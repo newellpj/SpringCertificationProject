@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 6:41:11 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="co.edureka.hibernate.orm.Books" table="books" catalog="sakila" optimistic-lock="version">
+        <id name="idbooks" type="java.lang.Integer">
+            <column name="idbooks" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" length="45" not-null="true" />
+        </property>
+        <property name="author" type="string">
+            <column name="author" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

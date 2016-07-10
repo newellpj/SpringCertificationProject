@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	 <bean id="authenticationSuccessHandlerWithoutReferer" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+  
+    <property name="useReferer" value="true" />
+</bean>
+	
+	   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	      <property name="url" value="jdbc:mysql://localhost:3306/sakila"/>
+	      <property name="username" value="root"/>
+	      <property name="password" value="fdg78DSA78"/>
+	   </bean>
+	   
+	   	
+	   
+	   <bean id="bookReviewsHibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	   		<property name="dataSource" ref="dataSource" />
+	   		<property name="packagesToScan" value="co.edureka.hibernate"/>
+	   		<property name="mappingResources">
+	   			<list>
+	   				<value>hibernate/Users.hbm.xml</value>
+	   				<value>hibernate/Authorities.hbm.xml</value>
+	   				<value>hibernate/Books.hbm.xml</value>
+	   				<value>hibernate/BookReviews.hbm.xml</value>
+	   			</list>
+	   		</property>
+	   		<property name="hibernateProperties">
+	   			<props>
+	   				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+	   				<prop key="hibernate.hbm2ddl.auto">update</prop>
+	   				<prop key="hibernate.show_sql">true</prop>
+	   			</props>
+	   		</property>
+	   </bean>
+	   
+	  	 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+			  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
+		    </bean>
+	   
+			<bean id="authenticationSuccessHandler" class="co.edureka.controller.LoginController">  
+			    <property name="defaultTargetUrl" value="/reviews" />
+		    </bean>
+	   
+	   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+	   		<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
+	   </bean>
+	   
+	   <bean id="usersBusinessObject" class="co.edureka.hibernate.UsersBusinessObjectImpl">
+	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
+	   </bean>
+	   
+	    <bean id="authoritiesBusinessObject" class="co.edureka.hibernate.AuthoritiesBusinessObjectImpl">
+	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
+	   </bean>
+	   
+	    <bean id="booksBusinessObject" class="co.edureka.hibernate.BooksBusinessObjectImpl">
+	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
+	   </bean>
+	    <bean id="booksReviewsBusinessObject" class="co.edureka.hibernate.BookReviewsBusinessObjectImpl">
+	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
+	   </bean>
+	   
+</beans>

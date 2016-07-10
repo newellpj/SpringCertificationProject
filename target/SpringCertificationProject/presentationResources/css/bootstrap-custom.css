@@ -1,0 +1,310 @@
+/* Positioning and other attributes */
+
+.relative {
+	position: relative;
+}
+
+.input-block-level.relative {
+	overflow: visible;
+}
+
+
+/* Page */
+
+.body {
+	background-image: url(../images/page/background.gif);
+	background-position: center;
+	background-repeat: repeat-y;
+}
+
+iframe {
+	border: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.iframe-body {
+	padding: 0;
+}
+
+textarea.autosizejs {
+	resize: vertical;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.noise {
+	background-image: url(../img/noise.png);
+	background-repeat: repeat;
+}
+
+.modal-form {
+	margin-bottom: 0 !important;
+}
+
+.table-bordered,
+.form-actions,
+.breadcrumb,
+.ui-dialog,
+.well-raised,
+.bs-docs-example,
+.bs-docs-sidenav,
+.label,
+#dash_nav {
+	outline: none;
+	box-shadow:0 2px 4px rgba(127,127,127,0.3) !important;
+}
+
+.well-raised.white {
+	background-color: white;
+}
+
+/* Spans */
+
+.row-fluid-no-margin [class*="span"] {
+	margin-left: 0%;
+}
+
+.row-fluid-no-margin .span12 {
+	width: 100.00%;
+}
+
+.row-fluid-no-margin .span11 {
+	width: 90%;
+}
+
+.row-fluid-no-margin .span10 {
+	width: 82%;
+}
+
+.row-fluid-no-margin .span9 {
+	width: 73%;
+}
+
+.row-fluid-no-margin .span8 {
+	width: 65%;
+}
+
+.row-fluid-no-margin .span7 {
+	width: 57%;
+}
+
+.row-fluid-no-margin .span6 {
+	width: 48%;
+}
+
+.row-fluid-no-margin .span5 {
+	width: 40%;
+}
+
+.row-fluid-no-margin .span4 {
+	width: 32%;
+}
+
+.row-fluid-no-margin .span3 {
+	width: 23%;
+}
+
+.row-fluid-no-margin .span2 {
+	width: 15%;
+}
+
+.row-fluid-no-margin .span1 {
+	width: 7%;
+}
+
+/* Bootstrap components */
+
+.container.container-no-margin,
+.container-fluid.container-no-margin {
+	margin: 0;
+}
+
+.table.table-borderless>tbody>tr>th,
+.table.table-borderless>tbody>tr>td {
+	border: 0;
+	padding: 4px;
+}
+
+.navbar-fixed-top,
+.navbar-fixed-bottom,
+.navbar-static-top {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+input[class*="span"],
+select[class*="span"],
+textarea[class*="span"],
+.uneditable-input[class*="span"],
+.row-fluid input[class*="span"],
+.row-fluid select[class*="span"],
+.row-fluid textarea[class*="span"],
+.row-fluid .uneditable-input[class*="span"] {
+	float: left;
+}
+
+.btn.pagination-left {
+	text-align: left;
+}
+
+.popover.popover-dropdown {
+	*display: none !important;
+	position: absolute;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.popover.popover-dropdown .table.table-borderless>tbody>tr>th,
+.popover.popover-dropdown .table.table-borderless>tbody>tr>td {
+	padding: 0;
+}
+
+.popover .table th a,
+.popover .table td a {
+	text-decoration: none;
+}
+
+/* JQuery UI Custom CSS */
+
+.ui-dialog-titlebar-close:before {
+	content: "\f00d";
+}
+
+.ui-dialog-titlebar-close {
+	*zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf00d;');
+	background-image: none !important;
+	background-repeat: repeat;
+	display: inline-block;
+	height: auto;
+	line-height: normal;
+	margin-top: 0;
+	vertical-align: baseline;
+	width: auto;
+	display: inline-block;
+	font-family: 'FontAwesome' !important;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: inherit;
+	color: gray;
+	opacity: 0.9;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.ui-dialog-buttonset {
+	text-align: center;
+	width: 100%;
+}
+
+input.datepicker[disabled],
+input.datepicker[readonly],
+input.datepicker-style[disabled],
+input.datepicker-style[readonly] {
+	background-color: white;
+	cursor: default;
+}
+
+..ui-dialog .ui-dialog-content,
+.ui-dialog .ui-dialog-content[style] {
+	overflow: hidden !important;
+	padding: 0 !important;
+}
+
+.ui-dialog .ui-dialog-content p,
+.ui-dialog p.ui-dialog-content {
+	padding: 14px !important;
+}
+
+.ui-widget-overlay {
+	position: fixed;
+}
+
+/* JSF Custom CSS */
+
+.selectOneRadio > tbody > tr > td > input[type=radio] {
+	float: left;
+	margin: 16px;
+}
+
+.selectOneRadio > tbody > tr > td > label > .puboptleft {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+/* Custom CSS */
+
+	/* Ajax loader */
+	[class*='ajax-loader'] {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+
+	.ajax-loader-2 {
+		background-image: url(../img/ajax-loader-2.gif);
+	}
+
+	.token-input-dropdown {
+		top: 30px;
+	}
+
+/*:root .searchPageVertDivider,
+:root .searchPageLeftPanel {
+	padding-top:120px\0;
+	padding-bottom:80px\0;
+}*/
+
+#dash_nav li {
+	border-right: 0;
+	border-left: 0;
+}
+
+/* UNSW Library footer */
+
+#footer {
+	clear: both;
+	font-size: 11px;
+	padding: 0 10px;
+	color: #999;
+}
+
+#footer a {
+	color: #999; 
+	text-decoration:none;
+	font-size:11px;
+	}
+
+#footer p {
+	font-size: 90%;
+	
+}
+
+#footer > .navigation > .horizontal {
+	width: 100%;
+	padding: 8px 0;
+	margin-bottom: 10px;
+}
+#footer ul {
+	float: left;
+	list-style: none !important;
+	font-size: 12px;
+}
+
+#footer ul li {
+	float: left;
+	padding: 0 8px;
+	border-right: 1px solid #e5e5e6;
+}
+
+#footer ul li.last {
+	padding: 0 0 0 8px;
+	border-right: none;
+	
+}

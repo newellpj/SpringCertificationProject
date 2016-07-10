@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 6:41:11 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="Stock" table="stock" catalog="sakila" optimistic-lock="version">
+        <composite-id name="id" class="StockId">
+            <key-property name="name" type="string">
+                <column name="name" length="50" />
+            </key-property>
+            <key-property name="category" type="string">
+                <column name="category" length="50" />
+            </key-property>
+            <key-property name="number" type="int">
+                <column name="number" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

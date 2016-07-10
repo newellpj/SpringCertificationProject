@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 6:41:11 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="co.edureka.hibernate.orm.Users" table="users" catalog="sakila" optimistic-lock="version">
+        <id name="usersId" type="java.lang.Integer">
+            <column name="usersID" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="enabled" type="string">
+            <column name="enabled" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 6:41:11 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="UserRoles" table="user_roles" catalog="sakila" optimistic-lock="version">
+        <composite-id name="id" class="UserRolesId">
+            <key-property name="userRoleId" type="int">
+                <column name="user_role_id" />
+            </key-property>
+            <key-property name="username" type="string">
+                <column name="username" length="45" />
+            </key-property>
+            <key-property name="role" type="string">
+                <column name="ROLE" length="45" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>
