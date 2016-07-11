@@ -37,7 +37,14 @@ $(document).ready(function() {
 	  
 	  if($("#reviewText").val().trim() == ''){
 		$( '#addReview').prop('disabled', true);
-	}
+	  }
+	  
+	 
+	  
+	  if($("#bookTitleReview").val() == null || $("#bookTitleReview").val().trim() == ''){
+		  $("#reviewText").prop('disabled', true); 
+		  noBookToReview();
+	  }
     
      $('#reviewText').keyup(function() {
         if($("#reviewText").val().trim() != '') {

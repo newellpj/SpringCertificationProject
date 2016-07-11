@@ -9,6 +9,38 @@ function jscroller(){
 }
 
 
+function noBookToReview(){
+	
+	var errorDialog = $("<div></div>").dialog({
+				hide: 'fade',
+				maxWidth: 300,
+				modal: true,
+				show: 'fade',
+				open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+					buttons: [
+				{
+					'class': 'btn btn-primary',
+					click: function(e) {
+						$(this).dialog("close");
+						
+					
+					},
+					text: 'OK'
+				}
+			
+			],	
+				title: 'Please search or add book ',
+				width: ( 300 )
+			});
+		
+		var msg = "You need to search or add a book to review";
+
+		$(errorDialog).html('<p>'+msg+'</p>');
+		 $(errorDialog).dialog("open");
+
+}
+
+
 
   function performAjaxAddReview(){
 	
