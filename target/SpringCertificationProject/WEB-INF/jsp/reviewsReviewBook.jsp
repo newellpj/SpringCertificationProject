@@ -37,9 +37,24 @@ $(document).ready(function() {
 	  
 	  if($("#reviewText").val().trim() == ''){
 		$( '#addReview').prop('disabled', true);
-	}
+	  }
+	  
+	 
+	  
+	  if($("#bookTitleReview").val() == null || $("#bookTitleReview").val().trim() == ''){
+		  $("#reviewText").prop('disabled', true); 
+		  noBookToReview();
+	  }
     
      $('#reviewText').keyup(function() {
+        if($("#reviewText").val().trim() != '') {
+           $('#addReview').prop('disabled', false);
+        }else{
+			 $('#addReview').prop('disabled', true); 
+		  }
+     });
+	 
+	 $('#reviewText').blur(function() {
         if($("#reviewText").val().trim() != '') {
            $('#addReview').prop('disabled', false);
         }else{
@@ -101,7 +116,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td colspan="1"></td><td colspan='2'><input id="addReview" name="addReview" type="button"
-						value="Add Review.." onclick="performAjaxAddReview();" /></td>
+						value="Add Review.." onclick="performAjaxAddReview();" /> </td>
 				</tr>
 			</table>
 			

@@ -40,6 +40,22 @@ $(document).ready(function() {
 			$('#addBook').prop('disabled', true);
 		 }
 	  });
+	  
+	  $('#authorTextAdd').blur(function() {
+	     if($("#titleTextAdd").val() != '' && $("#authorTextAdd").val() != '') {
+	        $('#addBook').prop('disabled', false);
+	     }else{
+			$( '#addBook').prop('disabled', true);
+		 }
+	  });
+	  
+	  $('#titleTextAdd').blur(function() {
+	     if($("#titleTextAdd").val() != '' && $("#authorTextAdd").val() != '') {
+	        $('#addBook').prop('disabled', false);
+	     }else{
+			$('#addBook').prop('disabled', true);
+		 }
+	  });
 
 });
 

@@ -41,6 +41,22 @@
 					 $( '#searchBook').prop('disabled', true);
 				 }
 		   });
+		   
+		   $('#titleText').blur(function() {
+		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
+		            $('#searchBook').prop('disabled', false);
+		         }else{
+					 $( '#searchBook').prop('disabled', true);
+				 }
+		   });
+		   
+		    $('#authorText').blur(function() {
+		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
+		            $('#searchBook').prop('disabled', false);
+		         }else{
+					 $( '#searchBook').prop('disabled', true);
+				 }
+		   });
 	});
 	
 	(function(d, s, id) {
