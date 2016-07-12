@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 13/07/2016 5:13:24 AM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
-    <class name="Users" table="users" catalog="sakila" optimistic-lock="version">
+    <class name="co.edureka.hibernate.orm.Users" table="users" catalog="sakila" optimistic-lock="version">
         <id name="usersId" type="java.lang.Integer">
             <column name="usersID" />
             <generator class="identity" />

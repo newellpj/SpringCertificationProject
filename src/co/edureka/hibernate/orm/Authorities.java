@@ -6,19 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="authorities")
-public class Authorities {
-	
-	@Id
-	@Column(name="usersID")
-	private int idauthorities;
-	
 
-	@Column(name="username")
+public class Authorities {
+
+	private int idauthorities;
 	private String username;
-	
-	@Column(name="authority")
 	private String authority;
 
 	public int getIdauthorities() {

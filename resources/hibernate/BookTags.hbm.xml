@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 13/07/2016 5:13:24 AM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
-    <class name="BookTags" table="book_tags" catalog="sakila" optimistic-lock="version">
+    <class name="co.edureka.hibernate.orm.BookTags" table="book_tags" catalog="sakila" optimistic-lock="version">
         <id name="idbookTags" type="java.lang.Integer">
             <column name="idbook_tags" />
             <generator class="identity" />

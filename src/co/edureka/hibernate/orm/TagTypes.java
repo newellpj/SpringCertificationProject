@@ -5,6 +5,8 @@ package co.edureka.hibernate.orm;
  */
 public class TagTypes implements java.io.Serializable {
 
+
+	private static final long serialVersionUID = 3476832973048259823L;
 	private Integer idtagTypes;
 	private String tagTypeName;
 

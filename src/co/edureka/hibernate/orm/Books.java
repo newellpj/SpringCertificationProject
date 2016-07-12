@@ -2,6 +2,7 @@ package co.edureka.hibernate.orm;
 
 public class Books implements java.io.Serializable {
 
+	private static final long serialVersionUID = 4744798857627076674L;
 	private Integer idbooks;
 	private String title;
 	private String author;

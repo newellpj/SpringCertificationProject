@@ -1,35 +1,17 @@
 package co.edureka.hibernate.orm;
 
+import java.io.Serializable;
 
+public class Users implements Serializable{
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+	private static final long serialVersionUID = -6310399697126817475L;
 
-@Entity
-@Table(name="users")
-public class Users {
-	
-	@Id
-	@Column(name="usersID")
 	private int usersId;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="authorities", 
-		joinColumns={@JoinColumn(name="username", referencedColumnName="username")},
-		inverseJoinColumns={@JoinColumn(name="username", referencedColumnName="username")})  
-	@Column(name="username")
 	private String username;
 	
-	@Column(name="password")
 	private String password;
 	
-	@Column(name="enabled")
 	private String enabled;
 	
 	
