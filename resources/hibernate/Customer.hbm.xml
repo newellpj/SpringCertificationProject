@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04/07/2016 6:41:11 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated 13/07/2016 5:13:24 AM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="Customer" table="customer" catalog="sakila" optimistic-lock="version">
         <id name="customerId" type="java.lang.Short">
@@ -32,17 +32,17 @@
         <property name="lastUpdate" type="timestamp">
             <column name="last_update" length="19" not-null="true" />
         </property>
-        <set name="rentals" table="rental" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="customer_id" not-null="true" />
-            </key>
-            <one-to-many class="Rental" />
-        </set>
         <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="customer_id" not-null="true" />
             </key>
             <one-to-many class="Payment" />
+        </set>
+        <set name="rentals" table="rental" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <one-to-many class="Rental" />
         </set>
     </class>
 </hibernate-mapping>

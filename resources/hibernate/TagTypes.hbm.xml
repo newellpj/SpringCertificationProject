@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/07/2016 5:13:24 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="TagTypes" table="tag_types" catalog="sakila" optimistic-lock="version">
+        <id name="idtagTypes" type="java.lang.Integer">
+            <column name="idtag_types" />
+            <generator class="identity" />
+        </id>
+        <property name="tagTypeName" type="string">
+            <column name="tag_type_name" length="45" not-null="true" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>

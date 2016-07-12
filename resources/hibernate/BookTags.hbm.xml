@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/07/2016 5:13:24 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="BookTags" table="book_tags" catalog="sakila" optimistic-lock="version">
+        <id name="idbookTags" type="java.lang.Integer">
+            <column name="idbook_tags" />
+            <generator class="identity" />
+        </id>
+        <property name="idbooks" type="string">
+            <column name="idbooks" length="45" not-null="true" />
+        </property>
+        <property name="tagValue" type="string">
+            <column name="tag_value" length="45" not-null="true" />
+        </property>
+        <property name="tagType" type="string">
+            <column name="tag_type" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

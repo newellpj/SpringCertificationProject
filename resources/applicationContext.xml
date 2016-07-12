@@ -28,6 +28,9 @@
 	   				<value>hibernate/Authorities.hbm.xml</value>
 	   				<value>hibernate/Books.hbm.xml</value>
 	   				<value>hibernate/BookReviews.hbm.xml</value>
+	   				<value>hibernate/BookTags.hbm.xml</value>
+	   				<value>hibernate/TagTypes.hbm.xml</value>
+	   				
 	   			</list>
 	   		</property>
 	   		<property name="hibernateProperties">
