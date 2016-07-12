@@ -112,7 +112,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td>Review:</td>
-					<td><textarea style="resize: none;" id="reviewText" name="reviewText" rows="10" cols="70" > </textarea> <span class="glyphicon glyphicon-comment iconspan5"></span></td>
+					<td><textarea style="resize: none; width:523px !important; height:212px !important;" id="reviewText" name="reviewText" rows="10" cols="70" > </textarea> <span class="glyphicon glyphicon-comment iconspan5"></span></td>
 				</tr>
 				<tr>
 					<td colspan="1"></td><td colspan='2'><input id="addReview" name="addReview" type="button"
