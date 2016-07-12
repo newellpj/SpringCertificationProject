@@ -180,10 +180,8 @@ public class ReviewController {
 		request.getSession().setAttribute("bookTitleFound", request.getParameter("titleText"));
 		request.getSession().setAttribute("bookAuthorFound", request.getParameter("authorText"));
 		request.getSession().setAttribute("bookPublisherFound", request.getParameter("publisherText"));
-		//request.getSession().setAttribute("username", );
-	
+		
 		modelAndView.setViewName("reviews");
-	//	modelAndView.addObject("bookReviewsModel", bookReviewsModel);
 		return bookReviewsModel;
 	}
 	
