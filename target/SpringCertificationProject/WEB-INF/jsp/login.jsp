@@ -39,11 +39,11 @@
 			<table style="width:100%;">
 				<tr>
 					<td>Username:</td>
-					<td><input class="usernameInput" type='text' name='username'><span class="glyphicon glyphicon-user iconspan"></span></td>
+					<td><input class="usernameInput" style="width:205px !important;" type='text' name='username'><span class="glyphicon glyphicon-user iconspan"></span></td>
 				</tr>
 				<tr>
 					<td>Password:</td>
-					<td><input type='password' name='password' />  <span class="glyphicon glyphicon-lock iconspan"></span></td>
+					<td><input type='password' name='password' style="width:205px !important;" />  <span class="glyphicon glyphicon-lock iconspan"></span></td>
 				</tr>
 				<tr>
 					<td colspan='2'><input style="position:relative; margin-left:260px;" name="submit" type="submit"
