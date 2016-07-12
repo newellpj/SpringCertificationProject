@@ -41,6 +41,24 @@ function noBookToReview(){
 }
 
 
+	function switchActive(obj){
+		var id = $(obj).attr("id");	
+		document.getElementById(id).style.backgroundColor="#f6f6f6";
+		
+        $('#myMenu ul li').each(function(){
+			var idFound = $(this).attr("id");
+			
+			if(idFound != id){
+				document.getElementById(idFound).style.backgroundColor="#e9e9e9";
+			}  
+        });
+    }
+
+function renderTagList(obj){
+	$(obj).attr('id');
+}
+
+
 
   function performAjaxAddReview(){
 	

@@ -119,12 +119,17 @@ $(document).ready(function() {
 			  <fieldset>
                 <h4>Add attributes to enable better searching</h4>
                    <div class="tagSearches"> 
-						<table width="100%"><tr><td>
-						<input type="checkbox" name="genre" value="genre" onclick="alert('howdy');"/>Genre <br /> </td>
-                        <td><input type="checkbox" name="category" value="category" />Category<br /></td>
-                        <td><input type="checkbox" name="language" value="language" />Language<br />
-						</td></tr></table>
+						<table width="100%">
+							<tr>
+								<td><input type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
+								<td><input type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
+								<td><input type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
+							</tr>
+						</table>
 					</div>
+					
+						<ul id="bookTagsList" class="bookTagsList">
+						</ul>
            
 			</fieldset>
 			
