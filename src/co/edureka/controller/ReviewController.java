@@ -170,7 +170,7 @@ public class ReviewController {
 		//System.out.println("author from map : "+bookReviewsModel.getAuthorText());
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		booksService.addBook(request.getParameter("titleText"), request.getParameter("authorText"));
+		booksService.addBook(request.getParameter("titleText"), request.getParameter("authorText"), request.getParameter("publisherText"));
 	
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -179,6 +179,7 @@ public class ReviewController {
 		
 		request.getSession().setAttribute("bookTitleFound", request.getParameter("titleText"));
 		request.getSession().setAttribute("bookAuthorFound", request.getParameter("authorText"));
+		request.getSession().setAttribute("bookPublisherFound", request.getParameter("publisherText"));
 		//request.getSession().setAttribute("username", );
 	
 		modelAndView.setViewName("reviews");
@@ -190,24 +191,16 @@ public class ReviewController {
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
 
-		System.out.println("request "+request.toString());
 		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
 		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
-	
-		
-		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
-		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
+		System.out.println("request contain publisherText ? : "+request.getParameter("publisherText"));
 		//System.out.println("author from map : "+bookReviewsModel.getAuthorText());
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
 		Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
-	
-		ModelAndView modelAndView = new ModelAndView();
-		
+
 		BookReviewsModel bookReviewsModel = new BookReviewsModel();
-		
-	
-		
+
 		if(book != null){
 			System.out.println("book found id "+book.getIdbooks());
 			System.out.println("book found title "+book.getTitle());
@@ -215,21 +208,16 @@ public class ReviewController {
 			request.getSession().setAttribute("bookID", book.getIdbooks());
 			request.getSession().setAttribute("bookTitleFound", book.getTitle());
 			request.getSession().setAttribute("bookAuthorFound", book.getAuthor());
+			request.getSession().setAttribute("bookPublisherFound", book.getPublisher());
 			bookReviewsModel.setTitleText(book.getTitle());
 			bookReviewsModel.setAuthorText(book.getAuthor());
+			bookReviewsModel.setPublisherText(book.getPublisher());
 		
 		}else{
-			modelAndView.addObject("error", "Book not Found");
+			
 			return null;
 		}
 		
-		//store returned values in session
-		
-
-		//request.getSession().setAttribute("username", );
-	
-		modelAndView.setViewName("reviews");
-	//	modelAndView.addObject("bookReviewsModel", bookReviewsModel);
 		return bookReviewsModel;
 
 	}

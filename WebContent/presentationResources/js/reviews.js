@@ -152,14 +152,15 @@ function noBookToReview(){
 		
 		var authorTextVal = $('#authorTextAdd').val();
 		var titleTextVal = $('#titleTextAdd').val(); 
-	
+		var publisherTextVal = $('#publisherTextAdd').val();   
 		
 		$.ajax({
 			url: 'addNewBook',
 			dataType: 'JSON',
 			data: { 
 				titleText: titleTextVal,
-				authorText: authorTextVal 
+				authorText: authorTextVal, 
+				publisherText: publisherTextVal
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
@@ -237,14 +238,15 @@ function noBookToReview(){
 		
 		var authorTextVal = $('#authorText').val();
 		var titleTextVal = $('#titleText').val();
-		
+		var publisherTextVal = $('#publisherText').val();   
 
 		$.ajax({
 			url: 'searchForBook',
 			dataType: 'JSON',
 			data: { 
 				titleText: titleTextVal,
-				authorText: authorTextVal 
+				authorText: authorTextVal, 
+				publisherText: publisherTextVal
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',

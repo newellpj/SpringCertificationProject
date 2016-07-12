@@ -35,10 +35,11 @@ public class BooksAndReviewsService {
 		return booksReviewsBO.findBooksReviewByTitleAndAuthorLazyLoad(title, author, offset, numberOfRecords);
 	}
 	
-	public void addBook(String title, String author){
+	public void addBook(String title, String author, String publisher){
 		Books books = new Books();
 		books.setTitle(title);
 		books.setAuthor(author);
+		books.setPublisher(publisher);
 		booksBO.save(books);
 	}
 	

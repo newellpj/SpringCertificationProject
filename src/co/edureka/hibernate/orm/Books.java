@@ -5,7 +5,8 @@ public class Books implements java.io.Serializable {
 	private Integer idbooks;
 	private String title;
 	private String author;
-
+	private String publisher;
+	
 	public Books() {
 	}
 
@@ -37,5 +38,15 @@ public class Books implements java.io.Serializable {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	
+	
 
 }

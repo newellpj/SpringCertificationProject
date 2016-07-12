@@ -17,26 +17,38 @@ public class BookReviewsModel {
 	private String titleText;
 
 	@NotNull
-	@Size(min=5,max=40)
+	@Size(min=1,max=40)
 	private String authorText;
 	
-	@Size(min=5,max=40)
+	@Size(min=1,max=40)
 	private String titleTextAdd;
 	
-	@Size(min=5,max=40)
+	@Size(min=1,max=40)
 	private String authorTextAdd;
 	
-	@Size(min=5,max=300)
+	@Size(min=1,max=300)
 	private String reviewText;
 	
-	@Size(min=5,max=40)
+	@Size(min=1,max=40)
 	private String bookTitleReview;
 	
-	@Size(min=5,max=40)
+	@Size(min=1,max=40)
 	private String bookAuthorReview;
 	
+	@Size(min=1,max=40)
+	private String publisherText;
 	
 	
+	
+
+	public String getPublisherText() {
+		return publisherText;
+	}
+
+	public void setPublisherText(String publisherText) {
+		this.publisherText = publisherText;
+	}
+
 	public String getBookTitleReview() {
 		return bookTitleReview;
 	}

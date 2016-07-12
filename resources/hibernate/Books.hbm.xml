@@ -14,5 +14,10 @@
         <property name="author" type="string">
             <column name="author" length="45" not-null="true" />
         </property>
+        
+        <property name="publisher" type="string">
+            <column name="publisher" length="45" not-null="false" />
+        </property>
+        
     </class>
 </hibernate-mapping>
