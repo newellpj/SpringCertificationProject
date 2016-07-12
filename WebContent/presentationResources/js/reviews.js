@@ -166,7 +166,7 @@ function noBookToReview(){
 			type: 'GET',
 			success:  function(bookReviewsModel) {
 			    $(dlg).dialog("close");
-			    
+			    $('#activeSel3', parent.document).click();
 				window.location.href = 'reviewsReviewBook';
 				
 			 },
@@ -253,8 +253,8 @@ function noBookToReview(){
 			    $(dlg).dialog("close");
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
 				//alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-			    
-				window.location.href = 'reviewsReviewBook';
+			     $('#activeSel3', parent.document).click(); //('<h1>clicked</h1>');
+				 window.location.href = 'reviewsReviewBook';
 				
 			 },
 
