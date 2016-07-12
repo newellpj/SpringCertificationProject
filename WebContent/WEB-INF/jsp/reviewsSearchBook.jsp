@@ -95,11 +95,11 @@
 		<table style="width:100%;">
 			<tr><td colspan="3">Search a Book to Review</td></tr>		
 				<tr>
-					<td>Title :</td>
+					<td>Title:</td>
 					<td><input id="titleText" style="width:250px !important;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span></td>
 				</tr>
 				<tr>
-					<td>Author :</td>
+					<td>Author:</td>
 					<td><input id="authorText" style="width:250px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
 				</tr>
 				<tr>

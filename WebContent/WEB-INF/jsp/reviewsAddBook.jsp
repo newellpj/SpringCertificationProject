@@ -96,11 +96,11 @@ $(document).ready(function() {
 		<table style="width:100%;">
 			
 				<tr>
-					<td>Title :</td>
+					<td>Title:</td>
 					<td><input style="width:250px !important;" id="titleTextAdd" type='text' name='titleTextAdd'><span class="glyphicon glyphicon-book iconspan3"></span></td>
 				</tr>
 				<tr>
-					<td>Author :</td>
+					<td>Author:</td>
 					<td><input style="width:250px !important;" id="authorTextAdd" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspan3"></span></td>
 				</tr>
 				<tr>
