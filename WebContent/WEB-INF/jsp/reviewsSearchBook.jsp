@@ -103,6 +103,10 @@
 					<td><input id="authorText" style="width:250px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
 				</tr>
 				<tr>
+					<td>Publisher:</td>
+					<td><input id="publisherText" style="width:250px !important;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
+				</tr>
+				<tr>
 					<td colspan="1"></td><td colspan='2'><input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"
 						value="Search.." /></td>
 				</tr>
