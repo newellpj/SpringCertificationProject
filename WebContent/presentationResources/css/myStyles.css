@@ -34,9 +34,8 @@
 
 
 select {
-  
    height: 34px;
-    background: transparent;
+   background: white;
    width: 240px;
    height: 29px;
    overflow: hidden;
