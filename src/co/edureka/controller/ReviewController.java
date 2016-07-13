@@ -198,36 +198,64 @@ public class ReviewController {
 	
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
-	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView searchBook(HttpServletRequest request, HttpServletResponse response){
 
 		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
 		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
 		System.out.println("request contain publisherText ? : "+request.getParameter("publisherText"));
 		//System.out.println("author from map : "+bookReviewsModel.getAuthorText());
 		
-		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
-
-		BookReviewsModel bookReviewsModel = new BookReviewsModel();
-
-		if(book != null){
-			System.out.println("book found id "+book.getIdbooks());
-			System.out.println("book found title "+book.getTitle());
-			
-			request.getSession().setAttribute("bookID", book.getIdbooks());
-			request.getSession().setAttribute("bookTitleFound", book.getTitle());
-			request.getSession().setAttribute("bookAuthorFound", book.getAuthor());
-			request.getSession().setAttribute("bookPublisherFound", book.getPublisher());
-			bookReviewsModel.setTitleText(book.getTitle());
-			bookReviewsModel.setAuthorText(book.getAuthor());
-			bookReviewsModel.setPublisherText(book.getPublisher());
+		String titleText = request.getParameter("titleText");
+		String authorText = request.getParameter("authorText");
+		String publisherText = request.getParameter("publisherText");
 		
+		HashMap<String, String> tagsAndValueMap = new HashMap<String, String>();
+		
+		if(request.getParameter("genreText") != null && !"".equals(request.getParameter("genreText"))){
+			tagsAndValueMap.put("genreText", request.getParameter("genreText"));
+		}
+		
+		if(request.getParameter("catText") != null && !"".equals(request.getParameter("catText"))){
+			tagsAndValueMap.put("catText", request.getParameter("catText"));
+		}
+		
+		if(request.getParameter("langText") != null && !"".equals(request.getParameter("langText"))){
+			tagsAndValueMap.put("langText", request.getParameter("langText"));
+		}
+		
+		BooksAndReviewsService booksService = new BooksAndReviewsService();
+		
+		List<Books> booksList = new ArrayList<Books>();
+		
+		if(titleText != null && !"".equals(titleText) && !"".equals(authorText) && authorText != null){
+			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
+		}else if(publisherText != null && !"".equals(publisherText)){
+			System.out.println("in here222");
+			booksList.addAll(booksService.findBooksByublisherLazyLoad(publisherText, 0, 20));
 		}else{
+			System.out.println("in here333");
+			booksList.addAll(booksService.findBooksByTagsLazyLoad(tagsAndValueMap, 0, 20));
+		}
+
+		ModelAndView modelView = new ModelAndView("reviewsReviewBook");
+		List<String> booksStringViewList = new ArrayList<String>();
+		
+		if(booksList != null && booksList.size() > 0){
 			
+			for(Books books : booksList){
+				booksStringViewList.add(books.getTitle()+" by "+books.getAuthor());
+			}
+			
+			modelView.addObject("booksLists", booksStringViewList);
+			request.getSession().setAttribute("currentPaginationOffset", 0);
+		}else{
+			request.getSession().setAttribute("bookAuthorFound", "");
+			request.getSession().setAttribute("bookTitleFound", "");
+			request.getSession().setAttribute("currentPaginationOffset", 0);
 			return null;
 		}
 		
-		return bookReviewsModel;
+		return modelView;
 
 	}
 

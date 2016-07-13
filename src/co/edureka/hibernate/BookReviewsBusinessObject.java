@@ -22,6 +22,8 @@ public interface BookReviewsBusinessObject {
 	
 	public List<BookReviews> findBooksReviewByReviewer(String username);
 	
+	public List<Books> findBooksByPublishersLazyLoad(String publisher, int offset, int numberOfRecords);
+	
 	public List<BookReviews> findBooksReviewByReviewerLazyLoad(String username, int offset, int numberOfRecords);
 	
 	public HashMap<Books, List<BookReviews>> findBooksReviewByTitleAndAuthorLazyLoad(String title, String author, int offset, int numberOfRecords);

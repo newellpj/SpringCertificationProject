@@ -9,6 +9,127 @@ function jscroller(){
 }
 
 
+
+function searchPageReadyInit(){
+	   
+	   
+	   
+	   if($("#authorText").val() == '' && $("#titleText").val() == '' && $("#publisherText").val() == '' &&
+		  ($("#genreSelect").val() == '' || $("#genreSelect").val() == null) && 
+		  ($("#categorySelect").val() == '' || $("#categorySelect").val() == null) && 
+		   ($("#languageSelect").val() == '' || $("#languageSelect").val() == null)){
+			$( '#searchBook').prop('disabled', true);
+		}
+		
+		$('#genreSelect').change(function() {
+			 
+	         if($("#genreSelect").val() != '' && $("#genreSelect").val() != null) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
+		 $('#genre').change(function() {
+			 
+	        if($("#genreSelect").val() != '' && $("#genreSelect").val() != null && document.getElementById("genre").checked) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
+		 
+		 $('#categorySelect').change(function() {
+			 
+	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null ) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
+		 $('#category').change(function() {
+			 
+	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null && document.getElementById("category").checked) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
+		 
+		 $('#languageSelect').change(function() {
+			
+	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
+		 $('#language').change(function() {
+			 
+	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null && document.getElementById("language").checked) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		
+	    
+	     $('#authorText').keyup(function() {
+			 
+	        if($("#authorText").val() != '' ) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+	
+		  $('#titleText').keyup(function() {
+		         if($("#authorText").val() != '') {
+		            $('#searchBook').prop('disabled', false);
+		         }else{
+					 $( '#searchBook').prop('disabled', true);
+				 }
+		   });
+		   
+		   $('#titleText').blur(function() {
+		         if($("#authorText").val() != '' ) {
+		            $('#searchBook').prop('disabled', false);
+		         }else{
+					 $( '#searchBook').prop('disabled', true);
+				 }
+		   });
+		   
+		    $('#authorText').blur(function() {
+		         if($("#authorText").val() != '' ) {
+		            $('#searchBook').prop('disabled', false);
+		         }else{
+					 $( '#searchBook').prop('disabled', true);
+				 }
+		   });
+		   
+		    $('#publisherText').keyup(function() {
+		         if($("#publisherText").val() != '') {
+		            $('#searchBook').prop('disabled', false);
+		         }else{
+					 $( '#searchBook').prop('disabled', true);
+				 }
+		   });
+		   
+		    $('#publisherText').blur(function() {
+		         if($("#publisherText").val() != '') {
+		            $('#searchBook').prop('disabled', false);
+		         }else{
+					 $( '#searchBook').prop('disabled', true);
+				 }
+		   });
+		   
+}
+
+
 function noBookToReview(){
 	
 	var errorDialog = $("<div></div>").dialog({
@@ -55,7 +176,40 @@ function noBookToReview(){
     }
 
 function renderTagList(obj){
-	$(obj).attr('id');
+	
+	var ID = $(obj).attr('id');
+	
+	if(document.getElementById(ID).checked){
+	
+		var myOptions = ""
+	
+		if(ID == 'genre'){
+			myOptions = [{ text: 'Please select..', value: ''}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
+							 {text : 'Biography', value: 'Biography'}, {text : 'Philosophy', value: 'Philosophy'},
+							 {text : 'Romance', value: 'Romance'}];		
+		}else if(ID == 'category'){
+			myOptions= [{ text: 'Please select..', value: ''}, { text: 'Fiction', value: 'Fiction'}, {text : 'Non-fiction', value: 'Non-fiction'}];	 
+		}else{
+			myOptions= [{ text: 'Please select..', value: ''}, { text: 'English', value: 'English'}, {text : 'French', value: 'French'},
+			 {text : 'Mandarin', value: 'Mandarin'}, {text : 'Hindi', value: 'Hindi'}, {text : 'Latin', value: 'Latin'},  {text : 'Spanish', value: 'Spanish'}];
+		}
+		
+		 $('#'+ID+'Select').html('');
+		
+		$.each(myOptions, function(i, el) { 
+		      
+			   $('#'+ID+'Select').append( new Option(el.text,el.value) );
+		});			
+			
+		 document.getElementById(ID+'Select').style.visibility = 'visible';
+		
+							 
+	}else{
+		document.getElementById(ID+'Select').style.visibility = 'hidden';
+	}
+	
+	
+	
 }
 
 
@@ -96,13 +250,6 @@ function renderTagList(obj){
 			type: 'GET',
 			success:  function(bookReviewsModel) {
 			    $(dlg).dialog("close");
-				
-				//var json = $.parseJSON(bookReviewsModel);
-				
-				
-				alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
-				alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-				
 				window.location.href = 'reviewsReviewBook';
 				
 			 },
@@ -171,6 +318,9 @@ function renderTagList(obj){
 		var authorTextVal = $('#authorTextAdd').val();
 		var titleTextVal = $('#titleTextAdd').val(); 
 		var publisherTextVal = $('#publisherTextAdd').val();   
+		var genreTextVal = $('#genreSelect').val();  
+		var catTextVal = $('#categorySelect').val();
+		var langTextVal = $('#languageSelect').val();
 		
 		$.ajax({
 			url: 'addNewBook',
@@ -178,7 +328,10 @@ function renderTagList(obj){
 			data: { 
 				titleText: titleTextVal,
 				authorText: authorTextVal, 
-				publisherText: publisherTextVal
+				publisherText: publisherTextVal,
+				genreText: genreTextVal,
+				catText: catTextVal,
+				langText: langTextVal
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
@@ -257,14 +410,20 @@ function renderTagList(obj){
 		var authorTextVal = $('#authorText').val();
 		var titleTextVal = $('#titleText').val();
 		var publisherTextVal = $('#publisherText').val();   
-
+		var genreTextVal = $('#genreSelect').val();  
+		var catTextVal = $('#categorySelect').val();
+		var langTextVal = $('#languageSelect').val();
+		
 		$.ajax({
 			url: 'searchForBook',
 			dataType: 'JSON',
 			data: { 
 				titleText: titleTextVal,
 				authorText: authorTextVal, 
-				publisherText: publisherTextVal
+				publisherText: publisherTextVal,
+				genreText: genreTextVal,
+				catText: catTextVal,
+				langText: langTextVal
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
@@ -273,8 +432,8 @@ function renderTagList(obj){
 			    $(dlg).dialog("close");
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
 				//alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-			     $('#activeSel3', parent.document).click(); //('<h1>clicked</h1>');
-				 window.location.href = 'reviewsReviewBook';
+			     //$('#activeSel3', parent.document).click(); 
+				 window.location.href = 'reviewsSearchBook';
 				
 			 },
 
@@ -294,8 +453,6 @@ function renderTagList(obj){
 							'class': 'btn btn-primary',
 							click: function(e) {
 								$(this).dialog("close");
-								
-							
 							},
 							text: 'OK'
 						}

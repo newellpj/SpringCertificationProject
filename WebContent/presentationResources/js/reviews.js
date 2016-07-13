@@ -194,7 +194,10 @@ function renderTagList(obj){
 			 {text : 'Mandarin', value: 'Mandarin'}, {text : 'Hindi', value: 'Hindi'}, {text : 'Latin', value: 'Latin'},  {text : 'Spanish', value: 'Spanish'}];
 		}
 		
+		 $('#'+ID+'Select').html('');
+		
 		$.each(myOptions, function(i, el) { 
+		      
 			   $('#'+ID+'Select').append( new Option(el.text,el.value) );
 		});			
 			
@@ -407,14 +410,20 @@ function renderTagList(obj){
 		var authorTextVal = $('#authorText').val();
 		var titleTextVal = $('#titleText').val();
 		var publisherTextVal = $('#publisherText').val();   
-
+		var genreTextVal = $('#genreSelect').val();  
+		var catTextVal = $('#categorySelect').val();
+		var langTextVal = $('#languageSelect').val();
+		
 		$.ajax({
 			url: 'searchForBook',
 			dataType: 'JSON',
 			data: { 
 				titleText: titleTextVal,
 				authorText: authorTextVal, 
-				publisherText: publisherTextVal
+				publisherText: publisherTextVal,
+				genreText: genreTextVal,
+				catText: catTextVal,
+				langText: langTextVal
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
@@ -423,8 +432,8 @@ function renderTagList(obj){
 			    $(dlg).dialog("close");
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
 				//alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-			     $('#activeSel3', parent.document).click(); //('<h1>clicked</h1>');
-				 window.location.href = 'reviewsReviewBook';
+			     //$('#activeSel3', parent.document).click(); 
+				 window.location.href = 'reviewsSearchBook';
 				
 			 },
 

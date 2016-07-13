@@ -110,6 +110,13 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 		session.close();
 		return list;
 	}
+	
+	public List<Books> findBooksByPublishersLazyLoad(String publisher, int offset, int numberOfRecords){
+		Session session = this.getSessionFactory().openSession();		
+		List<Books> list = session.createQuery(" from "+Books.class.getName()+" where publisher = :publisher ").setParameter("publisher", publisher).list();
+		session.close();
+		return list;
+	}
 
 	public List<BookReviews> findBooksReviewByReviewerLazyLoad(String username, int offset, int numberOfRecords){
 		Session session = this.getSessionFactory().openSession();

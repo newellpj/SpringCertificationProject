@@ -30,8 +30,6 @@
 	  
 	    $("myMenu li a").click(function(e) {
 	        e.preventDefault();
-			
-			
 	        $("#theI_Frame").attr("src", $(this).attr("href"));
 	    })
 
@@ -40,18 +38,6 @@
 	$("#theI_Frame").jscroll();
 	
 	
-	function switchActive(obj){
-		var id = $(obj).attr("id");	
-		document.getElementById(id).style.backgroundColor="#f6f6f6";
-		
-        $('#myMenu ul li').each(function(){
-			var idFound = $(this).attr("id");
-			
-			if(idFound != id){
-				document.getElementById(idFound).style.backgroundColor="#e9e9e9";
-			}  
-        });
-    }
 	
 	$('.scroll').jscroll();
 

@@ -58,18 +58,15 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			sqlAppender.append(" or tag_value="+"'"+tagsKeyValues.get(key)+"'");
 		}
 
-		List list = session.createQuery(" from "+BookTags.class.getName()+" where "+" "+sqlAppender.toString()).list();
+		List list = session.createQuery("select distinct(idbooks) from "+BookTags.class.getName()+" where "+" "+sqlAppender.toString()).list();
 		
 		List<Books> books = new ArrayList<Books>();
 		
 		for(Object obj : list){
 			
-			BookTags bookTags = (BookTags)obj;
-
+			int idbooks = (Integer)obj;
 			String sql = " from "+Books.class.getName()+" where idbooks = :booksid ";
-			
-			books.addAll(session.createQuery(sql).setParameter("booksid", 
-					bookTags.getIdbooks()).setFirstResult(offset).setMaxResults(numberOfRecords).list());
+			books.addAll(session.createQuery(sql).setParameter("booksid", idbooks).setFirstResult(offset).setMaxResults(numberOfRecords).list());
 		}
 		
 		session.close();

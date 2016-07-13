@@ -121,9 +121,16 @@ $(document).ready(function() {
                    <div class="tagSearches"> 
 						<table width="100%">
 							<tr>
-								<td><input type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
-								<td><input type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
-								<td><input type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
+								<td><input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
+								<td><select style="visibility:hidden;" id="genreSelect"></select></td>
+							</tr>
+							<tr>
+								<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
+								<td><select style="visibility:hidden;" id="categorySelect"></select></td>
+							</tr>
+							<tr>
+								<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
+								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
 							</tr>
 						</table>
 					</div>

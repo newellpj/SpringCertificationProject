@@ -50,8 +50,6 @@
 						value="Login" /></td>
 				</tr>
 			</table>
-
-
 		</form>
 	</div>
 

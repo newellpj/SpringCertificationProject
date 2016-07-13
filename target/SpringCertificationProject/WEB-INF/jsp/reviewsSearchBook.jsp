@@ -21,42 +21,11 @@
 <script>
 	$(document).ready(function() {
 
-	    if($("#authorText").val() == '' || $("#titleText").val() == ''){
-			$( '#searchBook').prop('disabled', true);
-		}
-	    
-	     $('#authorText').keyup(function() {
-			 
-	        if($("#authorText").val() != '' && $("#titleText").val() != '') {
-	           $('#searchBook').prop('disabled', false);
-	        }else{
-				 $( '#searchBook').prop('disabled', true);
-			 }
-	     });
 	
-		  $('#titleText').keyup(function() {
-		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
-		            $('#searchBook').prop('disabled', false);
-		         }else{
-					 $( '#searchBook').prop('disabled', true);
-				 }
-		   });
+		searchPageReadyInit();
+
+	
 		   
-		   $('#titleText').blur(function() {
-		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
-		            $('#searchBook').prop('disabled', false);
-		         }else{
-					 $( '#searchBook').prop('disabled', true);
-				 }
-		   });
-		   
-		    $('#authorText').blur(function() {
-		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
-		            $('#searchBook').prop('disabled', false);
-		         }else{
-					 $( '#searchBook').prop('disabled', true);
-				 }
-		   });
 	});
 	
 	(function(d, s, id) {
@@ -96,24 +65,60 @@
 			<tr><td colspan="3">Search a Book to Review</td></tr>		
 				<tr>
 					<td>Title:</td>
-					<td><input id="titleText" style="width:250px !important;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span></td>
+					<td><input id="titleText" style="width:262px !important;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span></td>
 				</tr>
 				<tr>
 					<td>Author:</td>
-					<td><input id="authorText" style="width:250px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
+					<td><input id="authorText" style="width:262px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
 				</tr>
 				<tr>
 					<td>Publisher:</td>
-					<td><input id="publisherText" style="width:250px !important;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
+					<td><input id="publisherText" style="width:262px !important;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
 				</tr>
-				<tr>
-					<td colspan="1"></td><td colspan='2'><input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"
-						value="Search.." /></td>
-				</tr>
-						<tr><td><span style="visibility:hidden;">placeholder</span></td></tr>
+				
 						
 			
 			</table>
+			
+			  <div class="tagSearches"> 
+						<table width="100%">
+							<tr>
+								<td><input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
+								<td><select style="visibility:hidden;" id="genreSelect"></select></td>
+							</tr>
+							<tr>
+								<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
+								<td><select style="visibility:hidden;" id="categorySelect"></select></td>
+							</tr>
+							<tr>
+								<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
+								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
+							</tr>
+							<tr>
+								<td colspan='1'></td><td colspan='1'><input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." /></td>
+							</tr>
+						<tr><td><span style="visibility:hidden;">placeholder</span></td></tr>
+						</table>
+					</div>
+					
+					
+						<br/><br/>
+	     	<div id="reviews" class="reviews">
+				<c:if test="${not empty booksLists}">
+					<h4>Book titles found for you search <%=session.getAttribute("bookTitleFound")%></h4>
+					<ul id="bookSearchList" class="bookSearchList">
+						<c:forEach var="listValue" items="${booksLists}">
+							<li>${listValue}</li>
+						</c:forEach>
+					</ul>
+					
+				 <div class="next"><a href="retrieveNextSearchSegment">next</a> </div>
+					
+			
+				</c:if>
+			</div>
+					
+					
 
 		
 		</form:form>

@@ -53,6 +53,27 @@ public class HibernateTestClass {
 		
 	}
 	
+	private static void testBooksSearchPublisher(){
+		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
+		
+		BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
+		BookReviewsBusinessObject booksReviewsBO = (BookReviewsBusinessObject) ctx.getBean("booksReviewsBusinessObject");
+		
+		Books books = new Books();
+		books.setTitle("Fear and Loathing in Las Vegas");
+		books.setAuthor("Hunter S Thompson");
+		books.setPublisher("Harper");
+	//	booksBO.save(books);
+		
+		List<Books> booksFound = booksReviewsBO.findBooksByPublishersLazyLoad(books.getPublisher(), 0, 20);
+
+		for(Books book : booksFound){
+			System.out.println("title :::: "+book.getTitle());
+		}
+
+	}
+	
+	
 	private static void testBooksAndReviews(){
 		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
 		

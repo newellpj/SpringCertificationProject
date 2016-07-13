@@ -21,42 +21,11 @@
 <script>
 	$(document).ready(function() {
 
-	    if($("#authorText").val() == '' || $("#titleText").val() == ''){
-			$( '#searchBook').prop('disabled', true);
-		}
-	    
-	     $('#authorText').keyup(function() {
-			 
-	        if($("#authorText").val() != '' && $("#titleText").val() != '') {
-	           $('#searchBook').prop('disabled', false);
-	        }else{
-				 $( '#searchBook').prop('disabled', true);
-			 }
-	     });
 	
-		  $('#titleText').keyup(function() {
-		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
-		            $('#searchBook').prop('disabled', false);
-		         }else{
-					 $( '#searchBook').prop('disabled', true);
-				 }
-		   });
+		searchPageReadyInit();
+
+	
 		   
-		   $('#titleText').blur(function() {
-		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
-		            $('#searchBook').prop('disabled', false);
-		         }else{
-					 $( '#searchBook').prop('disabled', true);
-				 }
-		   });
-		   
-		    $('#authorText').blur(function() {
-		         if($("#authorText").val() != '' && $("#titleText").val() != '') {
-		            $('#searchBook').prop('disabled', false);
-		         }else{
-					 $( '#searchBook').prop('disabled', true);
-				 }
-		   });
 	});
 	
 	(function(d, s, id) {
@@ -131,6 +100,25 @@
 						<tr><td><span style="visibility:hidden;">placeholder</span></td></tr>
 						</table>
 					</div>
+					
+					
+						<br/><br/>
+	     	<div id="reviews" class="reviews">
+				<c:if test="${not empty booksLists}">
+					<h4>Book titles found for you search <%=session.getAttribute("bookTitleFound")%></h4>
+					<ul id="bookSearchList" class="bookSearchList">
+						<c:forEach var="listValue" items="${booksLists}">
+							<li>${listValue}</li>
+						</c:forEach>
+					</ul>
+					
+				 <div class="next"><a href="retrieveNextSearchSegment">next</a> </div>
+					
+			
+				</c:if>
+			</div>
+					
+					
 
 		
 		</form:form>

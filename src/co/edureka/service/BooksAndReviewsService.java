@@ -34,6 +34,14 @@ public class BooksAndReviewsService {
 		return booksReviewsBO.findBooksReviewByTitleAndAuthor(title, author);
 	}
 	
+	public List<Books> findBooksByTagsLazyLoad(HashMap<String, String> tagsKeyValues, int offset, int numberOfRecords){
+		return tagsBO.findBooksByTagsLazyLoad(tagsKeyValues, offset, numberOfRecords);
+	}
+	
+	public List<Books> findBooksByublisherLazyLoad(String publisher, int offset, int numberOfRecords){
+		return booksReviewsBO.findBooksByPublishersLazyLoad(publisher, offset, numberOfRecords);
+	}
+	
 	public HashMap<Books, List<BookReviews>> searchBookReviewsByTitleAndAuthor(String title, String author, int offset, int numberOfRecords){
 		return booksReviewsBO.findBooksReviewByTitleAndAuthorLazyLoad(title, author, offset, numberOfRecords);
 	}
