@@ -32,6 +32,18 @@
 }
 
 
+
+select {
+  
+   height: 34px;
+    background: transparent;
+   width: 240px;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+   border-radius: 8px;
+}
+
 #reviews {
  	font-style: italic;
 }

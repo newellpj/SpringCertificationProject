@@ -55,7 +55,37 @@ function noBookToReview(){
     }
 
 function renderTagList(obj){
-	$(obj).attr('id');
+	
+	var ID = $(obj).attr('id');
+	
+	if(document.getElementById(ID).checked){
+	
+		var myOptions = ""
+	
+		if(ID == 'genre'){
+			myOptions = [{ text: 'Please select..', value: 'Please select..'}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
+							 {text : 'Biography', value: 'Biography'}, {text : 'Philosophy', value: 'Philosophy'},
+							 {text : 'Romance', value: 'Romance'}];		
+		}else if(ID == 'category'){
+			myOptions= [{ text: 'Please select..', value: 'Please select..'}, { text: 'Fiction', value: 'Fiction'}, {text : 'Non-fiction', value: 'Non-fiction'}];	 
+		}else{
+			myOptions= [{ text: 'Please select..', value: 'Please select..'}, { text: 'English', value: 'English'}, {text : 'French', value: 'French'},
+			 {text : 'Mandarin', value: 'Mandarin'}, {text : 'Hindi', value: 'Hindi'}, {text : 'Latin', value: 'Latin'},  {text : 'Spanish', value: 'Spanish'}];
+		}
+		
+		$.each(myOptions, function(i, el) { 
+			   $('#'+ID+'Select').append( new Option(el.text,el.value) );
+		});			
+			
+		 document.getElementById(ID+'Select').style.visibility = 'visible';
+		
+							 
+	}else{
+		document.getElementById(ID+'Select').style.visibility = 'hidden';
+	}
+	
+	
+	
 }
 
 
