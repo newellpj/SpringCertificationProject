@@ -15,6 +15,9 @@
     position: absolute;
 }
 
+.tagSearches{
+	font-style: italic ;
+}
 
 #myMenu ul {
     list-style-type: none;

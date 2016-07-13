@@ -101,18 +101,18 @@ $(document).ready(function() {
 
 				<tr><td colspan="3">Add a Review</td></tr>
 				<tr>
-					<td>Title :</td>
+					<td>Title:</td>
 					<td><input type='text'  style="width:250px !important;" id="bookTitleReview" name='bookTitleReview' disabled="true" 
 					value='<%=session.getAttribute("bookTitleFound")%>'><span class="glyphicon glyphicon-book iconspan4"></span></td>
 				</tr>
 				<tr>
-					<td>Author :</td>
+					<td>Author:</td>
 					<td><input type='text' style="width:250px !important;" id="bookAuthorReview" name='bookAuthorReview' 
 					disabled="true" value='<%=session.getAttribute("bookAuthorFound")%>' /><span class="glyphicon glyphicon-pencil iconspan4"></span></td>
 				</tr>
 				<tr>
-					<td>Review :</td>
-					<td><textarea style="resize: none;" id="reviewText" name="reviewText" rows="10" cols="70" > </textarea> <span class="glyphicon glyphicon-comment iconspan5"></span></td>
+					<td>Review:</td>
+					<td><textarea style="resize: none; width:523px !important; height:212px !important;" id="reviewText" name="reviewText" rows="10" cols="70" > </textarea> <span class="glyphicon glyphicon-comment iconspan5"></span></td>
 				</tr>
 				<tr>
 					<td colspan="1"></td><td colspan='2'><input id="addReview" name="addReview" type="button"

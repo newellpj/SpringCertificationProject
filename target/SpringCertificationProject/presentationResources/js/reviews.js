@@ -41,6 +41,24 @@ function noBookToReview(){
 }
 
 
+	function switchActive(obj){
+		var id = $(obj).attr("id");	
+		document.getElementById(id).style.backgroundColor="#f6f6f6";
+		
+        $('#myMenu ul li').each(function(){
+			var idFound = $(this).attr("id");
+			
+			if(idFound != id){
+				document.getElementById(idFound).style.backgroundColor="#e9e9e9";
+			}  
+        });
+    }
+
+function renderTagList(obj){
+	$(obj).attr('id');
+}
+
+
 
   function performAjaxAddReview(){
 	
@@ -152,21 +170,22 @@ function noBookToReview(){
 		
 		var authorTextVal = $('#authorTextAdd').val();
 		var titleTextVal = $('#titleTextAdd').val(); 
-	
+		var publisherTextVal = $('#publisherTextAdd').val();   
 		
 		$.ajax({
 			url: 'addNewBook',
 			dataType: 'JSON',
 			data: { 
 				titleText: titleTextVal,
-				authorText: authorTextVal 
+				authorText: authorTextVal, 
+				publisherText: publisherTextVal
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
 			type: 'GET',
 			success:  function(bookReviewsModel) {
 			    $(dlg).dialog("close");
-			    
+			    $('#activeSel3', parent.document).click();
 				window.location.href = 'reviewsReviewBook';
 				
 			 },
@@ -237,14 +256,15 @@ function noBookToReview(){
 		
 		var authorTextVal = $('#authorText').val();
 		var titleTextVal = $('#titleText').val();
-		
+		var publisherTextVal = $('#publisherText').val();   
 
 		$.ajax({
 			url: 'searchForBook',
 			dataType: 'JSON',
 			data: { 
 				titleText: titleTextVal,
-				authorText: authorTextVal 
+				authorText: authorTextVal, 
+				publisherText: publisherTextVal
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
@@ -253,8 +273,8 @@ function noBookToReview(){
 			    $(dlg).dialog("close");
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
 				//alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-			    
-				window.location.href = 'reviewsReviewBook';
+			     $('#activeSel3', parent.document).click(); //('<h1>clicked</h1>');
+				 window.location.href = 'reviewsReviewBook';
 				
 			 },
 

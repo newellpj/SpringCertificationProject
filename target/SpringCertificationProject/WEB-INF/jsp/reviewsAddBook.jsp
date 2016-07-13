@@ -88,7 +88,7 @@ $(document).ready(function() {
 			<div class="message">${message}</div>
 		</c:if>
 		
-		<p><span style="align-center;">Add a Book to Review</span></p>
+		<p><span style="align-center;">Title and Author are mandatory</span></p>
 
 <br/><br/>
 			<form:form id="reviewsForm" action="searchOrAddBook" method="post" commandName="bookReviewsModel">
@@ -96,12 +96,16 @@ $(document).ready(function() {
 		<table style="width:100%;">
 			
 				<tr>
-					<td>Title :</td>
+					<td>Title:</td>
 					<td><input style="width:250px !important;" id="titleTextAdd" type='text' name='titleTextAdd'><span class="glyphicon glyphicon-book iconspan3"></span></td>
 				</tr>
 				<tr>
-					<td>Author :</td>
+					<td>Author:</td>
 					<td><input style="width:250px !important;" id="authorTextAdd" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspan3"></span></td>
+				</tr>
+				<tr>
+					<td>Publisher:</td>
+					<td><input id="publisherTextAdd" style="width:250px !important;" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
 				</tr>
 				<tr>
 					<td colspan="1"></td><td colspan='2'><input id="addBook" name="addBook" type="button"
@@ -111,6 +115,24 @@ $(document).ready(function() {
 	
 				
 			</table>
+			
+			  <fieldset>
+                <h4>Add attributes to enable better searching</h4>
+                   <div class="tagSearches"> 
+						<table width="100%">
+							<tr>
+								<td><input type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
+								<td><input type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
+								<td><input type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
+							</tr>
+						</table>
+					</div>
+					
+						<ul id="bookTagsList" class="bookTagsList">
+						</ul>
+           
+			</fieldset>
+			
 
 
 		</form:form>
