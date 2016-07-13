@@ -11,7 +11,8 @@ function jscroller(){
 
 
 function searchPageReadyInit(){
-	    if($("#authorText").val() == '' && $("#titleText").val() == '' && $("#publisherText").val() == '' &&
+	   
+	   if($("#authorText").val() == '' && $("#titleText").val() == '' && $("#publisherText").val() == '' &&
 		  ($("#genreSelect").val() == '' || $("#genreSelect").val() == null) && 
 		  ($("#categorySelect").val() == '' || $("#categorySelect").val() == null) && 
 		   ($("#languageSelect").val() == '' || $("#languageSelect").val() == null)){
@@ -20,25 +21,54 @@ function searchPageReadyInit(){
 		
 		$('#genreSelect').change(function() {
 			 
-	        if($("#genreSelect").val() != '' ) {
+	         if($("#genreSelect").val() != '' && $("#genreSelect").val() != null) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
 				 $( '#searchBook').prop('disabled', true);
 			 }
 	     });
+		 
+		 $('#genre').change(function() {
+			 
+	        if($("#genreSelect").val() != '' && $("#genreSelect").val() != null) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
 		 
 		 $('#categorySelect').change(function() {
 			 
-	        if($("#categorySelect").val() != '' ) {
+	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
 				 $( '#searchBook').prop('disabled', true);
 			 }
 	     });
 		 
+		 $('#category').change(function() {
+			 
+	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
+		 
 		 $('#languageSelect').change(function() {
 			 
-	        if($("#languageSelect").val() != '' ) {
+	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null) {
+	           $('#searchBook').prop('disabled', false);
+	        }else{
+				 $( '#searchBook').prop('disabled', true);
+			 }
+	     });
+		 
+		 $('#language').change(function() {
+			 
+	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
 				 $( '#searchBook').prop('disabled', true);
