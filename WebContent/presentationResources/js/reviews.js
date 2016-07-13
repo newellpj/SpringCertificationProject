@@ -12,6 +12,8 @@ function jscroller(){
 
 function searchPageReadyInit(){
 	   
+	   
+	   
 	   if($("#authorText").val() == '' && $("#titleText").val() == '' && $("#publisherText").val() == '' &&
 		  ($("#genreSelect").val() == '' || $("#genreSelect").val() == null) && 
 		  ($("#categorySelect").val() == '' || $("#categorySelect").val() == null) && 
@@ -30,7 +32,7 @@ function searchPageReadyInit(){
 		 
 		 $('#genre').change(function() {
 			 
-	        if($("#genreSelect").val() != '' && $("#genreSelect").val() != null) {
+	        if($("#genreSelect").val() != '' && $("#genreSelect").val() != null && document.getElementById("genre").checked) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
 				 $( '#searchBook').prop('disabled', true);
@@ -40,7 +42,7 @@ function searchPageReadyInit(){
 		 
 		 $('#categorySelect').change(function() {
 			 
-	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null) {
+	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null ) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
 				 $( '#searchBook').prop('disabled', true);
@@ -49,7 +51,7 @@ function searchPageReadyInit(){
 		 
 		 $('#category').change(function() {
 			 
-	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null) {
+	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null && document.getElementById("category").checked) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
 				 $( '#searchBook').prop('disabled', true);
@@ -58,7 +60,7 @@ function searchPageReadyInit(){
 		 
 		 
 		 $('#languageSelect').change(function() {
-			 
+			
 	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
@@ -68,7 +70,7 @@ function searchPageReadyInit(){
 		 
 		 $('#language').change(function() {
 			 
-	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null) {
+	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null && document.getElementById("language").checked) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
 				 $( '#searchBook').prop('disabled', true);
