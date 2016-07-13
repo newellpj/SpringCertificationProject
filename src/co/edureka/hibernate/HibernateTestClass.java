@@ -19,7 +19,37 @@ public class HibernateTestClass {
 		
 		//testBooksAndReviews();
 		//testUsersAuthorities();
-		testSelectSubsets();
+		//testSelectSubsets();
+		testTagsSearch();
+	}
+	
+	private static void testTagsSearch(){
+		//findBooksByTagsLazyLoad
+		
+		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
+		
+		//BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
+		TagsBusinessObject tagsBO = (TagsBusinessObject) ctx.getBean("tagsBusinessObject");
+		
+		Books books = new Books();
+		books.setTitle("Fear and Loathing in Las Vegas");
+		books.setAuthor("Hunter S Thompson");
+	
+	//	booksBO.save(books);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("langText", "English");	
+		map.put("catText", "Non-fiction");	
+		map.put("genreText", "Philosophy");	
+		
+		List<Books> booksFound = tagsBO.findBooksByTagsLazyLoad(map, 0, 20);
+		
+		for(Books book : booksFound){
+			System.out.println("title :::: "+book.getTitle());
+		}
+		
+		
+	
 		
 	}
 	
