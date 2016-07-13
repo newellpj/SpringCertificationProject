@@ -11,11 +11,8 @@ public class AuthoritiesBusinessObjectImpl extends HibernateDaoSupport implement
 
 	@Override
 	public void save(Authorities authorities) {
-		
 		Session session = this.getSessionFactory().openSession();
-		
 		session.save(authorities);
-		
 		session.flush();
 		session.close();
 	}
@@ -36,11 +33,6 @@ public class AuthoritiesBusinessObjectImpl extends HibernateDaoSupport implement
 	public List<Authorities> findAuthoritiesByUserName(String username) {
 		// TODO Auto-generated method stub
 		List list = getHibernateTemplate().find(" from "+Authorities.class.getName()+" where username = ? ", username);
-
-		//Object obj = list.get(0);
-		
-		//UsersDBObj user = (AuthoritiesDBObj)obj;
-
 		return list;
 	}
 

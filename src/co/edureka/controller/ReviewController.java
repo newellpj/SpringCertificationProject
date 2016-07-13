@@ -170,11 +170,22 @@ public class ReviewController {
 		//System.out.println("author from map : "+bookReviewsModel.getAuthorText());
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		booksService.addBook(request.getParameter("titleText"), request.getParameter("authorText"), request.getParameter("publisherText"));
+		
+		BookReviewsModel bookReviewsModel = new BookReviewsModel();
+		bookReviewsModel.setTitleText(request.getParameter("titleText"));
+		bookReviewsModel.setAuthorText(request.getParameter("authorText"));
+		bookReviewsModel.setPublisherText(request.getParameter("publisherText"));
+		
+		HashMap<String, String> tagsAndValueMap = new HashMap<String, String>();
+		tagsAndValueMap.put("genreText", request.getParameter("genreText"));
+		tagsAndValueMap.put("catText", request.getParameter("catText"));
+		tagsAndValueMap.put("langText", request.getParameter("langText"));
+		
+		booksService.addBook(bookReviewsModel, tagsAndValueMap);
 	
 		ModelAndView modelAndView = new ModelAndView();
 		
-		BookReviewsModel bookReviewsModel = new BookReviewsModel();
+		
 		//store returned values in session
 		
 		request.getSession().setAttribute("bookTitleFound", request.getParameter("titleText"));

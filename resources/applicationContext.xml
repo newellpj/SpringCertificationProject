@@ -69,4 +69,8 @@
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
 	   
+	   <bean id="tagsBusinessObject" class="co.edureka.hibernate.TagsBusinessObjectImpl">
+	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
+	   </bean>
+	   
 </beans>

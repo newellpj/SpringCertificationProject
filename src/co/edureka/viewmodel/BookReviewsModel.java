@@ -37,9 +37,6 @@ public class BookReviewsModel {
 	
 	@Size(min=1,max=40)
 	private String publisherText;
-	
-	
-	
 
 	public String getPublisherText() {
 		return publisherText;

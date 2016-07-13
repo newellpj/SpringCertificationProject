@@ -8,8 +8,8 @@
             <column name="idbook_tags" />
             <generator class="identity" />
         </id>
-        <property name="idbooks" type="string">
-            <column name="idbooks" length="45" not-null="true" />
+        <property name="idbooks" type="java.lang.Integer">
+            <column name="idbooks" not-null="true" />
         </property>
         <property name="tagValue" type="string">
             <column name="tag_value" length="45" not-null="true" />

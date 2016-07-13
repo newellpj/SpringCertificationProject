@@ -6,15 +6,16 @@ package co.edureka.hibernate.orm;
  */
 public class BookTags implements java.io.Serializable {
 
+	private static final long serialVersionUID = -992189970330205942L;
 	private Integer idbookTags;
-	private String idbooks;
+	private Integer idbooks;
 	private String tagValue;
 	private String tagType;
 
 	public BookTags() {
 	}
 
-	public BookTags(String idbooks, String tagValue, String tagType) {
+	public BookTags(Integer idbooks, String tagValue, String tagType) {
 		this.idbooks = idbooks;
 		this.tagValue = tagValue;
 		this.tagType = tagType;
@@ -28,11 +29,11 @@ public class BookTags implements java.io.Serializable {
 		this.idbookTags = idbookTags;
 	}
 
-	public String getIdbooks() {
+	public Integer getIdbooks() {
 		return this.idbooks;
 	}
 
-	public void setIdbooks(String idbooks) {
+	public void setIdbooks(Integer idbooks) {
 		this.idbooks = idbooks;
 	}
 

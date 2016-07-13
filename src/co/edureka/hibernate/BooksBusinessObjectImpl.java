@@ -41,11 +41,9 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 			session.delete(bookReview);
 		}
 		
-	//	this.getHibernateTemplate().deleteAll(bookReviews);
 		session.delete(books);
 		session.flush();
 		session.close();
-
 	}
 
 	@Override

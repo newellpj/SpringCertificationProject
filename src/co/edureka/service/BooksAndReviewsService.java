@@ -8,15 +8,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import co.edureka.hibernate.BookReviewsBusinessObject;
 import co.edureka.hibernate.BooksBusinessObject;
+import co.edureka.hibernate.TagsBusinessObject;
 import co.edureka.hibernate.orm.BookReviews;
+import co.edureka.hibernate.orm.BookTags;
 import co.edureka.hibernate.orm.Books;
+import co.edureka.viewmodel.BookReviewsModel;
 
 public class BooksAndReviewsService {
 
 	private ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 	private BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
 	private BookReviewsBusinessObject booksReviewsBO = (BookReviewsBusinessObject) ctx.getBean("booksReviewsBusinessObject");
-	
+	private TagsBusinessObject tagsBO = (TagsBusinessObject) ctx.getBean("tagsBusinessObject");
 	
 	/**
 	 * @param title
@@ -35,12 +38,30 @@ public class BooksAndReviewsService {
 		return booksReviewsBO.findBooksReviewByTitleAndAuthorLazyLoad(title, author, offset, numberOfRecords);
 	}
 	
-	public void addBook(String title, String author, String publisher){
+	public void addBook(BookReviewsModel bookReviewsModel, HashMap<String, String> tagsAndValueMap){
 		Books books = new Books();
-		books.setTitle(title);
-		books.setAuthor(author);
-		books.setPublisher(publisher);
-		booksBO.save(books);
+		books.setTitle(bookReviewsModel.getTitleText());
+		books.setAuthor(bookReviewsModel.getAuthorText());
+		books.setPublisher(bookReviewsModel.getPublisherText());
+		
+		BookTags bookTags = null;
+
+		try{
+			
+			booksBO.save(books);
+			
+			for(String key : tagsAndValueMap.keySet()){
+				 bookTags = new BookTags();
+				 bookTags.setTagType(key);
+				 bookTags.setTagValue(tagsAndValueMap.get(key));
+				 bookTags.setIdbooks(books.getIdbooks());
+				 tagsBO.save(bookTags);
+			}
+			
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void addReview(int bookID, String username, String reviewText){
