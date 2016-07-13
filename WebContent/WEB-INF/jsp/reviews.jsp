@@ -30,8 +30,6 @@
 	  
 	    $("myMenu li a").click(function(e) {
 	        e.preventDefault();
-			
-			
 	        $("#theI_Frame").attr("src", $(this).attr("href"));
 	    })
 
