@@ -249,10 +249,10 @@ public class ReviewController {
 		
 		if(titleText != null && !"".equals(titleText) && !"".equals(authorText) && authorText != null){
 			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
+			booksList.add(book);
 		}else if(publisherText != null && !"".equals(publisherText)){
 			System.out.println("in here222");
 			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));
-			
 			request.getSession().setAttribute("publisherText", publisherText);
 			request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
 		}else{
@@ -273,10 +273,7 @@ public class ReviewController {
 				booksStringViewList.add(books.getTitle()+" by "+books.getAuthor());
 			}
 			
-			
-			
 			modelView.addObject("booksList", booksStringViewList);
-			
 			request.getSession().setAttribute("currentPaginationOffset", 0);
 			
 		}else{

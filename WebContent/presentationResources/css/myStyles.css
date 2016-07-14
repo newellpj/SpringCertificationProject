@@ -154,7 +154,6 @@ input[type="button"]:disabled:hover {
 
 input[type="button"]:hover {
 	background-color: #17acdb;
-b
 }
 
 input[type="submit"]:disabled:hover {
@@ -199,6 +198,18 @@ input[type="button"]{
 	box-shadow: -5px -5px- 5px -5px #3838cc inset;
 	text-shadow: 1px 1px #a8a8a8;
 }
+
+
+.resetSearch{
+  background-color:#a3a3cc !important;
+}
+
+.resetSearch:hover {
+	background-color: #8e8eb2 !important;
+}
+
+
+
 
 .myUserIcon{
 	content: date-circle.png

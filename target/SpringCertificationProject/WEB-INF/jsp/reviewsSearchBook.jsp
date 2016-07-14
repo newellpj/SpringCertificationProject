@@ -105,41 +105,22 @@ var html = $(".bookRevList").html();
 								<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
 								<td><select style="visibility:hidden;" id="categorySelect"></select></td>
 							</tr>
-							<tr>
-								<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
+					 			<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
 								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
 							</tr>
 							<tr>
 								<td colspan='1'></td><td> <input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." />
-								<input id="resetSearch" name="resetSearch" type="button" onclick="resetSearch();"  value="Reset" /></td>
+								<input id="resetSearch" class="resetSearch" name="resetSearch" type="button" onclick="resetSearches();"  value="Reset" /></td>
 							</tr>
-					
 						</table>
-					</div>
-					
-	
-
+					</div>		
 			<br/>
 			
-		
 			<div id="search" class="search" style="display:none;">
-				
-							
-					<ul id="bookRevList" class="bookRevList" >
-						
+					<ul id="bookRevList" class="bookRevList" >				
 					</ul>
-					
-				
-					
-			
-		
 			</div>
-					
-			
 		</form:form>
-		
-			
-
 	</div>
 
 <div style="margin-left:300px;" >

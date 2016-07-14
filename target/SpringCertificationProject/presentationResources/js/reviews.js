@@ -8,6 +8,15 @@ function jscroller(){
  });
 }
 
+function checkAllFields(){
+	if($("#authorText").val() == '' && $("#titleText").val() == '' && $("#publisherText").val() == '' &&
+		  ($("#genreSelect").val() == '' || $("#genreSelect").val() == null) && 
+		  ($("#categorySelect").val() == '' || $("#categorySelect").val() == null) && 
+		   ($("#languageSelect").val() == '' || $("#languageSelect").val() == null)){
+			   $( '#searchBook').prop('disabled', true);
+		   }
+}
+
 
 
 function searchPageReadyInit(){
@@ -26,7 +35,7 @@ function searchPageReadyInit(){
 	         if($("#genreSelect").val() != '' && $("#genreSelect").val() != null) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
-				 $( '#searchBook').prop('disabled', true);
+				checkAllFields();
 			 }
 	     });
 		 
@@ -35,7 +44,7 @@ function searchPageReadyInit(){
 	        if($("#genreSelect").val() != '' && $("#genreSelect").val() != null && document.getElementById("genre").checked) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
-				 $( '#searchBook').prop('disabled', true);
+				 checkAllFields();
 			 }
 	     });
 		 
@@ -45,7 +54,7 @@ function searchPageReadyInit(){
 	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null ) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
-				 $( '#searchBook').prop('disabled', true);
+				 checkAllFields();
 			 }
 	     });
 		 
@@ -54,7 +63,7 @@ function searchPageReadyInit(){
 	         if($("#categorySelect").val() != '' && $("#categorySelect").val() != null && document.getElementById("category").checked) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
-				 $( '#searchBook').prop('disabled', true);
+				 checkAllFields();
 			 }
 	     });
 		 
@@ -64,7 +73,7 @@ function searchPageReadyInit(){
 	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
-				 $( '#searchBook').prop('disabled', true);
+				 checkAllFields();
 			 }
 	     });
 		 
@@ -73,7 +82,7 @@ function searchPageReadyInit(){
 	        if($("#languageSelect").val() != '' && $("#languageSelect").val() != null && document.getElementById("language").checked) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
-				 $( '#searchBook').prop('disabled', true);
+				checkAllFields();
 			 }
 	     });
 		
@@ -83,23 +92,23 @@ function searchPageReadyInit(){
 	        if($("#authorText").val() != '' ) {
 	           $('#searchBook').prop('disabled', false);
 	        }else{
-				 $( '#searchBook').prop('disabled', true);
+				checkAllFields();
 			 }
 	     });
 	
 		  $('#titleText').keyup(function() {
-		         if($("#authorText").val() != '') {
+		         if($("#titleText").val() != '') {
 		            $('#searchBook').prop('disabled', false);
 		         }else{
-					 $( '#searchBook').prop('disabled', true);
+					checkAllFields();
 				 }
 		   });
 		   
 		   $('#titleText').blur(function() {
-		         if($("#authorText").val() != '' ) {
+		         if($("#titleText").val() != '' ) {
 		            $('#searchBook').prop('disabled', false);
 		         }else{
-					 $( '#searchBook').prop('disabled', true);
+					checkAllFields();
 				 }
 		   });
 		   
@@ -107,7 +116,7 @@ function searchPageReadyInit(){
 		         if($("#authorText").val() != '' ) {
 		            $('#searchBook').prop('disabled', false);
 		         }else{
-					 $( '#searchBook').prop('disabled', true);
+					 checkAllFields();
 				 }
 		   });
 		   
@@ -115,7 +124,7 @@ function searchPageReadyInit(){
 		         if($("#publisherText").val() != '') {
 		            $('#searchBook').prop('disabled', false);
 		         }else{
-					 $( '#searchBook').prop('disabled', true);
+					 checkAllFields();
 				 }
 		   });
 		   
@@ -123,7 +132,7 @@ function searchPageReadyInit(){
 		         if($("#publisherText").val() != '') {
 		            $('#searchBook').prop('disabled', false);
 		         }else{
-					 $( '#searchBook').prop('disabled', true);
+					checkAllFields();
 				 }
 		   });
 		   
@@ -178,7 +187,7 @@ function noBookToReview(){
 function renderTagList(obj){
 	
 	var ID = $(obj).attr('id');
-	
+
 	if(document.getElementById(ID).checked){
 	
 		var myOptions = ""
@@ -202,10 +211,11 @@ function renderTagList(obj){
 		});			
 			
 		 document.getElementById(ID+'Select').style.visibility = 'visible';
-		
+		document.getElementById(ID+'Select').style.display = 'inline';
 							 
 	}else{
-		document.getElementById(ID+'Select').style.visibility = 'hidden';
+		document.getElementById(ID+'Select').style.display = 'none';
+		 document.getElementById(ID+'Select').style.visibility = 'hidden';
 	}
 	
 	
@@ -387,11 +397,15 @@ function renderTagList(obj){
 		
  }
  
- function resetSearch(){
+ function resetSearches(){
 	 
 	 $('.bookRevList').html("");
 	 
 	 document.getElementById("search").style.display = "none";
+	  $("select").hide();
+	//document.getElementById(ID+'Select').style.visibility = 'hidden';
+	
+	$('#reviewsForm').trigger("reset");
 	 
 	 $.ajax({
 			url: 'resetSearch',
