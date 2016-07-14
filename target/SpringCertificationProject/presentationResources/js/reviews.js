@@ -387,6 +387,40 @@ function renderTagList(obj){
 		
  }
  
+ function resetSearch(){
+	 
+	 $('.bookRevList').html("");
+	 
+	 document.getElementById("search").style.display = "none";
+	 
+	 $.ajax({
+			url: 'resetSearch',
+			dataType: "JSON",
+			data: { 
+				titleText: '',
+				authorText: '', 
+				publisherText: '',
+				genreText: '',
+				catText: '',
+				langText: ''
+			},
+			processData: true,
+			contentType: 'application/json; charset=utf-8',
+			type: 'GET',
+			success:  function() {
+			  
+				// window.location.href = 'reviewsSearchBook';
+				 
+			 },
+
+		 error: function(e){
+
+	           
+          }
+ 
+		}); 
+ } 
+ 
  function performAjaxSearch(){
 	 
 	 //hid error dialog
@@ -403,7 +437,7 @@ function renderTagList(obj){
 
 		$(dlg).parent().find('button').remove();
 		
-		$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Searching on title and author </p></div>");
+		$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Searching books...</p></div>");
 			
 		$(dlg).dialog("open");
 		
@@ -431,18 +465,25 @@ function renderTagList(obj){
 			success:  function(bookReviewsModel) {
 			  
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
-				//alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
+			//	alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
 			     //$('#activeSel3', parent.document).click();
 			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
 			    
 				document.getElementById("search").style.display = "inline";
 				
-				for(var i = 0; i < bookReviewsModel['booksStringViewList'].length ;i++){
-					$('#search ul').append("<li>"+bookReviewsModel['booksStringViewList'][i]+"</li>");
+				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
+					$('.bookRevList').append("<li>"+bookReviewsModel['booksList'][i]+"</li>");
 				}
 				
+				
+				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+				
+				$('.search-box').jscroll({		  
+					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+				});
+				
 				$(dlg).dialog("close");
-				 //window.location.href = 'searchForBook';
+				// window.location.href = 'reviewsSearchBook';
 				 
 			 },
 

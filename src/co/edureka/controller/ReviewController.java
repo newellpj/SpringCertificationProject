@@ -204,6 +204,19 @@ public class ReviewController {
 		return new BookReviewsModel();
 	}
 	
+	
+	@RequestMapping(value = { "/resetSearch"}, method = RequestMethod.GET)
+	public @ResponseBody BookReviewsModel resetSearch(HttpServletRequest request, HttpServletResponse response){
+		request.getSession().removeAttribute("bookAuthorFound");
+		request.getSession().removeAttribute("bookTitleFound");
+		request.getSession().removeAttribute("currentPaginationOffset");
+		request.getSession().removeAttribute("searchType");
+		request.getSession().removeAttribute("tagsAndValueMap");
+		request.getSession().removeAttribute("publisherText");
+		
+		return new BookReviewsModel();
+	}
+	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
 

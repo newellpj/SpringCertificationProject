@@ -110,7 +110,8 @@ var html = $(".bookRevList").html();
 								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
 							</tr>
 							<tr>
-								<td colspan='1'></td><td colspan='1'><input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." /></td>
+								<td colspan='1'></td><td> <input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." />
+								<input id="resetSearch" name="resetSearch" type="button" onclick="resetSearches();"  value="Reset" /></td>
 							</tr>
 					
 						</table>
@@ -122,16 +123,11 @@ var html = $(".bookRevList").html();
 			
 		
 			<div id="search" class="search" style="display:none;">
-				
-							
+			
 					<ul id="bookRevList" class="bookRevList" >
 						
 					</ul>
-					
-				
-					
-			
-		
+
 			</div>
 					
 			

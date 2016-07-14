@@ -178,7 +178,7 @@ function noBookToReview(){
 function renderTagList(obj){
 	
 	var ID = $(obj).attr('id');
-	
+
 	if(document.getElementById(ID).checked){
 	
 		var myOptions = ""
@@ -202,10 +202,11 @@ function renderTagList(obj){
 		});			
 			
 		 document.getElementById(ID+'Select').style.visibility = 'visible';
-		
+		document.getElementById(ID+'Select').style.display = 'inline';
 							 
 	}else{
-		document.getElementById(ID+'Select').style.visibility = 'hidden';
+		document.getElementById(ID+'Select').style.display = 'none';
+		 document.getElementById(ID+'Select').style.visibility = 'hidden';
 	}
 	
 	
@@ -386,6 +387,44 @@ function renderTagList(obj){
 		});    
 		
  }
+ 
+ function resetSearches(){
+	 
+	 $('.bookRevList').html("");
+	 
+	 document.getElementById("search").style.display = "none";
+	  $("select").hide();
+	//document.getElementById(ID+'Select').style.visibility = 'hidden';
+	
+	$('#reviewsForm').trigger("reset");
+	 
+	 $.ajax({
+			url: 'resetSearch',
+			dataType: "JSON",
+			data: { 
+				titleText: '',
+				authorText: '', 
+				publisherText: '',
+				genreText: '',
+				catText: '',
+				langText: ''
+			},
+			processData: true,
+			contentType: 'application/json; charset=utf-8',
+			type: 'GET',
+			success:  function() {
+			  
+				// window.location.href = 'reviewsSearchBook';
+				 
+			 },
+
+		 error: function(e){
+
+	           
+          }
+ 
+		}); 
+ } 
  
  function performAjaxSearch(){
 	 
