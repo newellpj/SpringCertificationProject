@@ -199,6 +199,38 @@ input[type="button"]{
 	text-shadow: 1px 1px #a8a8a8;
 }
 
+button{
+	
+	padding: 10px 15px 11px !important;
+	font-size: 14px !important;
+	background-color: #3bbde5;
+	font-weight: normal;
+	font-style: normal !important;
+	color: #f1f1ff;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 0px solid #3232ff;
+	cursor: pointer;
+	box-shadow: -5px -5px- 5px -5px #3838cc inset;
+	text-shadow: 1px 1px #a8a8a8;
+}
+
+
+button:disabled:hover {
+	background-color: #fafafa;
+	color:#696969;
+}
+
+button:disabled {
+	background-color: #fafafa;
+	color:#696969;
+	box-shadow: -2px -2px 2px 2px #888888 inset;
+}
+
+button:hover {
+	background-color: #17acdb;
+}
 
 .resetSearch{
   background-color:#a3a3cc !important;

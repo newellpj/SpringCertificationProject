@@ -46,8 +46,8 @@
 					<td><input type='password' name='password' style="width:205px !important;" />  <span class="glyphicon glyphicon-lock iconspan"></span></td>
 				</tr>
 				<tr>
-					<td colspan='2'><input style="position:relative; margin-left:260px;" name="submit" type="submit"
-						value="Login" /></td>
+					<td colspan='1'></td></td><td colspan='1'><button name="submit" type="submit" style="margin-left:150px !important;"
+						value="Login" >	 <span class="glyphicon glyphicon-log-in"></span> &nbsp;Login </button></td>
 				</tr>
 			</table>
 		</form>
