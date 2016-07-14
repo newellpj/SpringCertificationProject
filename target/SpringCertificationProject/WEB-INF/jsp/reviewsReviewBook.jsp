@@ -115,8 +115,8 @@ $(document).ready(function() {
 					<td><textarea style="resize: none; width:523px !important; height:212px !important;" id="reviewText" name="reviewText" rows="10" cols="70" > </textarea> <span class="glyphicon glyphicon-comment iconspan5"></span></td>
 				</tr>
 				<tr>
-					<td colspan="1"></td><td colspan='2'><input id="addReview" name="addReview" type="button"
-						value="Add Review.." onclick="performAjaxAddReview();" /> </td>
+					<td colspan="1"></td><td colspan='2'><button id="addReview" name="addReview" type="button"
+						value="Add Review.." onclick="performAjaxAddReview();"> <span class="glyphicon glyphicon-star glyphicon-star-empty"></span> Add Review..  </button> </td>
 				</tr>
 			</table>
 			

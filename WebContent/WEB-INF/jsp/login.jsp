@@ -47,7 +47,7 @@
 				</tr>
 				<tr>
 					<td colspan='1'></td></td><td colspan='1'><button name="submit" type="submit" style="margin-left:150px !important;"
-						value="Login" >	 <span class="glyphicon glyphicon-log-in"></span> &nbsp;Login </button></td>
+						value="Login" >	 <span class="glyphicon glyphicon-log-in"></span> &nbsp; Login </button></td>
 				</tr>
 			</table>
 		</form>

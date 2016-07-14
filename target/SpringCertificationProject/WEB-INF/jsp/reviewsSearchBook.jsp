@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
@@ -109,8 +110,14 @@ var html = $(".bookRevList").html();
 								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
 							</tr>
 							<tr>
-								<td colspan='1'></td><td> <input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." />
-								<input id="resetSearch" class="resetSearch" name="resetSearch" type="button" onclick="resetSearches();"  value="Reset" /></td>
+								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." > 
+								<span class="glyphicon glyphicon-eye-open" ></span>Search...
+								</button>
+								<button id="resetSearch" class="resetSearch" name="resetSearch" type="button" onclick="resetSearches();"  value="Reset" >
+										<span class="glyphicon glyphicon-erase"  ></span>Reset
+								</button>
+								</td>
+								
 							</tr>
 						</table>
 					</div>		

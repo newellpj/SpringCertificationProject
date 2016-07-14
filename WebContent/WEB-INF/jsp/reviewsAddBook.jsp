@@ -110,7 +110,7 @@ $(document).ready(function() {
 				<tr>
 					<td colspan="1"></td><td colspan='2'><button id="addBook" name="addBook" type="button"
 						value="Add a book.." onclick="performAjaxAddBook();" >
-						<span class="glyphicon glyphicon-plus-sign"  ></span>Add a Book... </button>
+						<span class="glyphicon glyphicon-plus-sign"  ></span>&nbsp; Add a Book... </button>
 						</td>
 				</tr>
 				<tr><td><span style="visibility:hidden;">placeholder</span></td></tr>

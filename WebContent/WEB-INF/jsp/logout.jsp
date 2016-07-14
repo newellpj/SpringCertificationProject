@@ -21,7 +21,7 @@
 
 	<div id="login-box">
 
-		<h3>PJs Book Reviews Login Page</h3>
+		<h3>Thank you for visiting </h3>
 
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
@@ -30,14 +30,14 @@
 			<div class="message">${message}</div>
 		</c:if>
 		
-		<p>Click login to return to the login page </p>
-<br/><br/>
+		
+<br/>
 
-
+<p>
 			
-<input style="margin-left:200px" name="login" type="button"	value="Login" onclick="window.location.href='login'" />
-
-	
+<a href='login'> Return to Login Page </a>
+</p>
+<br/>	
 	</div>
 
 </body>
