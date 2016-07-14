@@ -416,7 +416,7 @@ function renderTagList(obj){
 		
 		$.ajax({
 			url: 'searchForBook',
-			dataType: 'JSON',
+			dataType: "JSON",
 			data: { 
 				titleText: titleTextVal,
 				authorText: authorTextVal, 
@@ -429,12 +429,21 @@ function renderTagList(obj){
 			contentType: 'application/json; charset=utf-8',
 			type: 'GET',
 			success:  function(bookReviewsModel) {
-			    $(dlg).dialog("close");
+			  
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
 				//alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-			     //$('#activeSel3', parent.document).click(); 
-				 window.location.href = 'reviewsSearchBook';
+			     //$('#activeSel3', parent.document).click();
+			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
+			    
+				document.getElementById("search").style.display = "inline";
 				
+				for(var i = 0; i < bookReviewsModel['booksStringViewList'].length ;i++){
+					$('#search ul').append("<li>"+bookReviewsModel['booksStringViewList'][i]+"</li>");
+				}
+				
+				$(dlg).dialog("close");
+				 //window.location.href = 'searchForBook';
+				 
 			 },
 
 		 error: function(e){

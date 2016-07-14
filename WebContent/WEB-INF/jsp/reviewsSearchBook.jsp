@@ -12,7 +12,8 @@
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
 <script type="text/javascript" src="./presentationResources/js/reviews.js"></script>
-
+<script type="text/javascript" src="./presentationResources/js/jquery.jscroll.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Book Reviews</title>
@@ -22,9 +23,23 @@
 	$(document).ready(function() {
 
 	
-		searchPageReadyInit();
+var html = $(".bookRevList").html();
+		 
+	//  if(html != 'undefined' && html != null){
+	//		
+		//  $('.search-box').jscroll({		  
+		//	loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+		//  });
+	//	  
+		 // $('.search').jscroll();
+	//	  
+	//   }
 
 	
+	
+		searchPageReadyInit();
+
+		
 		   
 	});
 	
@@ -45,7 +60,7 @@
 <body background="./presentationResources/images/bgimg.jpg">
 
 <br/>
-	<div id="search-box">
+	<div id="search-box" class="search-box">
 
 		<h3>PJs Book Reviews Page</h3>
 
@@ -97,30 +112,29 @@
 							<tr>
 								<td colspan='1'></td><td colspan='1'><input id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." /></td>
 							</tr>
-						<tr><td><span style="visibility:hidden;">placeholder</span></td></tr>
+					
 						</table>
 					</div>
 					
-					
-						<br/><br/>
-	     	<div id="reviews" class="reviews">
-				<c:if test="${not empty booksLists}">
-					<h4>Book titles found for you search <%=session.getAttribute("bookTitleFound")%></h4>
-					<ul id="bookSearchList" class="bookSearchList">
-						<c:forEach var="listValue" items="${booksLists}">
-							<li>${listValue}</li>
-						</c:forEach>
+	
+
+			<br/>
+			
+		
+			<div id="search" class="search" style="display:none;">
+				
+							
+					<ul id="bookRevList" class="bookRevList" >
+						
 					</ul>
 					
-				 <div class="next"><a href="retrieveNextSearchSegment">next</a> </div>
+				
 					
 			
-				</c:if>
+		
 			</div>
 					
-					
-
-		
+			
 		</form:form>
 		
 			

@@ -403,7 +403,7 @@ function renderTagList(obj){
 
 		$(dlg).parent().find('button').remove();
 		
-		$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Searching on title and author </p></div>");
+		$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Searching books...</p></div>");
 			
 		$(dlg).dialog("open");
 		
@@ -416,7 +416,7 @@ function renderTagList(obj){
 		
 		$.ajax({
 			url: 'searchForBook',
-			dataType: 'JSON',
+			dataType: "JSON",
 			data: { 
 				titleText: titleTextVal,
 				authorText: authorTextVal, 
@@ -429,12 +429,28 @@ function renderTagList(obj){
 			contentType: 'application/json; charset=utf-8',
 			type: 'GET',
 			success:  function(bookReviewsModel) {
-			    $(dlg).dialog("close");
+			  
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
-				//alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-			     //$('#activeSel3', parent.document).click(); 
-				 window.location.href = 'reviewsSearchBook';
+			//	alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
+			     //$('#activeSel3', parent.document).click();
+			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
+			    
+				document.getElementById("search").style.display = "inline";
 				
+				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
+					$('.bookRevList').append("<li>"+bookReviewsModel['booksList'][i]+"</li>");
+				}
+				
+				
+				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+				
+				$('.search-box').jscroll({		  
+					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+				});
+				
+				$(dlg).dialog("close");
+				// window.location.href = 'reviewsSearchBook';
+				 
 			 },
 
 		 error: function(e){

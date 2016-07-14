@@ -113,7 +113,8 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 	
 	public List<Books> findBooksByPublishersLazyLoad(String publisher, int offset, int numberOfRecords){
 		Session session = this.getSessionFactory().openSession();		
-		List<Books> list = session.createQuery(" from "+Books.class.getName()+" where publisher = :publisher ").setParameter("publisher", publisher).list();
+		List<Books> list = session.createQuery(" from "+Books.class.getName()+" where publisher = :publisher ").setParameter("publisher", publisher).
+				setFirstResult(offset).setMaxResults(numberOfRecords).list();
 		session.close();
 		return list;
 	}
@@ -124,7 +125,7 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 		String sql =  " where reviewers_username = :username ";
 		
 		List<BookReviews> list = session.createQuery(" from "+BookReviews.class.getName()+sql).setParameter("username", username)
-								.setFirstResult(offset).setMaxResults(offset+numberOfRecords).list();
+								.setFirstResult(offset).setMaxResults(numberOfRecords).list();
 		session.close();
 		return list;
 		

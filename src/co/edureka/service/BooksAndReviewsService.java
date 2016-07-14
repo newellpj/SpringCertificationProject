@@ -38,7 +38,7 @@ public class BooksAndReviewsService {
 		return tagsBO.findBooksByTagsLazyLoad(tagsKeyValues, offset, numberOfRecords);
 	}
 	
-	public List<Books> findBooksByublisherLazyLoad(String publisher, int offset, int numberOfRecords){
+	public List<Books> findBooksByPublisherLazyLoad(String publisher, int offset, int numberOfRecords){
 		return booksReviewsBO.findBooksByPublishersLazyLoad(publisher, offset, numberOfRecords);
 	}
 	

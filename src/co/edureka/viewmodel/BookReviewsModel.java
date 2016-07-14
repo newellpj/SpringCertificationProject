@@ -1,9 +1,13 @@
 package co.edureka.viewmodel;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class BookReviewsModel {
+	
+	private List<String> booksList;
 	
 	private int booksID;
 	
@@ -37,6 +41,16 @@ public class BookReviewsModel {
 	
 	@Size(min=1,max=40)
 	private String publisherText;
+
+	
+	
+	public List<String> getBooksList() {
+		return booksList;
+	}
+
+	public void setBooksList(List<String> booksList) {
+		this.booksList = booksList;
+	}
 
 	public String getPublisherText() {
 		return publisherText;

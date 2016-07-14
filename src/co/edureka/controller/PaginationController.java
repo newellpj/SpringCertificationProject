@@ -77,8 +77,8 @@ public class PaginationController {
 		System.out.println("bookAuthorFound  retrieveNextSegment : "+request.getSession().getAttribute("bookAuthorFound")); 
 		
 		BookReviewsModel bookReviewsModel = new BookReviewsModel();
-		bookReviewsModel.setBookTitleReview(request.getSession().getAttribute("bookTitleFound").toString());
-		bookReviewsModel.setBookAuthorReview(request.getSession().getAttribute("bookAuthorFound").toString());
+		//bookReviewsModel.setBookTitleReview(request.getSession().getAttribute("bookTitleFound").toString());
+		//bookReviewsModel.setBookAuthorReview(request.getSession().getAttribute("bookAuthorFound").toString());
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
 		
@@ -88,27 +88,44 @@ public class PaginationController {
 		
 		int latestOffset = Integer.parseInt(currentOffsetInSession)+20;
 		
-		HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(request.getSession().getAttribute("bookTitleFound").toString(), 
-				request.getSession().getAttribute("bookAuthorFound").toString(), latestOffset, 20);
+		String searchType = request.getSession().getAttribute("searchType").toString();
+		System.out.println("search type : "+searchType);
+		int paginationOffset = Integer.parseInt(request.getSession().getAttribute("currentPaginationOffset").toString());
+		
+		List<Books> booksList = null;
+		
+		if("findBooksByPublisherLazyLoad".equalsIgnoreCase(searchType)){
+			String publisherVal = request.getSession().getAttribute("publisherText").toString();			
+			booksList = booksService.findBooksByPublisherLazyLoad(publisherVal, latestOffset, 20);
+		}else if("findBooksByTagsLazyLoad".equalsIgnoreCase(searchType)){
+			
+			HashMap<String, String> tagsAndValueMap = (HashMap<String, String>)request.getSession().getAttribute("tagsAndValueMap");
+			booksList = booksService.findBooksByTagsLazyLoad(tagsAndValueMap, paginationOffset+20, 20);
+		}
+		
+		List<String> booksLists2 = new ArrayList<String>();
+		
+		
+		
+//		HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(request.getSession().getAttribute("bookTitleFound").toString(), 
+//				request.getSession().getAttribute("bookAuthorFound").toString(), latestOffset, 20);
 
-		request.getSession().setAttribute("currentPaginationOffset", latestOffset);
+		request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
 		
 		
 		ArrayList<String> list = new ArrayList<String>();
 		
-		for(Books book : bookMap.keySet()){	
-			bookMap.get(book);
+		for(Books book : booksList){	
+
+			booksLists2.add(book.getTitle()+" by "+book.getAuthor());
 			
-			for(BookReviews bookRev : bookMap.get(book)){
-				list.add(bookRev.getReviewText()+" - reviewed by -  "+bookRev.getReviewersUsername());
-			}
 		}
-		
-		System.out.println("size of reviews list returned : "+list.size());
+		System.out.println("size of booksList list returned : "+booksList.size());
+		System.out.println("size of booksList2 list returned : "+booksLists2.size());
 		ModelAndView model = new ModelAndView();	
 		//model.addObject("bookReviewsModel", bookReviewsModel);
-		model.addObject("reviewLists2", list);
-		model.setViewName("reviewsPaginationPage"); //reviewsPaginationPage
+		model.addObject("booksLists2", booksLists2);
+		model.setViewName("searchPaginationPage"); //reviewsPaginationPage
 		return model;
 	}
 	

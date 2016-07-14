@@ -65,11 +65,20 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		for(Object obj : list){
 			
 			int idbooks = (Integer)obj;
+			
+			System.out.println("id books to search on : "+idbooks);
+			
 			String sql = " from "+Books.class.getName()+" where idbooks = :booksid ";
 			books.addAll(session.createQuery(sql).setParameter("booksid", idbooks).setFirstResult(offset).setMaxResults(numberOfRecords).list());
+			
+			System.out.println("id books returned : "+idbooks);
+			
 		}
 		
 		session.close();
+		
+		
+		
 		return books;
 
 	}

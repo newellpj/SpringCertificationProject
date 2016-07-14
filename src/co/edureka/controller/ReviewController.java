@@ -196,9 +196,16 @@ public class ReviewController {
 		return bookReviewsModel;
 	}
 	
+	@RequestMapping(value = { "/searchForBook2"}, method = RequestMethod.GET)
+	public @ResponseBody BookReviewsModel searchBook2(HttpServletRequest request, HttpServletResponse response){
+		
+		request.getSession().setAttribute("langText", request.getParameter("langText"));
+		request.getSession().setAttribute("publisherText", request.getParameter("publisherText"));
+		return new BookReviewsModel();
+	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
-	public ModelAndView searchBook(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
 
 		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
 		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
@@ -220,7 +227,7 @@ public class ReviewController {
 		}
 		
 		if(request.getParameter("langText") != null && !"".equals(request.getParameter("langText"))){
-			tagsAndValueMap.put("langText", request.getParameter("langText"));
+			tagsAndValueMap.put("langText", request.getSession().getAttribute("langText").toString());
 		}
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
@@ -231,14 +238,21 @@ public class ReviewController {
 			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
 		}else if(publisherText != null && !"".equals(publisherText)){
 			System.out.println("in here222");
-			booksList.addAll(booksService.findBooksByublisherLazyLoad(publisherText, 0, 20));
+			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));
+			
+			request.getSession().setAttribute("publisherText", publisherText);
+			request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
 		}else{
 			System.out.println("in here333");
 			booksList.addAll(booksService.findBooksByTagsLazyLoad(tagsAndValueMap, 0, 20));
+			request.getSession().setAttribute("searchType", "findBooksByTagsLazyLoad");
+			request.getSession().setAttribute("tagsAndValueMap", tagsAndValueMap);
 		}
 
-		ModelAndView modelView = new ModelAndView("reviewsReviewBook");
+		ModelAndView modelView = new ModelAndView();
 		List<String> booksStringViewList = new ArrayList<String>();
+		
+		System.out.println("book list : "+booksList.size());
 		
 		if(booksList != null && booksList.size() > 0){
 			
@@ -246,8 +260,12 @@ public class ReviewController {
 				booksStringViewList.add(books.getTitle()+" by "+books.getAuthor());
 			}
 			
-			modelView.addObject("booksLists", booksStringViewList);
+			
+			
+			modelView.addObject("booksList", booksStringViewList);
+			
 			request.getSession().setAttribute("currentPaginationOffset", 0);
+			
 		}else{
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
@@ -255,7 +273,14 @@ public class ReviewController {
 			return null;
 		}
 		
-		return modelView;
+		BookReviewsModel bookReviewsModel = new BookReviewsModel();
+		bookReviewsModel.setTitleText(request.getParameter("titleText"));
+		bookReviewsModel.setAuthorText(request.getParameter("authorText"));
+		bookReviewsModel.setPublisherText(request.getParameter("publisherText"));
+		
+		bookReviewsModel.setBooksList(booksStringViewList);
+		modelView.setViewName("reviewsSearchBook");
+		return bookReviewsModel;
 
 	}
 
