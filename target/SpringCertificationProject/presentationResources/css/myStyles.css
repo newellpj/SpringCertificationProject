@@ -387,7 +387,21 @@ tr:nth-child(even)		{ background-color:#e9e9e9; }
 
 #search-box{
 	
-	width: 425px !important;
+	width: 766px !important;
+	padding: 20px;
+	margin: 40px auto;
+	background: #fff;
+	background-color: #ededed;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+	box-shadow: 10px 10px 5px #888888;
+	border-radius: 10px 10px 10px 10px;
+}
+
+#resultsSection{
+	visibility:hidden;
+	width: 766px !important;
 	padding: 20px;
 	margin: 40px auto;
 	background: #fff;

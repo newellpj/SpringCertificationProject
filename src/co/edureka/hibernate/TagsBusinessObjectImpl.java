@@ -54,8 +54,8 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 				sqlAppender.append(" or ");
 			}
 			
-			sqlAppender.append(" tag_type="+"'"+key+"'");
-			sqlAppender.append(" or tag_value="+"'"+tagsKeyValues.get(key)+"'");
+			sqlAppender.append(" ( tag_type="+"'"+key+"'");
+			sqlAppender.append(" and tag_value="+"'"+tagsKeyValues.get(key)+"')");
 		}
 
 		List list = session.createQuery("select distinct(idbooks) from "+BookTags.class.getName()+" where "+" "+sqlAppender.toString()).list();
@@ -76,10 +76,6 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		}
 		
 		session.close();
-		
-		
-		
 		return books;
-
 	}
 }

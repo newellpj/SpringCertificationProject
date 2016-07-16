@@ -421,6 +421,8 @@ function renderTagList(obj){
 	var html = document.getElementById("bookRevList").html;
 	var innerHTML = document.getElementById("bookRevList").innerHTML;
 	
+	document.getElementById("resultsSection").style.visibility = "visible";
+	
 	//document.getElementById("bookRevList").innerHTML.html = "";
 	
 	

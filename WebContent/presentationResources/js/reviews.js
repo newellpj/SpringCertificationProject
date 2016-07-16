@@ -214,8 +214,9 @@ function renderTagList(obj){
 		document.getElementById(ID+'Select').style.display = 'inline';
 							 
 	}else{
+		document.getElementById(ID+'Select').selectedIndex = 0;
 		document.getElementById(ID+'Select').style.display = 'none';
-		 document.getElementById(ID+'Select').style.visibility = 'hidden';
+		document.getElementById(ID+'Select').style.visibility = 'hidden';
 	}
 	
 	
@@ -421,6 +422,8 @@ function renderTagList(obj){
 	var html = document.getElementById("bookRevList").html;
 	var innerHTML = document.getElementById("bookRevList").innerHTML;
 	
+	document.getElementById("resultsSection").style.visibility = "visible";
+	
 	//document.getElementById("bookRevList").innerHTML.html = "";
 	
 	
@@ -464,6 +467,9 @@ function renderTagList(obj){
 		var genreTextVal = $('#genreSelect').val();  
 		var catTextVal = $('#categorySelect').val();
 		var langTextVal = $('#languageSelect').val();
+		
+		alert("catTextVal : "+catTextVal);
+		alert("langTextVal : "+langTextVal);
 		
 		$.ajax({
 			url: 'searchForBook',

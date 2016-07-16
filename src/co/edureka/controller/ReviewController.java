@@ -266,13 +266,17 @@ public class ReviewController {
 		
 		if(request.getParameter("genreText") != null && !"".equals(request.getParameter("genreText"))){
 			tagsAndValueMap.put("genreText", request.getParameter("genreText"));
+			System.out.println("genreText to search on : "+request.getParameter("genreText"));
 		}
 		
 		if(request.getParameter("catText") != null && !"".equals(request.getParameter("catText"))){
+			System.out.println("catText to search on : "+request.getParameter("catText"));
+			
 			tagsAndValueMap.put("catText", request.getParameter("catText"));
 		}
 		
 		if(request.getParameter("langText") != null && !"".equals(request.getParameter("langText"))){
+			System.out.println("lang text to search on : "+request.getParameter("langText"));
 			tagsAndValueMap.put("langText", request.getParameter("langText"));
 		}
 		

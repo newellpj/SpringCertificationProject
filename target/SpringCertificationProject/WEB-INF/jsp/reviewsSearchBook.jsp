@@ -85,7 +85,7 @@ var html = $(".bookRevList").html();
 					
 					
 					<td><input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
-					<td><select style="visibility:hidden;" id="genreSelect"></select></td>
+					<td><select style="visibility:hidden; width:240px;" id="genreSelect"></select></td>
 							
 					
 				</tr>
@@ -94,7 +94,7 @@ var html = $(".bookRevList").html();
 					<td><input id="authorText" style="width:262px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
 					
 					<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
-					<td><select style="visibility:hidden;" id="categorySelect"></select></td>
+					<td><select style="visibility:hidden; width:240px;" id="categorySelect"></select></td>
 					
 				</tr>
 				<tr>
@@ -102,7 +102,7 @@ var html = $(".bookRevList").html();
 					<td><input id="publisherText" style="width:262px !important;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
 					
 					<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
-					<td><select style="visibility:hidden;" id="languageSelect"></select></td>
+					<td><select style="visibility:hidden; width:240px;" id="languageSelect"></select></td>
 					
 				</tr>
 				
