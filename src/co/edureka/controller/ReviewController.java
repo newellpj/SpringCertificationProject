@@ -75,14 +75,33 @@ public class ReviewController {
 		
 		BookReviewsModel bookReviewsModel = new BookReviewsModel();
 		
+	
+		
+		BooksAndReviewsService booksService = new BooksAndReviewsService();
+		ModelAndView model = new ModelAndView();	
+		
+		String searchSelectedBook = request.getParameter("titleAuthorText");
+		System.out.println("searchSelectedBook : "+searchSelectedBook);
+		
+		if(searchSelectedBook != null && !"".equals(searchSelectedBook)){
+			//the existence of the request parameter searchSelectedBook - means we are coming to the reviews page from the search book page AND NOT the add book page.
+			String title = searchSelectedBook.substring(0, searchSelectedBook.lastIndexOf("-")).trim();
+			String author = searchSelectedBook.substring(searchSelectedBook.lastIndexOf("-")+1).trim();
+			
+			title = title.replaceAll("-", " ");
+			
+			System.out.println("title : "+title);
+			
+			request.getSession().setAttribute("bookTitleFound", title);
+			request.getSession().setAttribute("bookAuthorFound", author);
+		}
+		
 		String bookTitleFound = (request.getSession().getAttribute("bookTitleFound") != null) ? request.getSession().getAttribute("bookTitleFound").toString() : ""; 
 		String bookAuthorFound = (request.getSession().getAttribute("bookAuthorFound") != null) ? request.getSession().getAttribute("bookAuthorFound").toString() : ""; 
 		
 		bookReviewsModel.setBookTitleReview(bookTitleFound);
 		bookReviewsModel.setBookAuthorReview(bookAuthorFound);
 		
-		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		ModelAndView model = new ModelAndView();	
 		
 		if(!"".equals(bookTitleFound)){
 		
@@ -110,6 +129,7 @@ public class ReviewController {
 		model.setViewName("reviewsReviewBook");
 		return model;
 	}
+	
 	
 	
 	@RequestMapping(value = { "/addBookReview"}, method = RequestMethod.GET)
@@ -270,7 +290,7 @@ public class ReviewController {
 		if(booksList != null && booksList.size() > 0){
 			
 			for(Books books : booksList){
-				booksStringViewList.add(books.getTitle()+" by "+books.getAuthor());
+				booksStringViewList.add(books.getTitle()+" - "+books.getAuthor());
 			}
 			
 			modelView.addObject("booksList", booksStringViewList);

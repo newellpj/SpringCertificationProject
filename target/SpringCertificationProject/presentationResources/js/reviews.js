@@ -484,9 +484,21 @@ function renderTagList(obj){
 			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
 			    
 				document.getElementById("search").style.display = "inline";
+		
 				
 				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
-					$('.bookRevList').append("<li>"+bookReviewsModel['booksList'][i]+"</li>");
+					
+					$('.bookRevList').append("<div>");
+					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
+					
+					var bookDetails = bookReviewsModel['booksList'][i]
+					
+					bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");
+					
+					
+					$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+					$('.bookRevList').append("</a>");
+					$('.bookRevList').append("</div>");
 				}
 				
 				
@@ -497,7 +509,7 @@ function renderTagList(obj){
 				});
 				
 				$(dlg).dialog("close");
-				// window.location.href = 'reviewsSearchBook';
+				
 				 
 			 },
 

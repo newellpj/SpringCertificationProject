@@ -42,11 +42,11 @@
 	<div id="reviews" class="reviews">
 				<c:if test="${not empty booksLists2}">
 
-					<ul id="bookSearchList" class="bookSearchList">
+					
 						<c:forEach var="listValue2" items="${booksLists2}">
-							<li>${listValue2}</li>
+							<div> ${listValue2} &nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook'+<%=java.net.URLEncoder.encode(listValue2)%>> Review this</a> </div>
 						</c:forEach>
-					</ul>
+					
 					
 				 <div class="next"><a href="retrieveNextSearchSegment">next</a> </div>
 					
@@ -54,6 +54,5 @@
 				</c:if>
 			</div>
 </div>
-
 </body>
 </html>

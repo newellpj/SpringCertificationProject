@@ -113,7 +113,7 @@ var html = $(".bookRevList").html();
 								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
 								</button>
-								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetSearches();"  value="Reset" >
+								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
 										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
 								</button>
 								</td>
@@ -123,13 +123,22 @@ var html = $(".bookRevList").html();
 						</table>
 					</div>		
 			<br/>
+
 			
-			<div id="search" class="search" style="display:none;">
+		</form:form>
+</div>	
+<div id="resultsSection" class="resultsSection">
+		<form:form id="searchResults" class="searchResults">
+		
+				<div id="search" class="search" style="display:none; width:1000px !important;">
 					<ul id="bookRevList" class="bookRevList" >				
 					</ul>
 			</div>
+		
 		</form:form>
-	</div>
+</div>		
+		
+	
 
 <div style="margin-left:300px;" >
 	<div id="fb-root" ></div>

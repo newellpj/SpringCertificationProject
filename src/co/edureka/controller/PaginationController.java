@@ -117,7 +117,7 @@ public class PaginationController {
 		
 		for(Books book : booksList){	
 
-			booksLists2.add(book.getTitle()+" by "+book.getAuthor());
+			booksLists2.add(book.getTitle()+" - "+book.getAuthor());
 			
 		}
 		System.out.println("size of booksList list returned : "+booksList.size());

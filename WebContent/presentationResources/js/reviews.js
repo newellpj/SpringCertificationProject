@@ -397,6 +397,11 @@ function renderTagList(obj){
 		
  }
  
+ function resetTheSearch(){
+	 window.location.href = 'reviewsSearchBook';
+	
+	//resetSearches();
+ }
  function resetSearches(){
 	 
 	 $('.bookRevList').html("");
@@ -407,38 +412,34 @@ function renderTagList(obj){
 	
 	$('#reviewsForm').trigger("reset");
 	 
-	 $.ajax({
-			url: 'resetSearch',
-			dataType: "JSON",
-			data: { 
-				titleText: '',
-				authorText: '', 
-				publisherText: '',
-				genreText: '',
-				catText: '',
-				langText: ''
-			},
-			processData: true,
-			contentType: 'application/json; charset=utf-8',
-			type: 'GET',
-			success:  function() {
-			  
-				// window.location.href = 'reviewsSearchBook';
-				 
-			 },
 
-		 error: function(e){
-
-	           
-          }
- 
-		}); 
  } 
  
  function performAjaxSearch(){
-	 
-	 //hid error dialog
+	// $('.searchResults').trigger("reset");
 	
+	var html = document.getElementById("bookRevList").html;
+	var innerHTML = document.getElementById("bookRevList").innerHTML;
+	
+	//document.getElementById("bookRevList").innerHTML.html = "";
+	
+	
+	
+	document.getElementById("bookRevList").innerHTML = "";
+	
+	if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
+		
+		//document.getElementById("bookRevList2").innerHTML = "";
+		
+		 $( ".bookRevList2" ).each(function( ) {
+				this.innerHTML = "";
+		  });
+		
+		
+	}
+	
+	//alert("html : "+html);
+	//alert("innerHTML : "+innerHTML);
 	 
 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
@@ -484,20 +485,32 @@ function renderTagList(obj){
 			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
 			    
 				document.getElementById("search").style.display = "inline";
+		
 				
 				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
-					$('.bookRevList').append("<li>"+bookReviewsModel['booksList'][i]+"</li>");
+					
+					$('.bookRevList').append("<div>");
+					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
+					
+					var bookDetails = bookReviewsModel['booksList'][i]
+					
+					bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");
+					
+					
+					$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+					$('.bookRevList').append("</a>");
+					$('.bookRevList').append("</div>");
 				}
 				
 				
 				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
 				
-				$('.search-box').jscroll({		  
+				$('.resultsSection').jscroll({		  
 					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
 				});
 				
 				$(dlg).dialog("close");
-				// window.location.href = 'reviewsSearchBook';
+				
 				 
 			 },
 
