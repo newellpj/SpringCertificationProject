@@ -91,37 +91,40 @@ public class PaginationController {
 		String searchType = request.getSession().getAttribute("searchType").toString();
 		System.out.println("search type : "+searchType);
 		int paginationOffset = Integer.parseInt(request.getSession().getAttribute("currentPaginationOffset").toString());
-		
-		List<Books> booksList = null;
+		System.out.println("paginationOffset: "+paginationOffset);
+		List<Books> booksList = new ArrayList<Books>();
 		
 		if("findBooksByPublisherLazyLoad".equalsIgnoreCase(searchType)){
+			
+			System.out.println("doing findBooksByPublisherLazyLoad");
+			
 			String publisherVal = request.getSession().getAttribute("publisherText").toString();			
 			booksList = booksService.findBooksByPublisherLazyLoad(publisherVal, latestOffset, 20);
-		}else if("findBooksByTagsLazyLoad".equalsIgnoreCase(searchType)){
+			request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
 			
+		}else if("findBooksByTagsLazyLoad".equalsIgnoreCase(searchType)){
+			System.out.println("doing findBooksByTagsLazyLoad");
 			HashMap<String, String> tagsAndValueMap = (HashMap<String, String>)request.getSession().getAttribute("tagsAndValueMap");
 			booksList = booksService.findBooksByTagsLazyLoad(tagsAndValueMap, paginationOffset+20, 20);
+			request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
+		}else{
+			System.out.println("just here");
 		}
-		
+		System.out.println("size of booksList list returned : "+booksList.size());
+		//System.out.println("size of booksList2 list returned : "+booksLists2.size());
 		List<String> booksLists2 = new ArrayList<String>();
-		
-		
-		
 //		HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(request.getSession().getAttribute("bookTitleFound").toString(), 
 //				request.getSession().getAttribute("bookAuthorFound").toString(), latestOffset, 20);
 
-		request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
-		
-		
+	//	request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
 		ArrayList<String> list = new ArrayList<String>();
 		
 		for(Books book : booksList){	
-
 			booksLists2.add(book.getTitle()+" - "+book.getAuthor());
-			
 		}
-		System.out.println("size of booksList list returned : "+booksList.size());
-		System.out.println("size of booksList2 list returned : "+booksLists2.size());
+		
+		System.out.println("22 size of booksList list returned : "+booksList.size());
+		System.out.println("22 size of booksList2 list returned : "+booksLists2.size());
 		ModelAndView model = new ModelAndView();	
 		//model.addObject("bookReviewsModel", bookReviewsModel);
 		model.addObject("booksLists2", booksLists2);

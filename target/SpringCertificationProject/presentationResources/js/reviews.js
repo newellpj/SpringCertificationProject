@@ -397,6 +397,11 @@ function renderTagList(obj){
 		
  }
  
+ function resetTheSearch(){
+	 window.location.href = 'reviewsSearchBook';
+	
+	//resetSearches();
+ }
  function resetSearches(){
 	 
 	 $('.bookRevList').html("");
@@ -407,38 +412,36 @@ function renderTagList(obj){
 	
 	$('#reviewsForm').trigger("reset");
 	 
-	 $.ajax({
-			url: 'resetSearch',
-			dataType: "JSON",
-			data: { 
-				titleText: '',
-				authorText: '', 
-				publisherText: '',
-				genreText: '',
-				catText: '',
-				langText: ''
-			},
-			processData: true,
-			contentType: 'application/json; charset=utf-8',
-			type: 'GET',
-			success:  function() {
-			  
-				// window.location.href = 'reviewsSearchBook';
-				 
-			 },
 
-		 error: function(e){
-
-	           
-          }
- 
-		}); 
  } 
  
  function performAjaxSearch(){
-	 
-	 //hid error dialog
+	// $('.searchResults').trigger("reset");
 	
+	var html = document.getElementById("bookRevList").html;
+	var innerHTML = document.getElementById("bookRevList").innerHTML;
+	
+	//document.getElementById("bookRevList").innerHTML.html = "";
+	
+	
+	
+	document.getElementById("bookRevList").innerHTML = "";
+	
+	
+	
+	if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
+		
+		document.getElementById("bookRevList2").innerHTML = "";
+		
+		 $( ".bookRevList2" ).each(function( ) {
+				this.innerHTML = "";
+		  });
+		
+		
+	}
+	
+	//alert("html : "+html);
+	//alert("innerHTML : "+innerHTML);
 	 
 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
@@ -504,7 +507,7 @@ function renderTagList(obj){
 				
 				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
 				
-				$('.search-box').jscroll({		  
+				$('.resultsSection').jscroll({		  
 					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
 				});
 				

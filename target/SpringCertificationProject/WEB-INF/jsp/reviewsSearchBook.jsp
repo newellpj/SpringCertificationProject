@@ -72,9 +72,9 @@ var html = $(".bookRevList").html();
 			<div class="message">${message}</div>
 		</c:if>
 		
-		<p><span style="align-center;">Please type in author and title to find a book to review.</span></p>
+		<p><span style="align-center;">Please type in the criteria to find a book to review.</span></p>
 
-<br/><br/>
+
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
 	
 		<table style="width:100%;">
@@ -82,14 +82,28 @@ var html = $(".bookRevList").html();
 				<tr>
 					<td>Title:</td>
 					<td><input id="titleText" style="width:262px !important;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span></td>
+					
+					
+					<td><input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
+					<td><select style="visibility:hidden;" id="genreSelect"></select></td>
+							
+					
 				</tr>
 				<tr>
 					<td>Author:</td>
 					<td><input id="authorText" style="width:262px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
+					
+					<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
+					<td><select style="visibility:hidden;" id="categorySelect"></select></td>
+					
 				</tr>
 				<tr>
 					<td>Publisher:</td>
 					<td><input id="publisherText" style="width:262px !important;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
+					
+					<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
+					<td><select style="visibility:hidden;" id="languageSelect"></select></td>
+					
 				</tr>
 				
 						
@@ -99,21 +113,10 @@ var html = $(".bookRevList").html();
 			  <div class="tagSearches"> 
 						<table width="100%">
 							<tr>
-								<td><input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
-								<td><select style="visibility:hidden;" id="genreSelect"></select></td>
-							</tr>
-							<tr>
-								<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
-								<td><select style="visibility:hidden;" id="categorySelect"></select></td>
-							</tr>
-					 			<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
-								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
-							</tr>
-							<tr>
 								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
 								</button>
-								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetSearches();"  value="Reset" >
+								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
 										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
 								</button>
 								</td>
@@ -123,13 +126,22 @@ var html = $(".bookRevList").html();
 						</table>
 					</div>		
 			<br/>
+
 			
-			<div id="search" class="search" style="display:none;">
+		</form:form>
+</div>	
+<div id="resultsSection" class="resultsSection">
+		<form:form id="searchResults" class="searchResults">
+		
+				<div id="search" class="search" style="display:none; width:1000px !important;">
 					<ul id="bookRevList" class="bookRevList" >				
 					</ul>
 			</div>
+		
 		</form:form>
-	</div>
+</div>		
+		
+	
 
 <div style="margin-left:300px;" >
 	<div id="fb-root" ></div>

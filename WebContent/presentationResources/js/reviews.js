@@ -427,9 +427,11 @@ function renderTagList(obj){
 	
 	document.getElementById("bookRevList").innerHTML = "";
 	
+	
+	
 	if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
 		
-		//document.getElementById("bookRevList2").innerHTML = "";
+		document.getElementById("bookRevList2").innerHTML = "";
 		
 		 $( ".bookRevList2" ).each(function( ) {
 				this.innerHTML = "";

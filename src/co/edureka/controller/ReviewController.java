@@ -237,9 +237,22 @@ public class ReviewController {
 		return new BookReviewsModel();
 	}
 	
+	private void resetSearchSessionAttributes(HttpServletRequest request){
+		request.getSession().setAttribute("publisherText", "");
+		request.getSession().setAttribute("titleText", "");
+		request.getSession().setAttribute("authorText", "");
+		request.getSession().setAttribute("genreText", "");
+		request.getSession().setAttribute("catText", "");
+		request.getSession().setAttribute("langText", "");
+		request.getSession().setAttribute("searchType", "");
+		request.getSession().setAttribute("tagsAndValueMap", null);
+		request.getSession().setAttribute("currentPaginationOffset", 0);
+	}
+	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
-
+		
+		resetSearchSessionAttributes(request);
 		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
 		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
 		System.out.println("request contain publisherText ? : "+request.getParameter("publisherText"));
@@ -260,7 +273,7 @@ public class ReviewController {
 		}
 		
 		if(request.getParameter("langText") != null && !"".equals(request.getParameter("langText"))){
-			tagsAndValueMap.put("langText", request.getSession().getAttribute("langText").toString());
+			tagsAndValueMap.put("langText", request.getParameter("langText"));
 		}
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
@@ -268,8 +281,10 @@ public class ReviewController {
 		List<Books> booksList = new ArrayList<Books>();
 		
 		if(titleText != null && !"".equals(titleText) && !"".equals(authorText) && authorText != null){
+			System.out.println("in here111");
 			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
 			booksList.add(book);
+			
 		}else if(publisherText != null && !"".equals(publisherText)){
 			System.out.println("in here222");
 			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));
