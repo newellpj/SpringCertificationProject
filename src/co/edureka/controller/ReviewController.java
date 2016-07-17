@@ -280,11 +280,15 @@ public class ReviewController {
 			tagsAndValueMap.put("langText", request.getParameter("langText"));
 		}
 		
+		
+		System.out.println("just before service instantiation !");
+		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
 		
 		List<Books> booksList = new ArrayList<Books>();
+		System.out.println("just before test !");
 		
-		if(titleText != null && !"".equals(titleText) && !"".equals(authorText) && authorText != null){
+		if(titleText != null && !"".equals(titleText) || (!"".equals(authorText) && authorText != null)){
 			System.out.println("in here111");
 			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
 			booksList.add(book);
@@ -319,7 +323,10 @@ public class ReviewController {
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
 			request.getSession().setAttribute("currentPaginationOffset", 0);
-			return null;
+			
+			booksStringViewList.add("No books found");
+			
+			//return booksStringViewList;
 		}
 		
 		BookReviewsModel bookReviewsModel = new BookReviewsModel();

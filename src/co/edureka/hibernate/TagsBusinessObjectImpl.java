@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edureka.hibernate.orm.BookTags;
 import co.edureka.hibernate.orm.Books;
 
+
+
 public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsBusinessObject{
+
 	@Override
 	@Transactional
 	public void save(BookTags bookTags) {
@@ -51,14 +58,21 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			count++;
 			
 			if(count > 1){
-				sqlAppender.append(" or ");
+				sqlAppender.append("  union ");
 			}
-			
-			sqlAppender.append(" ( tag_type="+"'"+key+"'");
-			sqlAppender.append(" and tag_value="+"'"+tagsKeyValues.get(key)+"')");
+			sqlAppender.append(" select idbooks from book_tags where ");
+			sqlAppender.append("  tag_type="+"'"+key+"'");
+			sqlAppender.append(" and tag_value="+"'"+tagsKeyValues.get(key)+"'");
 		}
 
-		List list = session.createQuery("select distinct(idbooks) from "+BookTags.class.getName()+" where "+" "+sqlAppender.toString()).list();
+		//entityManager.getEntityManagerFactory();
+		
+		System.out.println("sql appender value ::: "+sqlAppender.toString());
+		
+		//Query query = entityManager.getEntityManagerFactory().createEntityManager().createNativeQuery(sqlAppender.toString());
+		//List list = query.getResultList();
+		
+		List list = session.createSQLQuery(sqlAppender.toString()).list();
 		
 		List<Books> books = new ArrayList<Books>();
 		
@@ -69,6 +83,9 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			System.out.println("id books to search on : "+idbooks);
 			
 			String sql = " from "+Books.class.getName()+" where idbooks = :booksid ";
+			//EntityManager em = EntityManagerFactory
+			
+		
 			books.addAll(session.createQuery(sql).setParameter("booksid", idbooks).setFirstResult(offset).setMaxResults(numberOfRecords).list());
 			
 			System.out.println("id books returned : "+idbooks);

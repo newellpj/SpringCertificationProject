@@ -214,8 +214,9 @@ function renderTagList(obj){
 		document.getElementById(ID+'Select').style.display = 'inline';
 							 
 	}else{
+		document.getElementById(ID+'Select').selectedIndex = 0;
 		document.getElementById(ID+'Select').style.display = 'none';
-		 document.getElementById(ID+'Select').style.visibility = 'hidden';
+		document.getElementById(ID+'Select').style.visibility = 'hidden';
 	}
 	
 	
@@ -467,6 +468,9 @@ function renderTagList(obj){
 		var catTextVal = $('#categorySelect').val();
 		var langTextVal = $('#languageSelect').val();
 		
+		//alert("catTextVal : "+catTextVal);
+		//alert("langTextVal : "+langTextVal);
+		
 		$.ajax({
 			url: 'searchForBook',
 			dataType: "JSON",
@@ -495,14 +499,16 @@ function renderTagList(obj){
 					
 					$('.bookRevList').append("<div>");
 					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
-					
 					var bookDetails = bookReviewsModel['booksList'][i]
 					
-					bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");
+					if("No books found" != bookDetails){
+						
+						bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
+						
+						$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+						$('.bookRevList').append("</a>");
+					}
 					
-					
-					$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
-					$('.bookRevList').append("</a>");
 					$('.bookRevList').append("</div>");
 				}
 				

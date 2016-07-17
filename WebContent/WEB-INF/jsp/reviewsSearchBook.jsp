@@ -110,7 +110,7 @@ var html = $(".bookRevList").html();
 			
 			</table>
 			
-			  <div class="tagSearches"> 
+			  <div class="tagSearches" style="margin-left:200px !important;"> 
 						<table width="100%">
 							<tr>
 								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 

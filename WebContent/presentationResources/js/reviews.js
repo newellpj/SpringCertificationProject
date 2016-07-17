@@ -468,8 +468,8 @@ function renderTagList(obj){
 		var catTextVal = $('#categorySelect').val();
 		var langTextVal = $('#languageSelect').val();
 		
-		alert("catTextVal : "+catTextVal);
-		alert("langTextVal : "+langTextVal);
+		//alert("catTextVal : "+catTextVal);
+		//alert("langTextVal : "+langTextVal);
 		
 		$.ajax({
 			url: 'searchForBook',
@@ -499,14 +499,16 @@ function renderTagList(obj){
 					
 					$('.bookRevList').append("<div>");
 					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
-					
 					var bookDetails = bookReviewsModel['booksList'][i]
 					
-					bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");
+					if("No books found" != bookDetails){
+						
+						bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
+						
+						$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+						$('.bookRevList').append("</a>");
+					}
 					
-					
-					$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
-					$('.bookRevList').append("</a>");
 					$('.bookRevList').append("</div>");
 				}
 				
