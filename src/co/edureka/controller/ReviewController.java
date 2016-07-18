@@ -114,7 +114,7 @@ public class ReviewController {
 				bookMap.get(book);
 				
 				for(BookReviews bookRev : bookMap.get(book)){
-					list.add(bookRev.getReviewText()+" - reviewed by -  "+bookRev.getReviewersUsername());
+					list.add(bookRev.getReviewText()+" - <b>reviewed by "+bookRev.getReviewersUsername()+"</b>");
 				}
 			}
 			
