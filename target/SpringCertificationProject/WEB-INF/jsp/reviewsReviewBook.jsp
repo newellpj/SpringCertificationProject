@@ -24,14 +24,18 @@
 <head>
 <script>
 $(document).ready(function() {
+	
+	
 		
 	  var html = $(".bookRevList").html();
 		  
 	  if(html != 'undefined' && html != null){
 	
-		  $('.add-reviews-box').jscroll({		  
+		  $('.resultsSection').jscroll({		  
 			loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
 		  });
+		  
+		  document.getElementById("resultsSection").style.visibility = "visible";
 	   }
 	 
 	  
@@ -91,15 +95,12 @@ $(document).ready(function() {
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
 		</c:if>
-		
-		<p><span style="align-center;">Add a review here.</span></p>
 
-<br/><br/>
+<br/>
 			<form:form id="reviewsForm"  method="post" commandName="bookReviewsModel">
 
 		<table style="width:100%;">
 
-				<tr><td colspan="3">Add a Review</td></tr>
 				<tr>
 					<td>Title:</td>
 					<td><input type='text'  style="width:250px !important;" id="bookTitleReview" name='bookTitleReview' disabled="true" 
@@ -120,8 +121,11 @@ $(document).ready(function() {
 				</tr>
 			</table>
 			
-			<br/><br/>
-			<div id="reviews" class="reviews">
+		</form:form>
+	</div>
+			
+	<div id="resultsSection" class="resultsSection">
+		
 				<c:if test="${not empty reviewLists}">
 					<h4>Book Reviews for <%=session.getAttribute("bookTitleFound")%></h4>
 					<ul id="bookRevList" class="bookRevList">
@@ -134,11 +138,12 @@ $(document).ready(function() {
 					
 			
 				</c:if>
-			</div>
+		
+		</div>
 
 
-		</form:form>
-	</div>
+	
+
 	<div style="margin-left:300px;" >
 	<div id="fb-root" ></div>
 <div class="fb-like" data-href="http://www.w3schools.com/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>

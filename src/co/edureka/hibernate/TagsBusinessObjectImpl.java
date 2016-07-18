@@ -58,11 +58,17 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			count++;
 			
 			if(count > 1){
-				sqlAppender.append("  union ");
+				sqlAppender.append(" and idbooks in (");
 			}
+			
 			sqlAppender.append(" select idbooks from book_tags where ");
 			sqlAppender.append("  tag_type="+"'"+key+"'");
 			sqlAppender.append(" and tag_value="+"'"+tagsKeyValues.get(key)+"'");
+			
+			if(count > 1){
+				sqlAppender.append(")");
+			}
+			
 		}
 
 		//entityManager.getEntityManagerFactory();
@@ -72,7 +78,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		//Query query = entityManager.getEntityManagerFactory().createEntityManager().createNativeQuery(sqlAppender.toString());
 		//List list = query.getResultList();
 		
-		List list = session.createSQLQuery(sqlAppender.toString()).list();
+		List list = session.createSQLQuery(sqlAppender.toString()).list(); //allows you to create native sql query
 		
 		List<Books> books = new ArrayList<Books>();
 		

@@ -118,6 +118,10 @@ public class ReviewController {
 				}
 			}
 			
+			if(list.size() == 0){
+				list.add("No Reviews found for title.");
+			}
+			
 			model.addObject("reviewLists", list);
 		}else{
 			request.getSession().setAttribute("bookAuthorFound", "");

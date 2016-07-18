@@ -39,7 +39,7 @@ public class HibernateTestClass {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("langText", "English");	
-		map.put("catText", "Fiction");	
+		map.put("catText", "Non-fiction");	
 		map.put("genreText", "Philosophy");	
 		
 		List<Books> booksFound = tagsBO.findBooksByTagsLazyLoad(map, 0, 20);

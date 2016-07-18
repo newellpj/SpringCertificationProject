@@ -48,7 +48,7 @@
 						</c:forEach>
 					</ul>
 					
-				 <div class="next"><a href="retrieveNextSegment">next</a> </div>
+				 <div class="next"><a href="retrieveNextReviewsSegment">next</a> </div>
 					
 			
 				</c:if>
