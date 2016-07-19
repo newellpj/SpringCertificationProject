@@ -58,7 +58,7 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 		hashMap.put("title", title);
 		hashMap.put("author", author);
 		
-		List list = session.createQuery(" from "+Books.class.getName()+" where title = :title and author = :author ").setProperties(hashMap).list();
+		List list = session.createQuery(" from "+Books.class.getName()+" where UPPER(title) = UPPER(:title) and UPPER(author) = UPPER(:author) ").setProperties(hashMap).list();
 		
 		if(list != null && list.size() > 0){
 			Object obj = list.get(0);
@@ -90,7 +90,7 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 		hashMap.put("title", title);
 		hashMap.put("author", author);
 		
-		List list = session.createQuery(" from "+Books.class.getName()+" where title = :title and author = :author ").setProperties(hashMap).list();
+		List list = session.createQuery(" from "+Books.class.getName()+" where UPPER(title) = UPPER(:title) and UPPER(author) = UPPER(:author) ").setProperties(hashMap).list();
 		
 		if(list != null && list.size() > 0){
 			Object obj = list.get(0);
@@ -114,14 +114,14 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 	public List<BookReviews> findBooksReviewByReviewer(String username) {
 		// TODO Auto-generated method stub
 		Session session = this.getSessionFactory().openSession();		
-		List<BookReviews> list = session.createQuery(" from "+BookReviews.class.getName()+" where reviewers_username = :username ").setParameter("username", username).list();
+		List<BookReviews> list = session.createQuery(" from "+BookReviews.class.getName()+" where UPPER(reviewers_username) = UPPER(:username) ").setParameter("username", username).list();
 		session.close();
 		return list;
 	}
 	
 	public List<Books> findBooksByPublishersLazyLoad(String publisher, int offset, int numberOfRecords){
 		Session session = this.getSessionFactory().openSession();		
-		List<Books> list = session.createQuery(" from "+Books.class.getName()+" where publisher = :publisher ").setParameter("publisher", publisher).
+		List<Books> list = session.createQuery(" from "+Books.class.getName()+" where UPPER(publisher) = UPPER(:publisher) ").setParameter("publisher", publisher).
 				setFirstResult(offset).setMaxResults(numberOfRecords).list();
 		session.close();
 		return list;

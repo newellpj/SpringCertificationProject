@@ -29,6 +29,11 @@ public class PaginationController {
 	@RequestMapping(value = { "/retrieveNextReviewsSegment"}, method = RequestMethod.GET)
 	public ModelAndView retrieveNextReviewsSegment(HttpServletRequest request, HttpServletResponse response) {
 
+		
+		if(request.getSession() == null){
+			return null;
+		}
+		
 		log.info("we getting in here retrieveNextSegment?");
 		
 		log.info("bookTitleFound retrieveNextSegment : "+request.getSession().getAttribute("bookTitleFound")); 
@@ -74,6 +79,10 @@ public class PaginationController {
 	@RequestMapping(value = { "/retrieveNextSearchSegment"}, method = RequestMethod.GET)
 	public ModelAndView retrieveNextSearchSegment(HttpServletRequest request, HttpServletResponse response) {
 
+		if(request.getSession() == null){
+			return null;
+		}
+		
 		log.info("we getting in here retrieveNextSegment?");
 		
 		log.info("bookTitleFound retrieveNextSegment : "+request.getSession().getAttribute("bookTitleFound")); 

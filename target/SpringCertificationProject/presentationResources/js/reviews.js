@@ -370,8 +370,6 @@ function renderTagList(obj){
 							'class': 'btn btn-primary',
 							click: function(e) {
 								$(this).dialog("close");
-								
-							
 							},
 							text: 'OK'
 						}
@@ -422,15 +420,8 @@ function renderTagList(obj){
 	var html = document.getElementById("bookRevList").html;
 	var innerHTML = document.getElementById("bookRevList").innerHTML;
 	
-	document.getElementById("resultsSection").style.visibility = "visible";
-	
-	//document.getElementById("bookRevList").innerHTML.html = "";
-	
-	
-	
+	document.getElementById("resultsSection").style.visibility = "visible";	
 	document.getElementById("bookRevList").innerHTML = "";
-	
-	
 	
 	if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
 		

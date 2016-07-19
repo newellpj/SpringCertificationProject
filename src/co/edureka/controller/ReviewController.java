@@ -55,6 +55,10 @@ public class ReviewController {
 	@RequestMapping(value = { "/getBookReviewsList"}, method = RequestMethod.GET)
 	public ModelAndView getBookReviewsList(HttpServletRequest request, HttpServletResponse response) {
 		
+		if(request.getSession() == null){
+			return null;
+		}
+		
 		//TODO add book review then bring back all back reviews with this one added - paginated!
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
@@ -69,6 +73,11 @@ public class ReviewController {
 	@RequestMapping(value = { "/reviewsReviewBook"}, method = RequestMethod.GET)
 	public ModelAndView addReviewsPage(HttpServletRequest request, HttpServletResponse response) {
 
+		
+		if(request.getSession() == null){
+			return null;
+		}
+		
 		log.info("we getting in here reviewsReviewBook?");
 		
 		log.info("bookTitleFound : "+request.getSession().getAttribute("bookTitleFound")); 
@@ -139,6 +148,12 @@ public class ReviewController {
 	
 	@RequestMapping(value = { "/addBookReview"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel addBookReview(HttpServletRequest request, HttpServletResponse response){
+		
+		if(request.getSession() == null){
+			return null;
+		}
+		
+		
 		log.info(" addBookReview request "+request.toString());
 		log.info("request contain titleText ? : "+request.getParameter("titleText"));
 		log.info("request contain authorText ? : "+request.getParameter("authorText"));
@@ -186,6 +201,11 @@ public class ReviewController {
 	@RequestMapping(value = { "/addNewBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel addNewBook(HttpServletRequest request, HttpServletResponse response){
 		log.info("request "+request.toString());
+		
+		if(request.getSession() == null){
+			return null;
+		}
+		
 		log.info("request contain titleText ? : "+request.getParameter("titleText"));
 		log.info("request contain authorText ? : "+request.getParameter("authorText"));
 	
@@ -232,6 +252,11 @@ public class ReviewController {
 	
 	@RequestMapping(value = { "/resetSearch"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel resetSearch(HttpServletRequest request, HttpServletResponse response){
+		
+		if(request.getSession() == null){
+			return null;
+		}
+		
 		request.getSession().removeAttribute("bookAuthorFound");
 		request.getSession().removeAttribute("bookTitleFound");
 		request.getSession().removeAttribute("currentPaginationOffset");
@@ -256,6 +281,12 @@ public class ReviewController {
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
+		
+		log.info("request.getSession() : "+request.getSession());
+		
+		if(request.getSession() == null){
+			return null;
+		}
 		
 		resetSearchSessionAttributes(request);
 		log.info("request contain titleText ? : "+request.getParameter("titleText"));

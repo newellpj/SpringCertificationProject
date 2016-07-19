@@ -24,6 +24,9 @@ public class SimpleUrlAuthenticationSuccessHandler implements AuthenticationSucc
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, 
       HttpServletResponse response, Authentication authentication) throws IOException {
+    	
+    	log.info("onAuthenticationSuccess");
+    	
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
     }
@@ -31,7 +34,7 @@ public class SimpleUrlAuthenticationSuccessHandler implements AuthenticationSucc
     protected void handle(HttpServletRequest request, 
       HttpServletResponse response, Authentication authentication) throws IOException {
         String targetUrl = determineTargetUrl(authentication);
- 
+        log.info("handle");
         if (response.isCommitted()) {
         	log.info("Response has already been committed. Unable to redirect to " + targetUrl);
             return;

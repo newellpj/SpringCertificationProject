@@ -66,8 +66,8 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			}
 			
 			sqlAppender.append(" select idbooks from book_tags where ");
-			sqlAppender.append("  tag_type="+"'"+key+"'");
-			sqlAppender.append(" and tag_value="+"'"+tagsKeyValues.get(key)+"'");
+			sqlAppender.append("  UPPER(tag_type) = "+"UPPER('"+key+"')");
+			sqlAppender.append(" and UPPER(tag_value) = "+"UPPER('"+tagsKeyValues.get(key)+"')");
 			
 			if(count > 1){
 				sqlAppender.append(")");
