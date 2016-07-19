@@ -43,13 +43,20 @@
 	   		</property>
 	   </bean>
 	   
-	  	 	<bean id="transactionManagerHibernate" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-			  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
-		    </bean>
-	   
-			<bean id="authenticationSuccessHandler" class="co.edureka.controller.LoginController">  
-			    <property name="defaultTargetUrl" value="/reviews" />
-		    </bean>
+  	 	<bean id="transactionManagerHibernate" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
+	    </bean>
+   
+		<bean id="authenticationSuccessHandler" class="co.edureka.controller.LoginController">  
+		    <property name="defaultTargetUrl" value="/reviews" />
+	    </bean>
+   
+   		<bean id="myAuthenticationSuccessHandler"  class="co.edureka.config.SimpleUrlAuthenticationSuccessHandler" />
+ 
+   
+   		<bean id="reviewsController" class="co.edureka.controller.ReviewController">  
+	
+	    </bean>
 	   
 	   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
 	   		<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
@@ -73,5 +80,9 @@
 	   <bean id="tagsBusinessObject" class="co.edureka.hibernate.TagsBusinessObjectImpl">
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
+	   
+ <bean id="myAspect" class="co.edureka.aop.MethodBeforeAdvisor">
+</bean>
+	   
 	   
 </beans>

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,8 @@ import co.edureka.hibernate.orm.BookReviews;
 import co.edureka.hibernate.orm.Books;
 
 
+@Configuration
+@EnableAspectJAutoProxy
 public class BooksBusinessObjectImpl extends HibernateDaoSupport implements BooksBusinessObject{
 
 	@Override
@@ -47,15 +51,17 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 	}
 
 	@Override
-	public Books findBooksByTitleAndAuthor(String title, String author) {
+	public List<Books> findBooksByTitleAndAuthor(String title, String author) {
 		// TODO Auto-generated method stub
 		System.out.println("book title to search : "+title);
 		Session session = this.getSessionFactory().openSession();
-		List list = null;
+		List<Books> list = null;
 		
 		
 		if(author == null || "".equals(author)){
 			list = session.createQuery(" from "+Books.class.getName()+" where UPPER(title) = UPPER(:title) ").setString("title", title).list();
+		}else if(title == null || "".equals(title)){
+			list = session.createQuery(" from "+Books.class.getName()+" where UPPER(author) = UPPER(:author) ").setString("author", author).list();
 		}else{
 			Map hashMap = new HashMap();
 			hashMap.put("title", title);
@@ -63,18 +69,10 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 			
 			list = session.createQuery(" from "+Books.class.getName()+" where UPPER(title) = UPPER(:title) and UPPER(author) = UPPER(:author) ").setProperties(hashMap).list();
 		}
+		
+		return list;
 
-		if(list != null && list.size() > 0){
-			Object obj = list.get(0);
-			Books books = (Books)obj;
-//			session.flush();
-			session.close();
-			return books;
-		}else{
-		//	session.flush();
-			session.close();
-			return null;
-		}
+
 	}
 
 }

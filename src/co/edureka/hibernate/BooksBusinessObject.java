@@ -16,5 +16,5 @@ public interface BooksBusinessObject {
 	 * @param author
 	 * @return Books ORM object
 	 */
-	public Books findBooksByTitleAndAuthor(String title, String author);
+	public  List<Books> findBooksByTitleAndAuthor(String title, String author);
 }

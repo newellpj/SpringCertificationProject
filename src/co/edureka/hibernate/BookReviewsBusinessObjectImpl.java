@@ -6,14 +6,22 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
+import co.edureka.controller.PaginationController;
 import co.edureka.hibernate.orm.BookReviews;
 import co.edureka.hibernate.orm.Books;
 
+@Configuration
+@EnableAspectJAutoProxy
 public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implements BookReviewsBusinessObject {
 
+	private final static Logger log = Logger.getLogger(BookReviewsBusinessObjectImpl.class); 
+	
 	@Override
 	@Transactional
 	public void save(BookReviews bookReviews) {
@@ -44,7 +52,7 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 	
 	public HashMap<Books, List<BookReviews>> findBooksReviewByTitleAndAuthorLazyLoad(String title, String author, int offset, int numberOfRecords ){
 		
-		System.out.println("BookReviews title to search : "+title);
+		log.info("BookReviews title to search : "+title);
 		Session session = this.getSessionFactory().openSession();
 		Map hashMap = new HashMap();
 		hashMap.put("title", title);
@@ -76,7 +84,7 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 	@Override
 	public HashMap<Books, List<BookReviews>> findBooksReviewByTitleAndAuthor(String title, String author) {
 		
-		System.out.println("BookReviews title to search : "+title);
+		log.info("BookReviews title to search : "+title);
 		Session session = this.getSessionFactory().openSession();
 		Map hashMap = new HashMap();
 		hashMap.put("title", title);

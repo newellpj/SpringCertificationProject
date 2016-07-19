@@ -3,9 +3,11 @@ package co.edureka.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import co.edureka.controller.PaginationController;
 import co.edureka.hibernate.BookReviewsBusinessObject;
 import co.edureka.hibernate.BooksBusinessObject;
 import co.edureka.hibernate.TagsBusinessObject;
@@ -16,6 +18,8 @@ import co.edureka.viewmodel.BookReviewsModel;
 
 public class BooksAndReviewsService {
 
+	private final static Logger log = Logger.getLogger(BooksAndReviewsService.class); 
+	
 	private ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 	private BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
 	private BookReviewsBusinessObject booksReviewsBO = (BookReviewsBusinessObject) ctx.getBean("booksReviewsBusinessObject");
@@ -26,7 +30,7 @@ public class BooksAndReviewsService {
 	 * @param author
 	 * @return
 	 */
-	public Books searchBooksByTitleAndOrAuthor(String title, String author){
+	public  List<Books> searchBooksByTitleAndOrAuthor(String title, String author){
 		return booksBO.findBooksByTitleAndAuthor(title, author);
 	}
 	
@@ -68,12 +72,12 @@ public class BooksAndReviewsService {
 			
 			
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 	}
 	
 	public void addReview(int bookID, String username, String reviewText){
-		System.out.println("add review : "+bookID+" : "+username+" : "+reviewText);
+		log.info("add review : "+bookID+" : "+username+" : "+reviewText);
 		BookReviews bookReview = new BookReviews();
 		bookReview.setIdbooks(bookID);
 		bookReview.setReviewersUsername(username);

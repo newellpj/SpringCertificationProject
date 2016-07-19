@@ -86,7 +86,7 @@ public class HibernateTestClass {
 	
 	//	booksBO.save(books);
 		
-		Books bookFound = booksBO.findBooksByTitleAndAuthor(books.getTitle(), books.getAuthor());
+		Books bookFound = booksBO.findBooksByTitleAndAuthor(books.getTitle(), books.getAuthor()).get(0);
 		
 		System.out.println("book found : "+bookFound.getTitle()+" author : "+bookFound.getAuthor());
 		

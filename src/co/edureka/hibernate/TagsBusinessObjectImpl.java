@@ -8,10 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edureka.controller.PaginationController;
 import co.edureka.hibernate.orm.BookTags;
 import co.edureka.hibernate.orm.Books;
 
@@ -19,6 +21,8 @@ import co.edureka.hibernate.orm.Books;
 
 public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsBusinessObject{
 
+	private final static Logger log = Logger.getLogger(TagsBusinessObjectImpl.class); 
+	
 	@Override
 	@Transactional
 	public void save(BookTags bookTags) {
@@ -73,7 +77,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 
 		//entityManager.getEntityManagerFactory();
 		
-		System.out.println("sql appender value ::: "+sqlAppender.toString());
+		log.info("sql appender value ::: "+sqlAppender.toString());
 		
 		//Query query = entityManager.getEntityManagerFactory().createEntityManager().createNativeQuery(sqlAppender.toString());
 		//List list = query.getResultList();
@@ -86,7 +90,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			
 			int idbooks = (Integer)obj;
 			
-			System.out.println("id books to search on : "+idbooks);
+			log.info("id books to search on : "+idbooks);
 			
 			String sql = " from "+Books.class.getName()+" where idbooks = :booksid ";
 			//EntityManager em = EntityManagerFactory
@@ -94,7 +98,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		
 			books.addAll(session.createQuery(sql).setParameter("booksid", idbooks).setFirstResult(offset).setMaxResults(numberOfRecords).list());
 			
-			System.out.println("id books returned : "+idbooks);
+			log.info("id books returned : "+idbooks);
 			
 		}
 		

@@ -15,6 +15,19 @@
 
 
 </style>
+
+<script>
+	 if (top.location!= self.location) {
+		
+		var href = self.location.href;
+		
+		//alert("href is : "+href);
+		 
+	    top.location = self.location.href;
+	 }
+
+</script>
+
 </head>
 <body background="./presentationResources/images/bgimg.jpg" >
 

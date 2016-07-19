@@ -303,7 +303,7 @@ function renderTagList(obj){
 					$(errorDialog).html('<p>'+msg+'</p>');
 					
 					 $(errorDialog).dialog("open");
-			 
+			         window.parent.location.href = 'logout'; 
 		 }
 		});  
 		
@@ -392,7 +392,7 @@ function renderTagList(obj){
 					$(errorDialog).html('<p>'+msg+'</p>');
 					
 					 $(errorDialog).dialog("open");
-			 
+			         window.parent.location.href = 'logout'; 
 		 }
 		});    
 		
@@ -560,6 +560,8 @@ function renderTagList(obj){
 					$(errorDialog).html('<p>'+msg+'</p>');
 					
 					 $(errorDialog).dialog("open");
+					 
+					window.parent.location.href = 'logout'; 
 			 
 		 }
 		});    

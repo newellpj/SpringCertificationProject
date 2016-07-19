@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import co.edureka.hibernate.orm.BookReviews;
 import co.edureka.hibernate.orm.Books;
@@ -22,14 +22,15 @@ import co.edureka.service.BooksAndReviewsService;
 import co.edureka.viewmodel.BookReviewsModel;
 
 @Controller
-@EnableWebMvc
 public class ReviewController {
 
+	private final static Logger log = Logger.getLogger(ReviewController.class); 
+	
 	@RequestMapping(value = { "/reviews"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
-		System.out.println("we getting in here reviews ");
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("we getting in here user logged in here - "+auth.getName());
+		log.info("we getting in here user logged in here - "+auth.getName());
 		ModelAndView model = new ModelAndView();		
 		model.setViewName("reviews");
 		return model;
@@ -37,7 +38,7 @@ public class ReviewController {
 	
 	@RequestMapping(value = { "/reviewsAddBook"}, method = RequestMethod.GET)
 	public ModelAndView addBookPage() {
-		System.out.println("we getting in here reviewsAddBook?");
+		log.info("we getting in here reviewsAddBook?");
 		ModelAndView model = new ModelAndView();		
 		model.setViewName("reviewsAddBook");
 		return model;
@@ -45,7 +46,7 @@ public class ReviewController {
 
 	@RequestMapping(value = { "/reviewsSearchBook"}, method = RequestMethod.GET)
 	public ModelAndView addSearchPage() {
-		System.out.println("we getting in here reviewsSearchBook?");
+		log.info("we getting in here reviewsSearchBook?");
 		ModelAndView model = new ModelAndView();		
 		model.setViewName("reviewsSearchBook");
 		return model;
@@ -68,10 +69,10 @@ public class ReviewController {
 	@RequestMapping(value = { "/reviewsReviewBook"}, method = RequestMethod.GET)
 	public ModelAndView addReviewsPage(HttpServletRequest request, HttpServletResponse response) {
 
-		System.out.println("we getting in here reviewsReviewBook?");
+		log.info("we getting in here reviewsReviewBook?");
 		
-		System.out.println("bookTitleFound : "+request.getSession().getAttribute("bookTitleFound")); 
-		System.out.println("bookAuthorFound : "+request.getSession().getAttribute("bookAuthorFound")); 
+		log.info("bookTitleFound : "+request.getSession().getAttribute("bookTitleFound")); 
+		log.info("bookAuthorFound : "+request.getSession().getAttribute("bookAuthorFound")); 
 		
 		BookReviewsModel bookReviewsModel = new BookReviewsModel();
 		
@@ -81,7 +82,7 @@ public class ReviewController {
 		ModelAndView model = new ModelAndView();	
 		
 		String searchSelectedBook = request.getParameter("titleAuthorText");
-		System.out.println("searchSelectedBook : "+searchSelectedBook);
+		log.info("searchSelectedBook : "+searchSelectedBook);
 		
 		if(searchSelectedBook != null && !"".equals(searchSelectedBook)){
 			//the existence of the request parameter searchSelectedBook - means we are coming to the reviews page from the search book page AND NOT the add book page.
@@ -90,7 +91,7 @@ public class ReviewController {
 			
 			title = title.replaceAll("-", " ");
 			
-			System.out.println("title : "+title);
+			log.info("title : "+title);
 			
 			request.getSession().setAttribute("bookTitleFound", title);
 			request.getSession().setAttribute("bookAuthorFound", author);
@@ -138,24 +139,24 @@ public class ReviewController {
 	
 	@RequestMapping(value = { "/addBookReview"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel addBookReview(HttpServletRequest request, HttpServletResponse response){
-		System.out.println(" addBookReview request "+request.toString());
-		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
-		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
+		log.info(" addBookReview request "+request.toString());
+		log.info("request contain titleText ? : "+request.getParameter("titleText"));
+		log.info("request contain authorText ? : "+request.getParameter("authorText"));
 	
 		
-		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
-		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
-		System.out.println("request contain reviewText ? : "+request.getParameter("reviewText"));
-		//System.out.println("author from map : "+bookReviewsModel.getAuthorText());
+		log.info("request contain titleText ? : "+request.getParameter("titleText"));
+		log.info("request contain authorText ? : "+request.getParameter("authorText"));
+		log.info("request contain reviewText ? : "+request.getParameter("reviewText"));
+		//log.info("author from map : "+bookReviewsModel.getAuthorText());
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
 		int bookID = (request.getSession().getAttribute("bookID") != null) ? Integer.parseInt(request.getSession().getAttribute("bookID").toString()) : -1;
 		
-		System.out.println("bookID : "+bookID);
+		log.info("bookID : "+bookID);
 		
 		if(bookID == -1){
-			System.out.println("BOOK != -1");
-			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
+			log.info("BOOK != -1");
+			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText")).get(0);
 			bookID = book.getIdbooks();
 		}
 		
@@ -184,14 +185,14 @@ public class ReviewController {
 	
 	@RequestMapping(value = { "/addNewBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel addNewBook(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("request "+request.toString());
-		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
-		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
+		log.info("request "+request.toString());
+		log.info("request contain titleText ? : "+request.getParameter("titleText"));
+		log.info("request contain authorText ? : "+request.getParameter("authorText"));
 	
 		
-		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
-		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
-		//System.out.println("author from map : "+bookReviewsModel.getAuthorText());
+		log.info("request contain titleText ? : "+request.getParameter("titleText"));
+		log.info("request contain authorText ? : "+request.getParameter("authorText"));
+		//log.info("author from map : "+bookReviewsModel.getAuthorText());
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
 		
@@ -257,10 +258,10 @@ public class ReviewController {
 	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
 		
 		resetSearchSessionAttributes(request);
-		System.out.println("request contain titleText ? : "+request.getParameter("titleText"));
-		System.out.println("request contain authorText ? : "+request.getParameter("authorText"));
-		System.out.println("request contain publisherText ? : "+request.getParameter("publisherText"));
-		//System.out.println("author from map : "+bookReviewsModel.getAuthorText());
+		log.info("request contain titleText ? : "+request.getParameter("titleText"));
+		log.info("request contain authorText ? : "+request.getParameter("authorText"));
+		log.info("request contain publisherText ? : "+request.getParameter("publisherText"));
+		//log.info("author from map : "+bookReviewsModel.getAuthorText());
 		
 		String titleText = request.getParameter("titleText");
 		String authorText = request.getParameter("authorText");
@@ -270,40 +271,39 @@ public class ReviewController {
 		
 		if(request.getParameter("genreText") != null && !"".equals(request.getParameter("genreText"))){
 			tagsAndValueMap.put("genreText", request.getParameter("genreText"));
-			System.out.println("genreText to search on : "+request.getParameter("genreText"));
+			log.info("genreText to search on : "+request.getParameter("genreText"));
 		}
 		
 		if(request.getParameter("catText") != null && !"".equals(request.getParameter("catText"))){
-			System.out.println("catText to search on : "+request.getParameter("catText"));
+			log.info("catText to search on : "+request.getParameter("catText"));
 			
 			tagsAndValueMap.put("catText", request.getParameter("catText"));
 		}
 		
 		if(request.getParameter("langText") != null && !"".equals(request.getParameter("langText"))){
-			System.out.println("lang text to search on : "+request.getParameter("langText"));
+			log.info("lang text to search on : "+request.getParameter("langText"));
 			tagsAndValueMap.put("langText", request.getParameter("langText"));
 		}
 		
 		
-		System.out.println("just before service instantiation !");
+		log.info("just before service instantiation !");
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
 		
 		List<Books> booksList = new ArrayList<Books>();
-		System.out.println("just before test !");
+		log.info("just before test !");
 		
 		if(titleText != null && !"".equals(titleText) || (!"".equals(authorText) && authorText != null)){
-			System.out.println("in here111");
-			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
-			booksList.add(book);
+			log.info("in here111");
+			booksList.addAll(booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText")));
 			
 		}else if(publisherText != null && !"".equals(publisherText)){
-			System.out.println("in here222");
+			log.info("in here222");
 			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));
 			request.getSession().setAttribute("publisherText", publisherText);
 			request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
 		}else{
-			System.out.println("in here333");
+			log.info("in here333");
 			booksList.addAll(booksService.findBooksByTagsLazyLoad(tagsAndValueMap, 0, 20));
 			request.getSession().setAttribute("searchType", "findBooksByTagsLazyLoad");
 			request.getSession().setAttribute("tagsAndValueMap", tagsAndValueMap);
@@ -312,7 +312,7 @@ public class ReviewController {
 		ModelAndView modelView = new ModelAndView();
 		List<String> booksStringViewList = new ArrayList<String>();
 		
-		System.out.println("book list : "+booksList.size());
+		log.info("book list : "+booksList.size());
 		
 		if(booksList != null && booksList.size() > 0){
 			

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,15 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class LoginController implements AuthenticationSuccessHandler{
+public class LoginController implements AuthenticationSuccessHandler, AuthenticationFailureHandler{
 
-	private final static Logger logger = Logger.getLogger(LoginController.class); 
+	private final static Logger log = Logger.getLogger(LoginController.class); 
 	
 	private String defaultTargetUrl;
 	
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
-
+		log.info("login code");
+		
 		ModelAndView model = new ModelAndView();		
 		model.setViewName("login");
 		return model;
@@ -44,7 +47,7 @@ public class LoginController implements AuthenticationSuccessHandler{
 		model.addObject("error", "Successfully logged out!");
 		model.setViewName("logout");
 		
-		System.out.println(" we here again logout!!!!!!");
+		log.info(" we here again logout!!!!!!");
 		
 		//response.sendRedirect("logout");
 		
@@ -53,11 +56,14 @@ public class LoginController implements AuthenticationSuccessHandler{
 		return model;
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error) {
+	@RequestMapping(value = "/login", method = RequestMethod.GET) 
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		//request.getSession(true);
-		System.out.println(" we again logining!!!!!!");
+		
+		
+		log.info("logger we again login!!!!!!");
+	
 		ModelAndView model = new ModelAndView();
 		if (error != null) {
 			System.out.println("error != null : "+error);
@@ -65,6 +71,8 @@ public class LoginController implements AuthenticationSuccessHandler{
 			model.setViewName("login");	
 		}else{
 			model.setViewName("login");
+			log.info("ELSE!!!!!!");
+			//response.sendRedirect("login");
 		}
 		
 		return model;
@@ -73,7 +81,7 @@ public class LoginController implements AuthenticationSuccessHandler{
 	
 	@RequestMapping("accessDenied")
 	public String accessDenied(){
-		System.out.println("accessDenied");
+		log.info("accessDenied");
 		return "accessDenied";
 		
 	}
@@ -81,7 +89,7 @@ public class LoginController implements AuthenticationSuccessHandler{
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse response, Authentication arg2)
 			throws IOException, ServletException {
-		System.out.println("onAuthenticationSuccess");
+		log.info("onAuthenticationSuccess");
 		response.sendRedirect("reviews");
 	}
 
@@ -91,6 +99,14 @@ public class LoginController implements AuthenticationSuccessHandler{
 
 	public void setDefaultTargetUrl(String defaultTargetUrl) {
 		this.defaultTargetUrl = defaultTargetUrl;
+	}
+
+	@Override
+	public void onAuthenticationFailure(HttpServletRequest arg0, HttpServletResponse arg1, AuthenticationException arg2)
+			throws IOException, ServletException {
+		log.info("onAuthenticationFailure");
+		// TODO Auto-generated method stub
+		
 	}
 
 	
