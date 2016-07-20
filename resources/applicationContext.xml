@@ -43,6 +43,10 @@
 	   		</property>
 	   </bean>
 	   
+	   <bean id="solrSearchManager" class="co.edureka.solr.SolrSearchManager">
+	   		<property name="connectionString" value="http://localhost:8983/solr/gettingstarted" />
+	   </bean>
+	   
   	 	<bean id="transactionManagerHibernate" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
 	    </bean>

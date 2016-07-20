@@ -32,7 +32,7 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>C:/Tomcat_7/webapps/SpringCertificationProject</directory>
+							<directory>C:/Tomcat_8/webapps/SpringCertificationProject</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
@@ -56,7 +56,7 @@
 						</goals>
 
 						<configuration>
-							<outputDirectory>C:/Tomcat_7/webapps/SpringCertificationProject</outputDirectory>
+							<outputDirectory>C:/Tomcat_8/webapps/SpringCertificationProject</outputDirectory>
 							<resources>
 								<resource>
 									<directory>target/SpringCertificationProject</directory>
@@ -75,7 +75,7 @@
 
 
 							<configuration>
-								<outputDirectory>C:/Tomcat_7/webapps/SpringCertificationProject/WEB-INF/classes</outputDirectory>
+								<outputDirectory>C:/Tomcat_8/webapps/SpringCertificationProject/WEB-INF/classes</outputDirectory>
 								<resources>
 									<resource>
 										<directory>resources</directory>
@@ -167,6 +167,13 @@
     <artifactId>aspectjweaver</artifactId>
     <version>1.8.4</version>
 </dependency>
+
+<dependency>
+    <groupId>org.apache.solr</groupId>
+    <artifactId>solr-solrj</artifactId>
+    <version>5.2.1</version>
+</dependency>
+
 
 <dependency>
     <groupId>aspectj</groupId>

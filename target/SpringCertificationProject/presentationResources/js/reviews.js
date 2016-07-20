@@ -421,13 +421,13 @@ function renderTagList(obj){
 	var innerHTML = document.getElementById("bookRevList").innerHTML;
 	
 	document.getElementById("resultsSection").style.visibility = "visible";	
-	document.getElementById("bookRevList").innerHTML = "";
+	document.getElementById("bookRevList").innerHTML = ""; //this is the original search results div that gets displayed
 	
 	if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
 		
 		document.getElementById("bookRevList2").innerHTML = "";
 		
-		 $( ".bookRevList2" ).each(function( ) {
+		 $( ".bookRevList2" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
 				this.innerHTML = "";
 		  });
 		
