@@ -18,6 +18,87 @@ function checkAllFields(){
 }
 
 
+function searchDocsPageInit(){
+	
+	$(function(){ // DOM ready
+
+		  // ::: TAGS BOX
+
+		  $("#tags input").on({
+		    focusout : function() {
+		      var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
+		      if(txt) $("<span/>", {text:txt.toLowerCase(), insertBefore:this});
+		      this.value = "";
+		    },
+		    keyup : function(ev) {
+		      // if: comma|enter (delimit more keyCodes with | pipe)
+		      if(/(188|13)/.test(ev.which)) $(this).focusout(); 
+		    }
+		  });
+		  $('#tags').on('click', 'span', function() {
+		    if(confirm("Remove "+ $(this).text() +"?")) $(this).remove(); 
+		  });
+
+		});
+	
+	
+	  if($("#authorText").val() == '' && $("#titleText").val() == '' && $("#keywordsText").val() == '' ){
+				$( '#searchBook').prop('disabled', true);
+		}
+			
+
+		     $('#authorText').keyup(function() {
+				 
+		        if($("#authorText").val() != '' ) {
+		           $('#searchBook').prop('disabled', false);
+		        }else{
+					checkAllFields();
+				 }
+		     });
+		
+			  $('#titleText').keyup(function() {
+			         if($("#titleText").val() != '') {
+			            $('#searchBook').prop('disabled', false);
+			         }else{
+						checkAllFields();
+					 }
+			   });
+			   
+			   $('#titleText').blur(function() {
+			         if($("#titleText").val() != '' ) {
+			            $('#searchBook').prop('disabled', false);
+			         }else{
+						checkAllFields();
+					 }
+			   });
+			   
+			    $('#authorText').blur(function() {
+			         if($("#authorText").val() != '' ) {
+			            $('#searchBook').prop('disabled', false);
+			         }else{
+						 checkAllFields();
+					 }
+			   });
+			   
+			    $('#keywordsText').keyup(function() {
+			         if($("#keywordsText").val() != '') {
+			            $('#searchBook').prop('disabled', false);
+			         }else{
+						 checkAllFields();
+					 }
+			   });
+			   
+			    $('#keywordsText').blur(function() {
+			         if($("#keywordsText").val() != '') {
+			            $('#searchBook').prop('disabled', false);
+			         }else{
+						checkAllFields();
+					 }
+			   });
+	
+	
+}
+
 
 function searchPageReadyInit(){
 	   
@@ -412,7 +493,11 @@ function renderTagList(obj){
 	$('#reviewsForm').trigger("reset");
 	 
 
- } 
+ }
+ 
+ function performAjaxDocSearch(){
+	 
+ }
  
  function performAjaxSearch(){
 	// $('.searchResults').trigger("reset");

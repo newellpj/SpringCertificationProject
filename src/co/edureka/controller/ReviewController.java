@@ -52,6 +52,14 @@ public class ReviewController {
 		return model;
 	}
 	
+	@RequestMapping(value = { "/reviewsSearchDocs"}, method = RequestMethod.GET)
+	public ModelAndView addDocsSearchPage() {
+		log.info("we getting in here addDocsSearchPage?");
+		ModelAndView model = new ModelAndView();		
+		model.setViewName("reviewsSearchDocs");
+		return model;
+	}
+	
 	@RequestMapping(value = { "/getBookReviewsList"}, method = RequestMethod.GET)
 	public ModelAndView getBookReviewsList(HttpServletRequest request, HttpServletResponse response) {
 		

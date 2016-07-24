@@ -1,8 +1,6 @@
 package co.edureka.solr;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -42,7 +40,11 @@ public class SolrSearchManager {
 		solr = new HttpSolrClient(connectionString);
 	}
 	
-	public String query(String queryString){
+	public String performFacetedQuery(String query){
+		return null;
+	}
+	
+	public String performQuery(String queryString){
 		log.info("querying solr..");
 		SolrQuery query = new SolrQuery();
 		query.setQuery(queryString);
@@ -56,11 +58,14 @@ public class SolrSearchManager {
 			}
 			
 			log.info(response.toString());
+			
+			//return response.getExpandedResults()
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			log.error("Error occured when querying Solr : "+e.getMessage());
 		}
-		return "";
+		return null;
 	}
 	
 	public void addDocument(String... fields){
