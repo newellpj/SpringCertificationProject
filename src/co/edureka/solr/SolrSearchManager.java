@@ -64,6 +64,7 @@ public class SolrSearchManager {
 		log.info("querying solr.."+queryString);
 		SolrQuery query = new SolrQuery();
 		query.setQuery(queryString);
+		query.setRows(1000);
 		query.setFields("id","content_type","extended_properties_application","stream_content_type", "page_count", "author", "title");
 		
 		try{

@@ -366,15 +366,13 @@ public class ReviewController {
 			log.info("list solrDocListKeywordsSearch is : "+solrDocListKeywordsSearch.size());
 		}
 
-
 		for(SolrDocument solrDocument : filteredList){
 			log.info("solrDocument filtered list ID : "+solrDocument.getFieldValue("id"));
 		}
 		
-		
 		SolrDocumentList finalisedFilteredList = new SolrDocumentList();
 		
-		if(solrDocListKeywordsSearch != null && solrDocListKeywordsSearch.size() > 0){
+		if(solrDocListKeywordsSearch != null && solrDocListKeywordsSearch.size() > 0 && filteredList.size() > 0){
 			for(SolrDocument solrDocument : solrDocListKeywordsSearch){
 				
 				log.info("keywords list ID : "+solrDocument.getFieldValue("id"));
@@ -387,6 +385,11 @@ public class ReviewController {
 			}
 		}else{
 			finalisedFilteredList.addAll(filteredList);
+			
+			if(solrDocListKeywordsSearch != null){
+				finalisedFilteredList.addAll(solrDocListKeywordsSearch);
+			}
+			
 		}
 		
 		log.info("finalisedFilteredList size "+finalisedFilteredList.size());
@@ -414,11 +417,6 @@ public class ReviewController {
 			log.info("title set : "+ssd.gettitle());
 			log.info("id set : "+ssd.getid());
 			
-			
-//			ssd.setAuthorText(solrD.getFieldValue("author").toString());
-//			ssd.setTitleText(solrD.getFieldValue("title").toString());
-//			ssd.setDocURLText(solrD.getFieldValue("id").toString());
-//			ssd.setContentText(solrD.getFieldValue("stream_content_type").toString());
 			returnList.add(ssd);
 			
 			String title = "";
@@ -438,7 +436,7 @@ public class ReviewController {
 
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
-			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" link to doc <a href='file://///"+ssd.getid()+"'>"+title+"</a>");
+			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" link to doc <a href='file://///"+ssd.getid()+"'"+" target="+"'"+"_blank"+"'"+">"+title+"</a>");
 			
 		}
 		
