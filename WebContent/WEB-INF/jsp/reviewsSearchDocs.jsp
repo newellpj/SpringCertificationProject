@@ -23,8 +23,13 @@
 <script>
 	$(document).ready(function() {
 
+		if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+			user_pref("capability.policy.policynames", "localfilelinks");
+			user_pref("capability.policy.localfilelinks.sites", "file:///C:/");
+			user_pref("capability.policy.localfilelinks.checkloaduri.enabled",  "allAccess");
+		}
 	
-var html = $(".bookRevList").html();
+		var html = $(".bookRevList").html();
 		 
 	//  if(html != 'undefined' && html != null){
 	//		
@@ -89,6 +94,8 @@ var html = $(".bookRevList").html();
 					<td><input id="authorText" style="width:262px !important; float:left !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
 					<td><span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span></td>
 				</tr>
+				</table>
+				<table>
 				<tr>
 					<td>Keywords (comma separated):</td>
 					<td><div id="tags"><input id="keywordsText" style="width:262px !important;" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>

@@ -438,7 +438,7 @@ public class ReviewController {
 
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
-			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b>"+author+" <a href='"+"file://///C:/temp/CoverLetter.docx"+"'>"+title+"</a>"); //" <a href='"+ssd.getid()+"'>"+title+"</a>");
+			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" link to doc <a href='file://///"+ssd.getid()+"'>"+title+"</a>");
 			
 		}
 		
