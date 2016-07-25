@@ -49,6 +49,11 @@
   width: 300px;
 }
 
+.docsSearchSegment{
+	border: 1px dashed;
+	height:100px !important;
+}
+
 
 .container {
     z-index: 2;

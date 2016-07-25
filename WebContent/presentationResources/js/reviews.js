@@ -569,36 +569,14 @@ function renderTagList(obj){
 			contentType: 'application/json; charset=utf-8',
 			type: 'GET',
 			success:  function(returnList) {
-			  
-				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
-			//	alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
-			     //$('#activeSel3', parent.document).click();
-			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
-			    
-				alert("returnList : "+returnList[0]);
-				
-				if(returnList == null || returnList == ''){
-					
-				}
-				
-				
+
 				document.getElementById("search").style.display = "inline";
 		
 				
-				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
+				for(var i = 0; i < returnList.length ;i++){
 					
-					$('.bookRevList').append("<div>");
-					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
-					var bookDetails = bookReviewsModel['booksList'][i]
-					
-					if("No books found" != bookDetails){
-						
-						bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
-						
-						$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
-						$('.bookRevList').append("</a>");
-					}
-					
+					$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");
+					document.getElementById('item'+i).innerHTML = returnList[i];			
 					$('.bookRevList').append("</div>");
 				}
 				

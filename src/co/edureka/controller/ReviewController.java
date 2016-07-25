@@ -1,5 +1,6 @@
 package co.edureka.controller;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -420,8 +421,29 @@ public class ReviewController {
 //			ssd.setContentText(solrD.getFieldValue("stream_content_type").toString());
 			returnList.add(ssd);
 			
-			formattedList.add(ssd.gettitle()+" - "+ssd.getauthor()+" <a href='"+ssd.getid()+"'>"+ssd.gettitle()+"</a>");
+			String title = "";
 			
+			if(ssd.gettitle() == null || "".equals(ssd.gettitle().trim())){
+
+				if(ssd.getid().lastIndexOf(File.separator) > -1){
+					title = ssd.getid().substring(ssd.getid().lastIndexOf(File.separator)+1);
+				}else{
+					title = ssd.getid();
+				}
+			}else{
+				title = ssd.gettitle();
+			}
+			
+			log.info("title "+title);
+
+			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
+			log.info("author 2 : "+author);
+			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b>"+author+" <a href='"+"file://///C:/temp/CoverLetter.docx"+"'>"+title+"</a>"); //" <a href='"+ssd.getid()+"'>"+title+"</a>");
+			
+		}
+		
+		if(formattedList.size() == 0){
+			formattedList.add("No documents found..");
 		}
 		
 //		Gson gson = new Gson();
