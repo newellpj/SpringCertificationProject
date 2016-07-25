@@ -325,7 +325,7 @@ input[type="text"]{
 }
 
 .iconspan2{
-	 float: right;
+	 float: center;
     margin-right: 7px;
     margin-top: -1px;
     position: relative;

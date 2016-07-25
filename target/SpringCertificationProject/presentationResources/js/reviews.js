@@ -36,7 +36,7 @@ function searchDocsPageInit(){
 		    }
 		  });
 		  $('#tags').on('click', 'span', function() {
-		    if(confirm("Remove "+ $(this).text() +"?")) $(this).remove(); 
+		     $(this).remove(); 
 		  });
 
 		});
@@ -476,6 +476,12 @@ function renderTagList(obj){
 		});    
 		
  }
+
+ function resetDocSearch(){
+	 window.location.href = 'reviewsSearchDocs';
+	
+	//resetSearches();
+ }
  
  function resetTheSearch(){
 	 window.location.href = 'reviewsSearchBook';
@@ -496,7 +502,166 @@ function renderTagList(obj){
  }
  
  function performAjaxDocSearch(){
+	 // $('.searchResults').trigger("reset");
+	
+	var html = document.getElementById("bookRevList").html;
+	var innerHTML = document.getElementById("bookRevList").innerHTML;
+	
+	document.getElementById("resultsSection").style.visibility = "visible";	
+	document.getElementById("bookRevList").innerHTML = ""; //this is the original search results div that gets displayed
+	
+	if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
+		
+		document.getElementById("bookRevList2").innerHTML = "";
+		
+		 $( ".bookRevList2" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
+				this.innerHTML = "";
+		  });
+		
+		
+	}
+	
+	//alert("html : "+html);
+	//alert("innerHTML : "+innerHTML);
 	 
+	 var dlg = $("<div></div>").dialog({
+			hide: 'fade',
+			maxWidth: 300,
+			modal: true,
+			show: 'fade',
+			title: 'Searching Docs....',
+			width: ( ('__proto__' in {}) ? '300' : 300 )
+		});
+
+		$(dlg).parent().find('button').remove();
+		
+		$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Searching documents...</p></div>");
+			
+		$(dlg).dialog("open");
+		
+		var authorTextVal = $('#authorText').val();
+		var titleTextVal = $('#titleText').val();
+		alert("auth : "+authorText);
+		var keywordTextVal = '';
+		
+		count = 0;
+		
+		 $( "#tags span" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
+			//alert("span val : "+$(this).html());
+			
+				count = count + 1;
+				if(count > 1 && keywordTextVal.length > 0){
+					keywordTextVal = keywordTextVal + ",";
+				}
+				
+				//alert($(this).html().length);
+				
+				if($(this).html().length > 0){
+					keywordTextVal = keywordTextVal + $(this).html();
+				}
+				
+				
+		  });
+		
+		alert("keywordTextVal : "+keywordTextVal); 
+
+		alert("authorTextVal : "+authorTextVal);
+
+		
+		$.ajax({
+			url: 'searchForDocs',
+			dataType: "JSON",
+			data: { 
+				titleText: titleTextVal,
+				authorText: authorTextVal, 
+				keywordText: keywordTextVal
+			},
+			processData: true,
+			contentType: 'application/json; charset=utf-8',
+			type: 'GET',
+			success:  function(list) {
+			  
+				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
+			//	alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
+			     //$('#activeSel3', parent.document).click();
+			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
+			    
+				alert("list : "+list);
+				
+				document.getElementById("search").style.display = "inline";
+		
+				
+				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
+					
+					$('.bookRevList').append("<div>");
+					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
+					var bookDetails = bookReviewsModel['booksList'][i]
+					
+					if("No books found" != bookDetails){
+						
+						bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
+						
+						$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+						$('.bookRevList').append("</a>");
+					}
+					
+					$('.bookRevList').append("</div>");
+				}
+				
+				
+				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+				
+				$('.resultsSection').jscroll({		  
+					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+				});
+				
+				$(dlg).dialog("close");
+				
+				 
+			 },
+
+		 error: function(e){
+
+	            
+				$(dlg).dialog("close");
+
+				var errorDialog = $("<div></div>").dialog({
+						hide: 'fade',
+						maxWidth: 300,
+						modal: true,
+						show: 'fade',
+						open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+							buttons: [
+						{
+							'class': 'btn btn-primary',
+							click: function(e) {
+								$(this).dialog("close");
+							},
+							text: 'OK'
+						}
+					
+					],	
+						title: 'Could NOT find book!',
+						width: ( 300 )
+					});
+
+					
+					
+					var msg = e.errorMessage;
+					
+					if('undefined' == msg || msg == null){
+							msg = "There was an error retrieving book";
+					}
+					
+					$(errorDialog).html('<p>'+msg+'</p>');
+					
+					 $(errorDialog).dialog("open");
+					 
+					window.parent.location.href = 'logout'; 
+			 
+		 }
+		});    
+
  }
  
  function performAjaxSearch(){

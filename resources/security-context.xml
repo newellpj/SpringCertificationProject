@@ -21,6 +21,8 @@
       <security:intercept-url pattern="/getBookReviewsList" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/searchForBook" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/addNewBook" access="hasRole('ROLE_USER')" />
+     <security:intercept-url pattern="/searchForDocs" access="hasRole('ROLE_USER')" />
+     
      
 		
 	  <security:access-denied-handler error-page="/accessDenied" />

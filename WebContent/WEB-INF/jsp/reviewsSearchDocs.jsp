@@ -110,7 +110,7 @@ var html = $(".bookRevList").html();
 								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxDocSearch();" style="width: 110px; height: 42px;" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
 								</button>
-								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
+								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetDocSearch();"  value="Reset" >
 										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
 								</button>
 								</td>

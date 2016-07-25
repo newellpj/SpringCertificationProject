@@ -44,14 +44,17 @@ public class SolrSearchManager {
 		return null;
 	}
 	
-	public String performQuery(String queryString){
-		log.info("querying solr..");
+	public SolrDocumentList performQuery(String queryString){
+		log.info("querying solr.."+queryString);
 		SolrQuery query = new SolrQuery();
 		query.setQuery(queryString);
-		query.setFields("id","content_type","extended_properties_application", "page_count", "author");
+		query.setFields("id","content_type","extended_properties_application","stream_content_type", "page_count", "author", "title");
 		
 		try{
 			QueryResponse response = solr.query(query);
+			
+			log.info("request url :::: "+response.getRequestUrl());
+			
 			SolrDocumentList solrList = response.getResults();
 			for(SolrDocument doc : solrList){
 				log.info(doc.toString());
@@ -59,7 +62,7 @@ public class SolrSearchManager {
 			
 			log.info(response.toString());
 			
-			//return response.getExpandedResults()
+			return solrList;
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -67,7 +70,7 @@ public class SolrSearchManager {
 		}
 		return null;
 	}
-	
+	 
 	public void addDocument(String... fields){
 		log.info("adding document to solr..");
 		SolrInputDocument document = new SolrInputDocument();

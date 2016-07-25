@@ -15,12 +15,12 @@ public class SolrSearchTester {
 		solrSearchManager.init();
 		//solrSearchManager.query("author:Newelly");
 		//solrSearchManager.addDocument("id:C:/Users/newelly/Pictures/ebay/wallet/DSC_0001.JPG", "author:Smithfield", "extended_properties_application:Microsoft Office Word");
-		solrSearchManager.performQuery("author:Smithfield");
+		solrSearchManager.performQuery("author:Newelly");
 		
-		List ids = new ArrayList();
-		ids.add("C:/Users/newelly/Pictures/ebay/wallet/DSC_0001.JPG");		
-		solrSearchManager.deleteDocument(ids);
-		solrSearchManager.performQuery("author:Smithfield");
+//		List ids = new ArrayList();
+//		ids.add("C:/Users/newelly/Pictures/ebay/wallet/DSC_0001.JPG");		
+//		solrSearchManager.deleteDocument(ids);
+//		solrSearchManager.performQuery("author:Smithfield");
 	}
 }
 

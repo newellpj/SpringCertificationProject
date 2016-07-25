@@ -20,6 +20,7 @@ co\edureka\config\Initializer.class
 co\edureka\config\SessionListener.class
 co\edureka\hibernate\BooksBusinessObjectImpl.class
 co\edureka\controller\SignupController.class
+co\edureka\service\SolrSearchService.class
 co\edureka\viewmodel\BookReviewsModel.class
 co\edureka\hibernate\TagsBusinessObjectImpl.class
 co\edureka\hibernate\orm\Authorities.class
@@ -27,6 +28,7 @@ co\edureka\config\ConfigHandler.class
 co\edureka\hibernate\TagsBusinessObject.class
 co\edureka\controller\HomeController.class
 co\edureka\solr\SolrSearchManager.class
+co\edureka\solr\SolrSearchData.class
 co\edureka\controller\ReviewController.class
 co\edureka\service\BooksAndReviewsService.class
 co\edureka\hibernate\AuthoritiesBusinessObject.class

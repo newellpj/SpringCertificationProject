@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import co.edureka.hibernate.orm.BookReviews;
 import co.edureka.hibernate.orm.Books;
 import co.edureka.service.BooksAndReviewsService;
+import co.edureka.service.SolrSearchService;
+import co.edureka.solr.SolrSearchData;
+import co.edureka.solr.SolrSearchManager;
 import co.edureka.viewmodel.BookReviewsModel;
 
 @Controller
@@ -285,6 +290,79 @@ public class ReviewController {
 		request.getSession().setAttribute("searchType", "");
 		request.getSession().setAttribute("tagsAndValueMap", null);
 		request.getSession().setAttribute("currentPaginationOffset", 0);
+	}
+	
+	
+	
+	@RequestMapping(value = { "/searchForDocs"}, method = RequestMethod.GET)
+	public @ResponseBody List<SolrSearchData> searchForDocs(HttpServletRequest request, HttpServletResponse response){
+		log.info("searchForDocs keyword text : : "+request.getParameter("keywordText"));
+		
+		SolrSearchData ssd = new SolrSearchData();
+		SolrSearchService solrService = new SolrSearchService();
+		
+		String keywords = request.getParameter("keywordText");
+		keywords = keywords.replaceAll(",", " ");
+		
+		String titleText = request.getParameter("titleText");
+		String authorText = request.getParameter("authorText");
+		
+		
+		SolrDocumentList solrDocListAuthorsSearch = null;
+		
+		if(!"".equals(authorText)){
+			solrDocListAuthorsSearch =  solrService.performQuery("author:"+authorText);
+		}
+		
+		SolrDocumentList solrDocListTitleSearch = null;
+		
+		if(!"".equals(titleText)){
+			solrDocListTitleSearch = solrService.performQuery("title:"+titleText);
+		}
+		
+		SolrDocumentList filteredList = new SolrDocumentList();
+		
+		if(solrDocListTitleSearch != null && solrDocListTitleSearch.size() > 0 && 
+				solrDocListAuthorsSearch != null && solrDocListAuthorsSearch.size() > 0){
+			
+			for(SolrDocument solrDoc : solrDocListTitleSearch){
+				if(solrDocListAuthorsSearch.contains(solrDoc)){
+					filteredList.add(solrDoc);
+				}
+			}
+			
+		}else{
+			filteredList.addAll(solrDocListAuthorsSearch);
+			filteredList.addAll(solrDocListTitleSearch);
+		}
+		
+		SolrDocumentList solrDocListKeywordsSearch = null;
+		
+		if(!"".equals(keywords)){
+			solrDocListKeywordsSearch = solrService.performQuery(keywords);
+		}
+		
+		SolrDocumentList finalisedFilteredList = new SolrDocumentList();
+		
+		if(solrDocListKeywordsSearch != null && solrDocListKeywordsSearch.size() > 0){
+			for(SolrDocument solrDocument : solrDocListKeywordsSearch){
+				if(filteredList.contains(solrDocument)){
+					finalisedFilteredList.add(solrDocument);
+				}
+			}
+		}
+
+		List<SolrSearchData> returnList = new ArrayList<SolrSearchData>();
+
+		for(SolrDocument solrD : finalisedFilteredList){
+			ssd.setAuthorText(solrD.getFieldValue("author").toString());
+			ssd.setTitleText(solrD.getFieldValue("title").toString());
+			ssd.setDocURLText(solrD.getFieldValue("id").toString());
+			ssd.setContentText(solrD.getFieldValue("stream_content_type").toString());
+			returnList.add(ssd);
+		}
+		
+		return returnList;
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
