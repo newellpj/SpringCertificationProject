@@ -16,6 +16,9 @@ public class SolrSearchService {
 		solrSearchManager.init();
 	}
 	
+	public String[] getFieldsArray(){
+		return solrSearchManager.getFieldArray();
+	}
 	
 	public SolrDocumentList performQuery(String queryString){
 		return solrSearchManager.performQuery(queryString);

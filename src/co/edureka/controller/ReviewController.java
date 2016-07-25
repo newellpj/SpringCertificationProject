@@ -1,5 +1,7 @@
 package co.edureka.controller;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +25,6 @@ import co.edureka.hibernate.orm.Books;
 import co.edureka.service.BooksAndReviewsService;
 import co.edureka.service.SolrSearchService;
 import co.edureka.solr.SolrSearchData;
-import co.edureka.solr.SolrSearchManager;
 import co.edureka.viewmodel.BookReviewsModel;
 
 @Controller
@@ -304,6 +305,8 @@ public class ReviewController {
 		String keywords = request.getParameter("keywordText");
 		keywords = keywords.replaceAll(",", " ");
 		
+		log.info("keywords : "+keywords);
+		
 		String titleText = request.getParameter("titleText");
 		String authorText = request.getParameter("authorText");
 		
@@ -312,13 +315,19 @@ public class ReviewController {
 		
 		if(!"".equals(authorText)){
 			solrDocListAuthorsSearch =  solrService.performQuery("author:"+authorText);
+			log.info("list solrDocListAuthorsSearch is : "+solrDocListAuthorsSearch.size());
 		}
+		
+		
 		
 		SolrDocumentList solrDocListTitleSearch = null;
 		
 		if(!"".equals(titleText)){
 			solrDocListTitleSearch = solrService.performQuery("title:"+titleText);
+			log.info("list solrDocListTitleSearch is : "+solrDocListTitleSearch.size());
 		}
+		
+		
 		
 		SolrDocumentList filteredList = new SolrDocumentList();
 		
@@ -326,41 +335,99 @@ public class ReviewController {
 				solrDocListAuthorsSearch != null && solrDocListAuthorsSearch.size() > 0){
 			
 			for(SolrDocument solrDoc : solrDocListTitleSearch){
-				if(solrDocListAuthorsSearch.contains(solrDoc)){
-					filteredList.add(solrDoc);
+				
+				for(SolrDocument solrDocAuthors : solrDocListAuthorsSearch){
+					if(solrDocAuthors.getFieldValue("id").toString().equals(solrDoc.getFieldValue("id").toString())){
+						filteredList.add(solrDoc);
+					}
 				}
+				
+				
 			}
 			
 		}else{
-			filteredList.addAll(solrDocListAuthorsSearch);
-			filteredList.addAll(solrDocListTitleSearch);
+			
+			if(solrDocListAuthorsSearch != null){
+				filteredList.addAll(solrDocListAuthorsSearch);
+			}
+			
+			if(solrDocListTitleSearch != null){
+				filteredList.addAll(solrDocListTitleSearch);
+			}
 		}
+		
+		
+		log.info("filteredList size "+filteredList.size());
 		
 		SolrDocumentList solrDocListKeywordsSearch = null;
 		
 		if(!"".equals(keywords)){
 			solrDocListKeywordsSearch = solrService.performQuery(keywords);
+			log.info("list solrDocListKeywordsSearch is : "+solrDocListKeywordsSearch.size());
 		}
+
+
+		for(SolrDocument solrDocument : filteredList){
+			log.info("solrDocument filtered list ID : "+solrDocument.getFieldValue("id"));
+		}
+		
 		
 		SolrDocumentList finalisedFilteredList = new SolrDocumentList();
 		
 		if(solrDocListKeywordsSearch != null && solrDocListKeywordsSearch.size() > 0){
 			for(SolrDocument solrDocument : solrDocListKeywordsSearch){
-				if(filteredList.contains(solrDocument)){
-					finalisedFilteredList.add(solrDocument);
+				
+				log.info("keywords list ID : "+solrDocument.getFieldValue("id"));
+				
+				for(SolrDocument solrDocFiltered : filteredList){
+					if(solrDocFiltered.getFieldValue("id").toString().equals(solrDocument.getFieldValue("id").toString())){
+						finalisedFilteredList.add(solrDocument);
+					}
 				}
 			}
+		}else{
+			finalisedFilteredList.addAll(filteredList);
 		}
+		
+		log.info("finalisedFilteredList size "+finalisedFilteredList.size());
 
 		List<SolrSearchData> returnList = new ArrayList<SolrSearchData>();
 
 		for(SolrDocument solrD : finalisedFilteredList){
-			ssd.setAuthorText(solrD.getFieldValue("author").toString());
-			ssd.setTitleText(solrD.getFieldValue("title").toString());
-			ssd.setDocURLText(solrD.getFieldValue("id").toString());
-			ssd.setContentText(solrD.getFieldValue("stream_content_type").toString());
+			
+			ssd = new SolrSearchData();
+			
+			for(String field : solrService.getFieldsArray()){
+				String fieldToSet = (solrD.getFieldValue(field) != null) ? solrD.getFieldValue(field).toString() : "";
+				
+				try{
+					Method method = ssd.getClass().getDeclaredMethod("set"+field, String.class);
+					method.invoke(ssd, fieldToSet);
+				}catch(Exception e){
+					e.printStackTrace();
+					log.error(e.getMessage());
+				}
+			}
+			
+			log.info("author set : "+ssd.getauthor());
+			log.info("title set : "+ssd.gettitle());
+			log.info("id set : "+ssd.getid());
+			
+			
+//			ssd.setAuthorText(solrD.getFieldValue("author").toString());
+//			ssd.setTitleText(solrD.getFieldValue("title").toString());
+//			ssd.setDocURLText(solrD.getFieldValue("id").toString());
+//			ssd.setContentText(solrD.getFieldValue("stream_content_type").toString());
 			returnList.add(ssd);
 		}
+		
+//		Gson gson = new Gson();
+//		
+//		var jsonSolrDocList = gson.toJson(returnList);
+//
+//		 System.out.println("jsonCartList: " + jsonSolrDocList);
+		
+		log.info("list to return is : "+returnList.size());
 		
 		return returnList;
 	}

@@ -502,7 +502,6 @@ function renderTagList(obj){
  }
  
  function performAjaxDocSearch(){
-	 // $('.searchResults').trigger("reset");
 	
 	var html = document.getElementById("bookRevList").html;
 	var innerHTML = document.getElementById("bookRevList").innerHTML;
@@ -517,12 +516,9 @@ function renderTagList(obj){
 		 $( ".bookRevList2" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
 				this.innerHTML = "";
 		  });
-		
-		
+
 	}
-	
-	//alert("html : "+html);
-	//alert("innerHTML : "+innerHTML);
+
 	 
 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
@@ -541,31 +537,24 @@ function renderTagList(obj){
 		
 		var authorTextVal = $('#authorText').val();
 		var titleTextVal = $('#titleText').val();
-		alert("auth : "+authorText);
 		var keywordTextVal = '';
 		
 		count = 0;
 		
-		 $( "#tags span" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
-			//alert("span val : "+$(this).html());
-			
+		 $( "#tags span" ).each(function( ) { //these are the search result divs that get added upon pagination of search results		
 				count = count + 1;
 				if(count > 1 && keywordTextVal.length > 0){
 					keywordTextVal = keywordTextVal + ",";
 				}
 				
-				//alert($(this).html().length);
-				
 				if($(this).html().length > 0){
 					keywordTextVal = keywordTextVal + $(this).html();
 				}
-				
-				
 		  });
 		
-		alert("keywordTextVal : "+keywordTextVal); 
+//		alert("keywordTextVal : "+keywordTextVal); 
 
-		alert("authorTextVal : "+authorTextVal);
+//		alert("authorTextVal : "+authorTextVal);
 
 		
 		$.ajax({
@@ -579,14 +568,19 @@ function renderTagList(obj){
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
 			type: 'GET',
-			success:  function(list) {
+			success:  function(returnList) {
 			  
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
 			//	alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
 			     //$('#activeSel3', parent.document).click();
 			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
 			    
-				alert("list : "+list);
+				alert("returnList : "+returnList);
+				
+				if(returnList == null || returnList == ''){
+					
+				}
+				
 				
 				document.getElementById("search").style.display = "inline";
 		

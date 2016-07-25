@@ -82,22 +82,20 @@ var html = $(".bookRevList").html();
 				<tr>
 					<td>Title:</td>
 					<td><input id="titleText" style="width:262px !important;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span></td>		
+						<td><span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span></td>
 				</tr>
 				<tr>
 					<td>Author:</td>
-					<td><input id="authorText" style="width:262px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
+					<td><input id="authorText" style="width:262px !important; float:left !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
+					<td><span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span></td>
 				</tr>
 				<tr>
 					<td>Keywords (comma separated):</td>
 					<td><div id="tags"><input id="keywordsText" style="width:262px !important;" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>
-							<span>CV</span>
 							<span>Java</span>
 							<span>Javascript</span>
 							<span>JQuery</span>
 							<span>Angular</span>
-							<span>Node</span>
-							<span>CSS3</span>
-							<span>HTML5</span>
 						</div>
 					</td>	
 				</tr>

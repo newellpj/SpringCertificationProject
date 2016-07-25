@@ -21,9 +21,25 @@ public class SolrSearchManager {
 	private SolrClient solr;
 	
 	@Autowired
+	private String solrFieldsList;
+	
+	@Autowired
 	private String connectionString;
 	
 	public SolrSearchManager(){
+	}
+
+	public String getSolrFieldsList() {
+		return solrFieldsList;
+	}
+
+	
+	public String[] getFieldArray(){
+		return solrFieldsList.split(":");
+	}
+	
+	public void setSolrFieldsList(String solrFieldsList) {
+		this.solrFieldsList = solrFieldsList;
 	}
 
 	public String getConnectionString() {
