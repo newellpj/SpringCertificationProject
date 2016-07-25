@@ -291,17 +291,18 @@ public class ReviewController {
 		request.getSession().setAttribute("searchType", "");
 		request.getSession().setAttribute("tagsAndValueMap", null);
 		request.getSession().setAttribute("currentPaginationOffset", 0);
+		request.getSession().setAttribute("solrSearchListReturned", null);
 	}
 	
 	
 	
 	@RequestMapping(value = { "/searchForDocs"}, method = RequestMethod.GET)
-	public @ResponseBody List<SolrSearchData> searchForDocs(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody List<String> searchForDocs(HttpServletRequest request, HttpServletResponse response){
 		log.info("searchForDocs keyword text : : "+request.getParameter("keywordText"));
 		
+		resetSearchSessionAttributes(request);
 		SolrSearchData ssd = new SolrSearchData();
-		SolrSearchService solrService = new SolrSearchService();
-		
+		SolrSearchService solrService = new SolrSearchService();	
 		String keywords = request.getParameter("keywordText");
 		keywords = keywords.replaceAll(",", " ");
 		
@@ -341,8 +342,6 @@ public class ReviewController {
 						filteredList.add(solrDoc);
 					}
 				}
-				
-				
 			}
 			
 		}else{
@@ -392,6 +391,7 @@ public class ReviewController {
 		log.info("finalisedFilteredList size "+finalisedFilteredList.size());
 
 		List<SolrSearchData> returnList = new ArrayList<SolrSearchData>();
+		List<String> formattedList = new ArrayList<String>();
 
 		for(SolrDocument solrD : finalisedFilteredList){
 			
@@ -419,6 +419,9 @@ public class ReviewController {
 //			ssd.setDocURLText(solrD.getFieldValue("id").toString());
 //			ssd.setContentText(solrD.getFieldValue("stream_content_type").toString());
 			returnList.add(ssd);
+			
+			formattedList.add(ssd.gettitle()+" - "+ssd.getauthor()+" <a href='"+ssd.getid()+"'>"+ssd.gettitle()+"</a>");
+			
 		}
 		
 //		Gson gson = new Gson();
@@ -427,9 +430,13 @@ public class ReviewController {
 //
 //		 System.out.println("jsonCartList: " + jsonSolrDocList);
 		
+		request.getSession().setAttribute("solrSearchListReturned", returnList);
+		
 		log.info("list to return is : "+returnList.size());
 		
-		return returnList;
+		
+		
+		return formattedList;
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)

@@ -575,7 +575,7 @@ function renderTagList(obj){
 			     //$('#activeSel3', parent.document).click();
 			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
 			    
-				alert("returnList : "+returnList);
+				alert("returnList : "+returnList[0]);
 				
 				if(returnList == null || returnList == ''){
 					
