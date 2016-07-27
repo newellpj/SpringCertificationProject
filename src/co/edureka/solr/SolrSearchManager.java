@@ -1,6 +1,10 @@
 package co.edureka.solr;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -10,6 +14,7 @@ import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -65,6 +70,38 @@ public class SolrSearchManager {
 		return performQueryPaginated(queryString, 1000, 0);
 	}
 	
+	public String extractSpecifiedDocumentContent(String documentURI, int lines){
+		 File file = new File(documentURI);
+	      Tika tika = new Tika();
+	      
+	      try{
+	    	  String fileContent = tika.parseToString(file);
+	    	  StringBuffer contentAppender = new StringBuffer();
+	    	  
+	    	  return fileContent;
+  
+//	    	  BufferedReader br = new BufferedReader(new FileReader(file));
+//	    	  String line = "";
+//	    	  
+//	    	  int count = 1;
+//	    	  
+//	    	  while ((line = br.readLine()) != null || count < lines) {
+//	    		 contentAppender.append(line);
+//	    		 System.out.println(line);
+//	    		 count++;
+//	    	  }
+//	    	  
+//	    	  return contentAppender.toString();
+	    	  
+	      }catch(Exception e){
+	    	  e.printStackTrace();
+	    	  log.error("Tika parse exception occured!");
+	    	  log.error(e.getMessage());
+	      }
+	      
+	      return "No content extracted";
+	}
+	
 	public SolrDocumentList performQueryPaginated(String queryString, int rows, int offset){
 		log.info("querying solr.."+queryString);
 		SolrQuery query = new SolrQuery();
@@ -80,6 +117,9 @@ public class SolrSearchManager {
 			
 			SolrDocumentList solrList = response.getResults();
 			for(SolrDocument doc : solrList){
+				
+				log.info("content found by tika parser : "+this.extractSpecifiedDocumentContent(doc.getFieldValue("id").toString(), 1000));
+				
 				log.info(doc.toString());
 			}
 			

@@ -22,6 +22,8 @@
      <security:intercept-url pattern="/searchForBook" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/addNewBook" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/searchForDocs" access="hasRole('ROLE_USER')" />
+     <security:intercept-url pattern="/retrieveNextSearchDocsSegment" access="hasRole('ROLE_USER')" />
+     
      
      
 		

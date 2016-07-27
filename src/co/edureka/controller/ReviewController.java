@@ -293,6 +293,10 @@ public class ReviewController {
 		request.getSession().setAttribute("tagsAndValueMap", null);
 		request.getSession().setAttribute("currentPaginationOffset", 0);
 		request.getSession().setAttribute("solrSearchListReturned", null);
+		request.getSession().setAttribute("solrPaginationOffset", 0);
+		request.getSession().setAttribute("solrTitleQuery", "");
+		request.getSession().setAttribute("solrAuthorQuery", "");
+		request.getSession().setAttribute("solrKeywordsQuery", "");
 	}
 	
 	
@@ -317,15 +321,23 @@ public class ReviewController {
 		
 		if(!"".equals(authorText)){
 			solrDocListAuthorsSearch =  solrService.performQueryPaginated("author:"+authorText, 5, 0);
+			request.getSession().setAttribute("solrAuthorQuery", "author:"+authorText);
+			
 			log.info("list solrDocListAuthorsSearch is : "+solrDocListAuthorsSearch.size());
 		}
+		
+		request.getSession().setAttribute("solrPaginationOffset", 0);
 		
 		
 		
 		SolrDocumentList solrDocListTitleSearch = null;
 		
 		if(!"".equals(titleText)){
-			solrDocListTitleSearch = solrService.performQuery("title:"+titleText);
+			solrDocListTitleSearch = solrService.performQueryPaginated("title:"+titleText, 5, 0);
+			
+			request.getSession().setAttribute("solrTitleQuery", "title:"+titleText);
+	
+			
 			log.info("list solrDocListTitleSearch is : "+solrDocListTitleSearch.size());
 		}
 		
@@ -362,7 +374,8 @@ public class ReviewController {
 		SolrDocumentList solrDocListKeywordsSearch = null;
 		
 		if(!"".equals(keywords)){
-			solrDocListKeywordsSearch = solrService.performQuery(keywords);
+			solrDocListKeywordsSearch = solrService.performQueryPaginated(keywords,5, 0);
+			request.getSession().setAttribute("solrKeywordsQuery", keywords);
 			log.info("list solrDocListKeywordsSearch is : "+solrDocListKeywordsSearch.size());
 		}
 

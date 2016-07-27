@@ -575,13 +575,13 @@ function renderTagList(obj){
 				
 				for(var i = 0; i < returnList.length ;i++){
 					
-					$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");
+					$('.bookrevlist').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");
 					document.getElementById('item'+i).innerHTML = returnList[i];			
 					$('.bookRevList').append("</div>");
 				}
 				
 				
-				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+				$(".search").append("<div class='next'><a href='retrieveNextSearchDocsSegment'>"+""+"</a> </div>");
 				
 				$('.resultsSection').jscroll({		  
 					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
