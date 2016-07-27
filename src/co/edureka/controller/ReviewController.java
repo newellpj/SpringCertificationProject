@@ -316,7 +316,7 @@ public class ReviewController {
 		SolrDocumentList solrDocListAuthorsSearch = null;
 		
 		if(!"".equals(authorText)){
-			solrDocListAuthorsSearch =  solrService.performQuery("author:"+authorText);
+			solrDocListAuthorsSearch =  solrService.performQueryPaginated("author:"+authorText, 5, 0);
 			log.info("list solrDocListAuthorsSearch is : "+solrDocListAuthorsSearch.size());
 		}
 		

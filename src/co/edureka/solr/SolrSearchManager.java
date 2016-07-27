@@ -60,11 +60,17 @@ public class SolrSearchManager {
 		return null;
 	}
 	
+	
 	public SolrDocumentList performQuery(String queryString){
+		return performQueryPaginated(queryString, 1000, 0);
+	}
+	
+	public SolrDocumentList performQueryPaginated(String queryString, int rows, int offset){
 		log.info("querying solr.."+queryString);
 		SolrQuery query = new SolrQuery();
 		query.setQuery(queryString);
-		query.setRows(1000);
+		query.setStart(offset);
+		query.setRows(rows);
 		query.setFields("id","content_type","extended_properties_application","stream_content_type", "page_count", "author", "title");
 		
 		try{

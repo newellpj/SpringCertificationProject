@@ -15,7 +15,7 @@ public class SolrSearchTester {
 		solrSearchManager.init();
 		//solrSearchManager.query("author:Newelly");
 		//solrSearchManager.addDocument("id:C:/Users/newelly/Pictures/ebay/wallet/DSC_0001.JPG", "author:Smithfield", "extended_properties_application:Microsoft Office Word");
-		solrSearchManager.performQuery("author:Newelly");
+		solrSearchManager.performQueryPaginated("author:Newelly", 15, 5);
 		
 //		List ids = new ArrayList();
 //		ids.add("C:/Users/newelly/Pictures/ebay/wallet/DSC_0001.JPG");		
