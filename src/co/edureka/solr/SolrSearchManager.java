@@ -70,7 +70,30 @@ public class SolrSearchManager {
 		return performQueryPaginated(queryString, 1000, 0);
 	}
 	
-	public String extractSpecifiedDocumentContent(String documentURI, int lines){
+	
+	
+	public String extractAllDocumentContent(String documentURI){
+		File file = new File(documentURI);
+	    Tika tika = new Tika();
+	      
+	    try{
+	    	return tika.parseToString(file);
+	    }catch(Exception e){
+    	  e.printStackTrace();
+    	  log.error("Tika parse exception occured!");
+    	  log.error(e.getMessage());
+	    }
+      
+	     return "";
+	}
+	
+	/**
+	 * 
+	 * @param documentURI
+	 * @param characterCount - this does count white spaces
+	 * @return
+	 */
+	public String extractSpecifiedDocumentContent(String documentURI, int characterCount){
 		 File file = new File(documentURI);
 	      Tika tika = new Tika();
 	      
@@ -78,7 +101,13 @@ public class SolrSearchManager {
 	    	  String fileContent = tika.parseToString(file);
 	    	  StringBuffer contentAppender = new StringBuffer();
 	    	  
-	    	  return fileContent;
+	    	  if(fileContent.length() > characterCount){
+	    		  return fileContent.substring(0, characterCount);
+	    	  }else{
+	    		  return fileContent;
+	    	  }
+	    	  
+	    	  
   
 //	    	  BufferedReader br = new BufferedReader(new FileReader(file));
 //	    	  String line = "";

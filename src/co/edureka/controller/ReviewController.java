@@ -449,20 +449,16 @@ public class ReviewController {
 
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
-			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+"<b>link to doc </b> <a href='file://///"+ssd.getid()+"'"+
-					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='text-overflow: ellipsis'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 1000)+"</p>");
+			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
+					" target="+"'"+"_blank"+"'"+">"+title+"</a><p>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 430)+
+					"<i> <a href='#'> ...see more</a></i></p>"+
+					"<div style='display:none'>"+solrService.extractAllDocumentContent(ssd.getid())+"</div>");
 			
 		}
 		
 		if(formattedList.size() == 0){
 			formattedList.add("No documents found..");
 		}
-		
-//		Gson gson = new Gson();
-//		
-//		var jsonSolrDocList = gson.toJson(returnList);
-//
-//		 System.out.println("jsonCartList: " + jsonSolrDocList);
 		
 		request.getSession().setAttribute("solrSearchListReturned", returnList);
 		

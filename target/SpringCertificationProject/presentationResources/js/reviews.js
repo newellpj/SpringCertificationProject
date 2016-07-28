@@ -575,9 +575,13 @@ function renderTagList(obj){
 				
 				for(var i = 0; i < returnList.length ;i++){
 					
-					$('.bookrevlist').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
+					$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
 					$('.bookRevList').append("</div>");
-					$('#item'+i).html(returnList[i]);	
+					
+					var ID = '#item'+i;
+					
+					$(ID).html(returnList[i]);	
+					toggleReadMoreSearchResults(ID);
 				}
 				
 				
@@ -634,6 +638,16 @@ function renderTagList(obj){
 		 }
 		});    
 
+ }
+ 
+ function toggleReadMoreSearchResults(ID){
+		$('.docsSearchSegment').find('a[href="#"]').on('click', function (e) {
+		    alert('in find');
+			e.preventDefault();
+		    this.expand = !this.expand;
+		    $(this).text(this.expand?"Click to collapse":"Click to read more");
+		    $(this).closest(ID).find('.docsSearchSegment, .docsSearchSegmentBig').toggleClass('docsSearchSegment docsSearchSegmentBig');
+		});
  }
  
  function performAjaxSearch(){

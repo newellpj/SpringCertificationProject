@@ -17,6 +17,7 @@
 <script type="text/javascript" src="./presentationResources/js/reviews.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery.ellipsis.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title></title>
