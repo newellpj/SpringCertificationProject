@@ -58,6 +58,8 @@
 	max-height:120px !important;
 	margin:10px !important;
 	padding:5px !important;
+	overflow:hidden !important;
+	text-overflow: ellipsis;
 }
 
 
@@ -219,7 +221,6 @@ input[type="submit"]:hover {
 }
 
 input[type="submit"]{
-	
 	padding: 10px 15px 11px !important;
 	font-size: 14px !important;
 	background-color: #3bbde5;
@@ -235,7 +236,6 @@ input[type="submit"]{
 }
 
 input[type="button"]{
-	
 	padding: 10px 15px 11px !important;
 	font-size: 14px !important;
 	background-color: #3bbde5;
@@ -251,7 +251,6 @@ input[type="button"]{
 }
 
 button{
-	
 	padding: 10px 15px 11px !important;
 	font-size: 14px !important;
 	background-color: #3bbde5;
@@ -290,9 +289,6 @@ button:hover {
 .resetSearch:hover {
 	background-color: #8e8eb2 !important;
 }
-
-
-
 
 .myUserIcon{
 	content: date-circle.png

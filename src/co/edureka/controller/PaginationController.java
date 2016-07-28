@@ -155,6 +155,9 @@ public class PaginationController {
 	public ModelAndView retrieveNextSearchDocsSegment(HttpServletRequest request, HttpServletResponse response) {
 		log.info("searchForDocs keyword text : : "+request.getParameter("keywordText"));
 		
+		if(request.getSession() == null){
+			return null;
+		}
 		
 		SolrSearchData ssd = new SolrSearchData();
 		SolrSearchService solrService = new SolrSearchService();	
@@ -169,6 +172,7 @@ public class PaginationController {
 		
 		String offset = request.getSession().getAttribute("solrPaginationOffset").toString();
 		
+		log.info("OFFSET : "+offset);
 		
 		SolrDocumentList solrDocListAuthorsSearch = null;
 		
@@ -177,7 +181,7 @@ public class PaginationController {
 			log.info("list solrDocListAuthorsSearch is : "+solrDocListAuthorsSearch.size());
 		}
 		
-		request.getSession().setAttribute("solrPaginationOffset", 0);
+		request.getSession().setAttribute("solrPaginationOffset", Integer.parseInt(offset)+5);
 		
 		
 		
@@ -280,7 +284,7 @@ public class PaginationController {
 			
 			String title = "";
 			
-			if(ssd.gettitle() == null || "".equals(ssd.gettitle().trim())){
+			if(ssd.gettitle() == null || "".equals(ssd.gettitle().trim()) || "Unknown".equalsIgnoreCase(ssd.gettitle()) || "en".equalsIgnoreCase(ssd.gettitle())){
 
 				if(ssd.getid().lastIndexOf(File.separator) > -1){
 					title = ssd.getid().substring(ssd.getid().lastIndexOf(File.separator)+1);
@@ -295,19 +299,12 @@ public class PaginationController {
 
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
-			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" link to doc <a href='file://///"+ssd.getid()+"'"+" target="+"'"+"_blank"+"'"+">"+title+"</a>");
+			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" <b>link to doc </b> <a href='file://///"+ssd.getid()+"'"+
+			" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='text-overflow: ellipsis'>"+
+					solrService.extractSpecifiedDocumentContent(ssd.getid(), 1000)+"</p>");
 			
 		}
-		
-		if(formattedList.size() == 0){
-			formattedList.add("No documents found..");
-		}
-		
-//		Gson gson = new Gson();
-//		
-//		var jsonSolrDocList = gson.toJson(returnList);
-//
-//		 System.out.println("jsonCartList: " + jsonSolrDocList);
+
 		
 		request.getSession().setAttribute("solrSearchListReturned", returnList);
 		

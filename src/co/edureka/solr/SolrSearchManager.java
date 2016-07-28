@@ -103,12 +103,13 @@ public class SolrSearchManager {
 	}
 	
 	public SolrDocumentList performQueryPaginated(String queryString, int rows, int offset){
-		log.info("querying solr.."+queryString);
+		log.info("querying solr.."+queryString+" with offset : "+offset+" with rows : "+rows);
+		
 		SolrQuery query = new SolrQuery();
 		query.setQuery(queryString);
 		query.setStart(offset);
 		query.setRows(rows);
-		query.setFields("id","content_type","extended_properties_application","stream_content_type", "page_count", "author", "title");
+		//query.setFields("id","content_type","extended_properties_application","stream_content_type", "page_count", "author", "title");
 		
 		try{
 			QueryResponse response = solr.query(query);
@@ -124,6 +125,8 @@ public class SolrSearchManager {
 			}
 			
 			log.info(response.toString());
+			
+			log.info("total results found : "+solrList.size());
 			
 			return solrList;
 			

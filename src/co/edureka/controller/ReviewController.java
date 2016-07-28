@@ -434,7 +434,7 @@ public class ReviewController {
 			
 			String title = "";
 			
-			if(ssd.gettitle() == null || "".equals(ssd.gettitle().trim())){
+			if(ssd.gettitle() == null || "".equals(ssd.gettitle().trim()) || "Unknown".equalsIgnoreCase(ssd.gettitle()) || "en".equalsIgnoreCase(ssd.gettitle())){
 
 				if(ssd.getid().lastIndexOf(File.separator) > -1){
 					title = ssd.getid().substring(ssd.getid().lastIndexOf(File.separator)+1);
@@ -449,7 +449,8 @@ public class ReviewController {
 
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
-			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" link to doc <a href='file://///"+ssd.getid()+"'"+" target="+"'"+"_blank"+"'"+">"+title+"</a>");
+			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+"<b>link to doc </b> <a href='file://///"+ssd.getid()+"'"+
+					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='text-overflow: ellipsis'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 1000)+"</p>");
 			
 		}
 		

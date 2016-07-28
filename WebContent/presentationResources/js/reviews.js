@@ -575,9 +575,9 @@ function renderTagList(obj){
 				
 				for(var i = 0; i < returnList.length ;i++){
 					
-					$('.bookrevlist').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");
-					document.getElementById('item'+i).innerHTML = returnList[i];			
+					$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
 					$('.bookRevList').append("</div>");
+					$('#item'+i).html(returnList[i]);	
 				}
 				
 				

@@ -20,6 +20,10 @@ public class SolrSearchService {
 		return solrSearchManager.getFieldArray();
 	}
 	
+	public String extractSpecifiedDocumentContent(String documentURI, int lines){
+		return solrSearchManager.extractSpecifiedDocumentContent(documentURI, lines);
+	}
+	
 	public SolrDocumentList performQueryPaginated(String queryString, int rows, int offset){
 		return solrSearchManager.performQueryPaginated(queryString, rows, offset);
 	}
