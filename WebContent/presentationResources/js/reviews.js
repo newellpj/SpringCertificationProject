@@ -501,6 +501,39 @@ function renderTagList(obj){
 
  }
  
+ function displayFullContent(){
+	
+	 var fullTextDiv = $(".fullContent");	
+	 
+	 var dlg = $("<div></div>").dialog({
+		   buttons : [{
+				'class' : 'dialogButton',
+				click : function(e) {
+					$(this).dialog("close");
+				},
+				text : 'Close'
+			} ],
+			hide: 'fade',
+			maxWidth: 600,
+			modal: true,
+			show: 'fade',
+			title: 'Excerpt',
+			width: '650',
+			height: 'auto'
+		});
+		
+		
+		//$(dlg).parent().find('button').remove();
+		
+		$(".ui-dialog-titlebar").hide();
+		
+		$(fullTextDiv).css('display', 'inline-block');
+		//$(fullTextDiv).css('display', 'inline-block');
+
+		$(dlg).html("<div style='padding:10px; text-shadow:none!important'><b>"+$(fullTextDiv).html()+"</b><div>");			
+		$(dlg).dialog("open");
+ }
+ 
  function performAjaxDocSearch(){
 	
 	var html = document.getElementById("bookRevList").html;
@@ -581,7 +614,7 @@ function renderTagList(obj){
 					var ID = '#item'+i;
 					
 					$(ID).html(returnList[i]);	
-					toggleReadMoreSearchResults(ID);
+					//toggleReadMoreSearchResults(ID);
 				}
 				
 				

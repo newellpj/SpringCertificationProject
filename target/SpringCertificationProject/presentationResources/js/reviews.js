@@ -501,6 +501,23 @@ function renderTagList(obj){
 
  }
  
+ function displayFullContent(){
+	
+	 var fullTextDiv = $(".fullContent").next();	 
+	 var dlg = $("<div></div>").dialog({
+			hide: 'fade',
+			maxWidth: 600,
+			modal: true,
+			show: 'fade',
+			title: 'Searching Docs....',
+			width: '650',
+			height: '300'	
+		});
+		
+		$(dlg).html("<div><p>"+fullTextDiv+"</p></div>");			
+		$(dlg).dialog("open");
+ }
+ 
  function performAjaxDocSearch(){
 	
 	var html = document.getElementById("bookRevList").html;
@@ -581,7 +598,7 @@ function renderTagList(obj){
 					var ID = '#item'+i;
 					
 					$(ID).html(returnList[i]);	
-					toggleReadMoreSearchResults(ID);
+					//toggleReadMoreSearchResults(ID);
 				}
 				
 				

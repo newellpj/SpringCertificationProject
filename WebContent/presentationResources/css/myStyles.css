@@ -200,7 +200,7 @@ activeSel{
 	 }
 	 
  .ui-dialog{
-	 background-color:#ebebeb !important;
+	background-color:#ebebeb !important;
 	box-shadow: 10px 10px 5px #888888 !important;
 	border: 1px solid #c3c3c3;
 	font-weight: normal;
@@ -286,6 +286,22 @@ button{
 	box-shadow: -5px -5px- 5px -5px #3838cc inset;
 	text-shadow: 1px 1px #a8a8a8;
 }
+
+.dialogButton{
+	padding: 10px 15px 11px !important;
+	font-size: 14px !important;
+	background-color: #3bbde5;
+	font-weight: normal;
+	font-style: normal !important;
+	color: #f1f1ff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 0px solid #3232ff;
+	cursor: pointer;
+	box-shadow: -5px -5px- 5px -5px #3838cc inset;
+	text-shadow: 1px 1px #a8a8a8;
+}
+
 
 
 button:disabled:hover {
