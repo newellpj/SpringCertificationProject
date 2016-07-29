@@ -106,21 +106,7 @@ public class SolrSearchManager {
 	    	  }else{
 	    		  return fileContent;
 	    	  }
-	    	  
-	    	  
-  
-//	    	  BufferedReader br = new BufferedReader(new FileReader(file));
-//	    	  String line = "";
-//	    	  
-//	    	  int count = 1;
-//	    	  
-//	    	  while ((line = br.readLine()) != null || count < lines) {
-//	    		 contentAppender.append(line);
-//	    		 System.out.println(line);
-//	    		 count++;
-//	    	  }
-//	    	  
-//	    	  return contentAppender.toString();
+
 	    	  
 	      }catch(Exception e){
 	    	  e.printStackTrace();

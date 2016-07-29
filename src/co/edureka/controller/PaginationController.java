@@ -297,12 +297,18 @@ public class PaginationController {
 			
 			log.info("title "+title);
 
+			String largerContent = solrService.extractSpecifiedDocumentContent(ssd.getid(), 2000);
+			
+			if(largerContent.length() >= 1999){
+				largerContent = largerContent + "<i> ...open document to see more</i>";
+			}
+			
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
 			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
-					" target="+"'"+"_blank"+"'"+">"+title+"</a><p>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 430)+
-					"<i> <a href='reviewsSearchBook' class='html5lightbox' data-width='960' data-height='600'> ...see more</a></i></p>"+
-					"<div style='display:none'>"+solrService.extractAllDocumentContent(ssd.getid())+"</div>");
+					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
+					"<i> <a href='#' onclick='displayFullContent();'> ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+
+					largerContent+"</div>");
 			
 		}
 

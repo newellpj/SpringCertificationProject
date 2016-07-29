@@ -222,7 +222,7 @@ function searchPageReadyInit(){
 
 function noBookToReview(){
 	
-	var errorDialog = $("<div></div>").dialog({
+	var errorDialog = $("<div ></div>").dialog({
 				hide: 'fade',
 				maxWidth: 300,
 				modal: true,
@@ -246,7 +246,12 @@ function noBookToReview(){
 		
 		var msg = "You need to search or add a book to review";
 
+
+		
 		$(errorDialog).html('<p>'+msg+'</p>');
+        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
+        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
+		
 		 $(errorDialog).dialog("open");
 
 }
@@ -505,7 +510,7 @@ function renderTagList(obj){
 	
 	 var fullTextDiv = $(".fullContent");	
 	 
-	 var dlg = $("<div></div>").dialog({
+	 var dlg = $("<div class='dialogStyles'></div>").dialog({
 		   buttons : [{
 				'class' : 'dialogButton',
 				click : function(e) {
@@ -515,22 +520,24 @@ function renderTagList(obj){
 			} ],
 			hide: 'fade',
 			maxWidth: 600,
+			maxHeight: 1000,
+			autoOpen: false,
 			modal: true,
 			show: 'fade',
 			title: 'Excerpt',
 			width: '650',
-			height: 'auto'
+			height: 'auto'	
 		});
-		
-		
-		//$(dlg).parent().find('button').remove();
-		
+
 		$(".ui-dialog-titlebar").hide();
 		
-		$(fullTextDiv).css('display', 'inline-block');
-		//$(fullTextDiv).css('display', 'inline-block');
+		var parent = $(dlg).parent();
 
-		$(dlg).html("<div style='padding:10px; text-shadow:none!important'><b>"+$(fullTextDiv).html()+"</b><div>");			
+		$(dlg).resizable();
+		
+		$(fullTextDiv).css('display', 'inline-block');
+		
+		$(dlg).html("<div class='dialogStyles'  style='padding:10px; text-shadow:none!important;'>"+$(fullTextDiv).html()+"<div>");			
 		$(dlg).dialog("open");
  }
  
@@ -809,8 +816,7 @@ function renderTagList(obj){
 						width: ( 300 )
 					});
 
-					
-					
+
 					var msg = e.errorMessage;
 					
 					if('undefined' == msg || msg == null){

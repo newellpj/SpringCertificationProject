@@ -49,13 +49,26 @@
   width: 300px;
 }
 
+.ui-dialog-buttonset{
+	background-image: url("../images/dialogbg.jpg");
+	border-radius: 0px 0px 10px 10px;
+	background-color: #696969;
+}
+
+.dialogStyles{
+		border-radius: 10px 10px 0px 0px;
+		color: white;
+		background-color: black;
+		background-image: url("../images/dialogbg.jpg") !important;
+}
+
 .docsSearchSegment{
 	border-top: 1px dotted #e9e9e9;
 	border-bottom: 1px dotted #e9e9e9;
 	border-right: 0px dotted;
 	border-left: 0px dotted;
 	min-height:100px;
-	max-height:130px;
+	max-height:100px;
 	margin:10px !important;
 	padding:5px !important;
 	overflow:hidden !important;
@@ -63,24 +76,6 @@
 	width: 652px;
 	text-overflow: ellipsis !important;
 	white-space: normal;
-}
-
-
-.docsSearchSegmentBig{
-	border-top: 1px dotted #e9e9e9;
-	border-bottom: 1px dotted #e9e9e9;
-	border-right: 0px dotted;
-	border-left: 0px dotted;
-	min-height:100px !important;
-	height:auto !important;
-	max-height:130px !important;
-	margin:10px !important;
-	padding:5px !important;
-	display: block;
-	width: 652px;
-	overflow:hidden !important;
-	text-overflow: ellipsis !important;
-	 white-space: normal;
 }
 
 
@@ -175,7 +170,7 @@ select {
 
 #theI_Frame {
   height: 800px !important;
-  width: 850px !important;
+  width: 100% !important;
   resize: none;
   overflow-x: scroll;
   overflow-y: hidden !important;
@@ -200,7 +195,7 @@ activeSel{
 	 }
 	 
  .ui-dialog{
-	 background-color:#ebebeb !important;
+	background-color:#ebebeb !important;
 	box-shadow: 10px 10px 5px #888888 !important;
 	border: 1px solid #c3c3c3;
 	font-weight: normal;
@@ -285,6 +280,26 @@ button{
 	cursor: pointer;
 	box-shadow: -5px -5px- 5px -5px #3838cc inset;
 	text-shadow: 1px 1px #a8a8a8;
+}
+
+.dialogButton{
+	padding: 10px 15px 11px !important;
+	font-size: 14px !important;
+	background-color: #848484 !important;
+	font-weight: normal;
+	font-style: normal !important;
+	color: #f1f1ff;
+	border-radius: 0px !important;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 0px solid #b3b3b3 !important;
+	cursor: pointer;
+	box-shadow: -5px -5px- 5px -5px #b3b3b3 inset !important;
+	text-shadow: 1px 1px #a8a8a8;
+}
+
+.dialogButton:hover {
+	background-color: #939393 !important;
 }
 
 
@@ -453,6 +468,11 @@ tr:nth-child(even)		{ background-color:#e9e9e9; }
 	box-shadow: 10px 10px 5px #888888;
 }
 
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
 #search-box{
 	
 	width: 766px !important;
@@ -534,6 +554,11 @@ tr:nth-child(even)		{ background-color:#e9e9e9; }
 .tooltip {
 display: inline-block;    
 }
+
+.facebookFooter{
+	margin-left:550px;
+}
+
 
 .tooltip .tooltiptext {
     margin-left:9px;

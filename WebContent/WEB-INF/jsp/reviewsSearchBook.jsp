@@ -143,7 +143,7 @@ var html = $(".bookRevList").html();
 		
 	
 
-<div style="margin-left:300px;" >
+<div class="facebookFooter" >
 	<div id="fb-root" ></div>
 <div class="fb-like" data-href="http://www.w3schools.com/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 </div>

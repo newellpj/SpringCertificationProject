@@ -20,6 +20,11 @@ public class SolrSearchService {
 		return solrSearchManager.getFieldArray();
 	}
 	
+	/**
+	 * documents can be huge so use this if you know the size of your document.
+	 * @param documentURI
+	 * @return
+	 */
 	public String extractAllDocumentContent(String documentURI){
 		return solrSearchManager.extractAllDocumentContent(documentURI);
 	}
