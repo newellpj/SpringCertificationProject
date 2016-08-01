@@ -74,17 +74,25 @@ public class SolrSearchManager {
 	
 	public String extractAllDocumentContent(String documentURI){
 		File file = new File(documentURI);
-	    Tika tika = new Tika();
-	      
-	    try{
-	    	return tika.parseToString(file);
-	    }catch(Exception e){
-    	  e.printStackTrace();
-    	  log.error("Tika parse exception occured!");
-    	  log.error(e.getMessage());
-	    }
+		
+		if(file.length() < 2048000){
+		
+		    Tika tika = new Tika();
+		      
+		    try{
+		    	return tika.parseToString(file);
+		    }catch(Exception e){
+	    	  e.printStackTrace();
+	    	  log.error("Tika parse exception occured!");
+	    	  log.error(e.getMessage());
+	    	  return null;
+		    }
+		}else{
+			return "file too large to parse please download document";
+		}
+		
       
-	     return "";
+	     
 	}
 	
 	/**
@@ -96,6 +104,8 @@ public class SolrSearchManager {
 	public String extractSpecifiedDocumentContent(String documentURI, int characterCount){
 		 File file = new File(documentURI);
 	      Tika tika = new Tika();
+	      
+	      if(file.length() < 2048000){
 	      
 	      try{
 	    	  String fileContent = tika.parseToString(file);
@@ -112,6 +122,10 @@ public class SolrSearchManager {
 	    	  e.printStackTrace();
 	    	  log.error("Tika parse exception occured!");
 	    	  log.error(e.getMessage());
+	      }
+	      
+	      }else{
+	    	  return "File too large to extract content. Please download file";
 	      }
 	      
 	      return "No content extracted";

@@ -387,7 +387,8 @@ function renderTagList(obj){
 					}
 					
 					$(errorDialog).html('<p>'+msg+'</p>');
-					
+			        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
+			        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 					 $(errorDialog).dialog("open");
 			         window.parent.location.href = 'logout'; 
 		 }
@@ -474,7 +475,8 @@ function renderTagList(obj){
 					}
 					
 					$(errorDialog).html('<p>'+msg+'</p>');
-					
+			        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
+			        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 					 $(errorDialog).dialog("open");
 			         window.parent.location.href = 'logout'; 
 		 }
@@ -671,7 +673,12 @@ function renderTagList(obj){
 					
 					$(errorDialog).html('<p>'+msg+'</p>');
 					
+			        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
+			        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
+					
 					 $(errorDialog).dialog("open");
+					 
+					 
 					 
 					window.parent.location.href = 'logout'; 
 			 
@@ -824,6 +831,8 @@ function renderTagList(obj){
 					}
 					
 					$(errorDialog).html('<p>'+msg+'</p>');
+			        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
+			        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 					
 					 $(errorDialog).dialog("open");
 					 

@@ -48,5 +48,20 @@
     </listener-class>
 </listener>
 
+<display-name>queryDocuments</display-name>
+ 
+  <listener>
+    <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>QueryDocsImpl</servlet-name>
+    <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QueryDocsImpl</servlet-name>
+    <url-pattern>/queryDocs</url-pattern>
+  </servlet-mapping>
+
   
 </web-app>
