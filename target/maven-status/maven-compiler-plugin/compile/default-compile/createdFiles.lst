@@ -1,6 +1,8 @@
+co\edureka\webservices\books\QueryBooks.class
 co\edureka\viewmodel\UsersModel.class
 co\edureka\hibernate\orm\TagTypes.class
 co\edureka\service\UsersRolesAuthoritiesService.class
+co\edureka\webservices\books\model\BooksReviewsWSModel.class
 co\edureka\hibernate\UsersBusinessObjectImpl.class
 co\edureka\hibernate\orm\Books.class
 co\edureka\aop\MethodBeforeAdvisor.class
@@ -9,6 +11,7 @@ co\edureka\hibernate\orm\Users.class
 co\edureka\hibernate\orm\BookReviews.class
 co\edureka\hibernate\BookReviewsBusinessObjectImpl.class
 co\edureka\hibernate\UsersBusinessObject.class
+co\edureka\webservices\books\QueryBooksImpl.class
 co\edureka\controller\LoginController.class
 co\edureka\config\SimpleUrlAuthenticationSuccessHandler.class
 co\edureka\hibernate\HibernateTestClass.class

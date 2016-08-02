@@ -6,9 +6,11 @@ C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\ed
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\hibernate\orm\Authorities.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\hibernate\orm\Users.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\solr\SolrSearchManager.java
+C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\webservices\books\QueryBooksImpl.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\solr\SolrSearchTester.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\hibernate\orm\TagTypes.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\controller\LoginController.java
+C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\webservices\books\QueryBooks.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\hibernate\TagsBusinessObject.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\viewmodel\BookReviewsModel.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\config\SessionListener.java
@@ -19,9 +21,10 @@ C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\ed
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\hibernate\orm\BookTags.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\controller\SignupController.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\hibernate\UsersBusinessObject.java
+C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\webservices\books\model\BooksReviewsWSModel.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\webservices\documents\QueryDocsClient.java
-C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\viewmodel\UsersModel.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\hibernate\UsersBusinessObjectImpl.java
+C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\viewmodel\UsersModel.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\aop\MethodBeforeAdvisor.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\controller\ReviewController.java
 C:\Users\newelly\SpringCertificationProject\SpringCertificationProject\src\co\edureka\controller\PaginationController.java

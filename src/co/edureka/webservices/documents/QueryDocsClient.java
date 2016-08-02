@@ -18,7 +18,7 @@ public class QueryDocsClient {
 
 	        QueryDocs queryDocs = service.getPort(QueryDocs.class);
 
-	        System.out.println(queryDocs.queryAuthor("mkyong"));
+	        System.out.println(queryDocs.queryAuthor("newelly"));
 
 	    }
 }

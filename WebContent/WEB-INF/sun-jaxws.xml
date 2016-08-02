@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
   <endpoint name="QueryDocsImplService" implementation="co.edureka.webservices.documents.QueryDocsImpl" url-pattern="/queryDocs" ></endpoint>
+  <endpoint name="QueryBooksImplService" implementation="co.edureka.webservices.books.QueryBooksImpl" url-pattern="/queryBooks" ></endpoint>
 </endpoints>
